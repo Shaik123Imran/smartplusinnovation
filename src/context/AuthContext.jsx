@@ -11,7 +11,7 @@ import {
   unenrollFromCourse,
   resetPassword,
   isFirebaseConfigured
-} from '../services/firebase'
+} from '../services/api'
 import { sendWelcomeEmail } from '../services/emailjs'
 
 const AuthContext = createContext()

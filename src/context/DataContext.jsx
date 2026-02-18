@@ -12,7 +12,7 @@ import {
   submitTestimonial,
   submitContactForm,
   subscribeNewsletter
-} from '../services/firebase'
+} from '../services/api'
 
 const DataContext = createContext()
 
