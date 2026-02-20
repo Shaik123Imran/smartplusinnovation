@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import Hero from '../components/home/Hero'
 import WorkshopRegistration from '../components/home/WorkshopRegistration'
+import HowItWorks from '../components/home/HowItWorks'
 import Stats from '../components/home/Stats'
 import FeaturedPrograms from '../components/home/FeaturedPrograms'
 import Community from '../components/home/Community'
@@ -16,6 +17,7 @@ function Home() {
     <Layout>
       <Hero />
       <WorkshopRegistration />
+      <HowItWorks />
       <Stats />
       <FeaturedPrograms />
       <Community onContactClick={() => setIsQuickContactOpen(true)} />
