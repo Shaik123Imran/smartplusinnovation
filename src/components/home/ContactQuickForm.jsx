@@ -30,6 +30,8 @@ function ContactQuickForm({ open, onClose }) {
   })
 
   const [agree, setAgree] = useState(false)
+  const [hasViewedTerms, setHasViewedTerms] = useState(false)
+  const [hasViewedPrivacy, setHasViewedPrivacy] = useState(false)
   const [status, setStatus] = useState(null)
 
   const handleChange = (e) => {
@@ -79,6 +81,16 @@ function ContactQuickForm({ open, onClose }) {
     } catch (err) {
       setStatus({ type: 'error', message: 'Something went wrong. Please try again.' })
     }
+  }
+
+  const handleOpenTerms = () => {
+    window.open('/terms', '_blank', 'noopener,noreferrer')
+    setHasViewedTerms(true)
+  }
+
+  const handleOpenPrivacy = () => {
+    window.open('/privacy', '_blank', 'noopener,noreferrer')
+    setHasViewedPrivacy(true)
   }
 
   return (
@@ -147,19 +159,33 @@ function ContactQuickForm({ open, onClose }) {
               type="checkbox"
               checked={agree}
               onChange={(e) => setAgree(e.target.checked)}
-              className="mt-1 w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
+              className="mt-1 w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!hasViewedTerms || !hasViewedPrivacy}
               required
             />
             <span className="text-sm text-text/70">
               I agree to the{' '}
-              <span className="font-semibold text-primary">Terms & Conditions</span> and{' '}
-              <span className="font-semibold text-primary">Privacy Policy</span>. You can review the full
-              documents from the links in the footer.
+              <button
+                type="button"
+                onClick={handleOpenTerms}
+                className="font-semibold text-primary underline-offset-2 hover:underline"
+              >
+                Terms &amp; Conditions
+              </button>{' '}
+              and{' '}
+              <button
+                type="button"
+                onClick={handleOpenPrivacy}
+                className="font-semibold text-primary underline-offset-2 hover:underline"
+              >
+                Privacy Policy
+              </button>
+              . Please read them before accepting.
             </span>
           </label>
           <p className="text-xs text-text/50">
-            Note: Please replace this text with your exact Terms & Conditions and Privacy Policy content from your
-            documents.
+            You must open both the Terms & Conditions and Privacy Policy links above before the checkbox can be
+            accepted. Replace this text with your exact legal content from your documents.
           </p>
         </div>
 
