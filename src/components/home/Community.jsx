@@ -48,7 +48,7 @@ const features = [
   },
 ]
 
-function Community() {
+function Community({ onContactClick }) {
   const navigate = useNavigate()
 
   const handleFeatureClick = (feature) => {
@@ -149,12 +149,25 @@ function Community() {
               ))}
             </div>
 
-            <Button to="/about" variant="secondary" size="lg">
-              Learn More About Us
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Button>
+            <div className="flex flex-wrap gap-4">
+              <Button to="/about" variant="secondary" size="lg">
+                Learn More About Us
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                onClick={onContactClick}
+              >
+                Contact Us
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
