@@ -1,5 +1,5 @@
-import { useParams, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import Layout from '../components/layout/Layout'
 import { useData } from '../context/DataContext'
 import { useAuth } from '../context/AuthContext'
@@ -10,12 +10,19 @@ import Modal from '../components/common/Modal'
 function ProgramDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
   const { getProgram } = useData()
-  const { user, isEnrolled, enroll } = useAuth()
+  const { user, isEnrolled } = useAuth()
   const [showEnrollModal, setShowEnrollModal] = useState(false)
-  const [enrolling, setEnrolling] = useState(false)
 
   const program = getProgram(id)
+
+  useEffect(() => {
+    if (location.state?.paymentSuccess) {
+      setShowEnrollModal(true)
+      navigate(location.pathname, { replace: true, state: {} })
+    }
+  }, [location.state?.paymentSuccess, location.pathname, navigate])
 
   if (!program) {
     return (
@@ -31,20 +38,15 @@ function ProgramDetail() {
   }
 
   const enrolled = user && isEnrolled(program.id)
+  const detailImageFile = program.imageFile || (program.image ? `${program.image}.jpg` : null)
+  const detailImageSrc = detailImageFile ? `/program-images/${detailImageFile}` : null
 
-  const handleEnroll = async () => {
+  const handleEnrollClick = () => {
     if (!user) {
-      navigate('/login', { state: { from: `/programs/${id}` } })
+      navigate('/login', { state: { from: `/programs/${id}/checkout` } })
       return
     }
-
-    setEnrolling(true)
-    const result = await enroll(program.id)
-    setEnrolling(false)
-
-    if (result.success) {
-      setShowEnrollModal(true)
-    }
+    navigate(`/programs/${id}/checkout`)
   }
 
   return (
@@ -60,6 +62,17 @@ function ProgramDetail() {
                   </svg>
                   Back to Programs
                 </Button>
+
+                {detailImageSrc && (
+                  <div className="mb-5 overflow-hidden rounded-2xl aspect-[16/9] bg-gray-100 shadow-sm">
+                    <img
+                      src={detailImageSrc}
+                      alt={`${program.title} banner`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
 
                 <Badge variant={program.color}>{program.category.replace('-', ' & ').toUpperCase()}</Badge>
                 
@@ -139,16 +152,22 @@ function ProgramDetail() {
             <div className="lg:col-span-1">
               <div className="sticky top-24 bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
                 <div className="mb-6">
-                  <div className="flex items-baseline gap-2 mb-2">
-                    <span className="text-4xl font-extrabold text-text">₹{program.price.toLocaleString('en-IN')}</span>
-                    {program.originalPrice && (
-                      <span className="text-xl text-text/40 line-through">₹{program.originalPrice.toLocaleString('en-IN')}</span>
-                    )}
-                  </div>
-                  {program.originalPrice && (
-                    <Badge variant="success">
-                      Save ₹{(program.originalPrice - program.price).toLocaleString('en-IN')} ({Math.round((1 - program.price / program.originalPrice) * 100)}% off)
-                    </Badge>
+                  {enrolled ? (
+                    <>
+                      <div className="flex items-baseline gap-2 mb-2">
+                        <span className="text-4xl font-extrabold text-text">₹{program.price.toLocaleString('en-IN')}</span>
+                        {program.originalPrice && (
+                          <span className="text-xl text-text/40 line-through">₹{program.originalPrice.toLocaleString('en-IN')}</span>
+                        )}
+                      </div>
+                      {program.originalPrice && (
+                        <Badge variant="success">
+                          Save ₹{(program.originalPrice - program.price).toLocaleString('en-IN')} ({Math.round((1 - program.price / program.originalPrice) * 100)}% off)
+                        </Badge>
+                      )}
+                    </>
+                  ) : (
+                    <p className="text-text/60 text-sm py-2">Enroll in this course to view pricing.</p>
                   )}
                 </div>
 
@@ -165,8 +184,8 @@ function ProgramDetail() {
                     </Button>
                   </div>
                 ) : (
-                  <Button onClick={handleEnroll} loading={enrolling} className="w-full" size="lg">
-                    {user ? 'Enroll Now' : 'Login to Enroll'}
+                  <Button onClick={handleEnrollClick} className="w-full" size="lg">
+                    {user ? 'Buy Now — Proceed to Payment' : 'Login to Enroll'}
                   </Button>
                 )}
 

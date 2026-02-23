@@ -4,7 +4,6 @@ import Hero from '../components/home/Hero'
 import WorkshopRegistration from '../components/home/WorkshopRegistration'
 import HowItWorks from '../components/home/HowItWorks'
 import Stats from '../components/home/Stats'
-import FeaturedPrograms from '../components/home/FeaturedPrograms'
 import Community from '../components/home/Community'
 import Testimonials from '../components/home/Testimonials'
 import Newsletter from '../components/home/Newsletter'
@@ -19,7 +18,6 @@ function Home() {
       <WorkshopRegistration />
       <HowItWorks />
       <Stats />
-      <FeaturedPrograms />
       <Community onContactClick={() => setIsQuickContactOpen(true)} />
       <Testimonials />
       <Newsletter />

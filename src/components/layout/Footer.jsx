@@ -1,15 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useData } from '../../context/DataContext'
+import { programs } from '../../data/programs'
 
 const footerLinks = {
-  programs: [
-    { name: 'Web Development', href: '/programs/web-development' },
-    { name: 'Data Science', href: '/programs/data-science' },
-    { name: 'UI/UX Design', href: '/programs/ui-ux-design' },
-    { name: 'Digital Marketing', href: '/programs/digital-marketing' },
-    { name: 'Cloud Computing', href: '/programs/cloud-computing' },
-  ],
+  programs: programs.slice(0, 6).map((p) => ({ name: p.title, href: `/programs/${p.id}` })),
   company: [
     { name: 'About Us', href: '/about' },
     { name: 'Blog', href: '/blog' },

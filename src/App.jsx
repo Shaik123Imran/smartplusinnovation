@@ -19,6 +19,7 @@ import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
+import Checkout from './pages/Checkout'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/programs" element={<Programs />} />
               <Route path="/programs/:id" element={<ProgramDetail />} />
+              <Route path="/programs/:id/checkout" element={<Checkout />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/blog" element={<Blog />} />

@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import Layout from '../components/layout/Layout'
-import { useData } from '../context/DataContext'
+import { team, values } from '../data/team'
 import { calculateDynamicStats, formatStats } from '../services/stats'
 import Button from '../components/common/Button'
 
 function About() {
-  const { team, values } = useData()
   const [stats, setStats] = useState([])
   const [loading, setLoading] = useState(true)
   const DEMO_VIDEO_URL = 'https://www.w3schools.com/html/mov_bbb.mp4'

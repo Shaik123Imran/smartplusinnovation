@@ -4,16 +4,11 @@ import { Input, Textarea, Select } from '../common/Input'
 import Button from '../common/Button'
 import { useData } from '../../context/DataContext'
 import { sendContactEmail } from '../../services/emailjs'
+import { programs } from '../../data/programs'
 
 const COURSE_OPTIONS = [
   { value: '', label: 'Select course type' },
-  { value: 'web-development', label: 'Full Stack Web Development' },
-  { value: 'data-science', label: 'Data Science & Analytics' },
-  { value: 'ui-ux', label: 'UI/UX Design' },
-  { value: 'digital-marketing', label: 'Digital Marketing' },
-  { value: 'cloud', label: 'Cloud Computing & DevOps' },
-  { value: 'mobile', label: 'Mobile App Development' },
-  { value: 'ai', label: 'AI & Deep Learning' },
+  ...programs.map((p) => ({ value: p.id, label: p.title })),
   { value: 'other', label: 'Other / Not sure yet' },
 ]
 

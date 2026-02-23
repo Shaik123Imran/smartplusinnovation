@@ -65,17 +65,20 @@ function Hero() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-3xl transform rotate-3 opacity-20"></div>
               <div className="relative bg-white rounded-3xl shadow-2xl p-8 transform hover:-rotate-1 transition-transform duration-500">
-                <div className="aspect-square bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 rounded-2xl flex items-center justify-center overflow-hidden">
+                <div className="aspect-square rounded-2xl flex items-center justify-center overflow-hidden relative">
+                  <img
+                    src="/program-images/Full_stack_development_program.png"
+                    alt="Learning and building real-world projects"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/35 via-black/15 to-black/35" />
+
                   <div className="relative w-full h-full p-8">
-                    <div className="absolute top-8 left-8 w-24 h-24 bg-primary/20 rounded-2xl animate-pulse"></div>
-                    <div className="absolute top-16 right-12 w-20 h-20 bg-secondary/20 rounded-full animate-pulse delay-75"></div>
-                    <div className="absolute bottom-16 left-16 w-16 h-16 bg-accent/20 rounded-xl animate-pulse delay-150"></div>
-                    <div className="absolute bottom-8 right-8 w-28 h-28 bg-primary/10 rounded-3xl animate-pulse delay-200"></div>
-                    
                     <div className="absolute inset-0 flex items-center justify-center">
                       <Link
                         to="/programs"
-                        className="group text-center space-y-4 rounded-2xl px-6 py-5 focus:outline-none focus:ring-4 focus:ring-primary/30 hover:bg-white/40 transition-colors"
+                        className="group text-center space-y-4 rounded-2xl px-6 py-5 focus:outline-none focus:ring-4 focus:ring-primary/30 bg-white/70 hover:bg-white/85 backdrop-blur transition-colors"
                         aria-label="Start Learning - Browse Programs"
                       >
                         <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-105 transition-transform duration-300">
@@ -84,9 +87,9 @@ function Hero() {
                           </svg>
                         </div>
                         <p className="text-text font-bold text-lg group-hover:text-primary transition-colors">Start Learning</p>
-                        <p className="text-text/60 text-sm">100+ Courses Available</p>
+                        <p className="text-text/60 text-sm">Browse programs & enroll</p>
                         <p className="text-primary text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                          Browse Programs →
+                          View Programs →
                         </p>
                       </Link>
                     </div>
