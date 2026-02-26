@@ -33,7 +33,7 @@ export function DataProvider({ children }) {
   const allBlogs = [...sampleBlogs, ...dynamicBlogs]
   const allTestimonials = [...testimonials, ...dynamicTestimonials]
 
-  // Fetch dynamic data from Firebase
+  // Fetch dynamic data from the current backend (or demo/local storage)
   useEffect(() => {
     const fetchDynamicData = async () => {
       try {

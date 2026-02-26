@@ -7,7 +7,6 @@ const navLinks = [
   { name: 'Programs', href: '/programs' },
   { name: 'About', href: '/about' },
   { name: 'Pricing', href: '/pricing' },
-  { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -91,9 +90,6 @@ function Navbar() {
                     <Link to="/dashboard/profile" className="block px-4 py-2 text-text hover:bg-primary/5 hover:text-primary transition-colors">
                       Profile
                     </Link>
-                    <Link to="/blog/write" className="block px-4 py-2 text-text hover:bg-primary/5 hover:text-primary transition-colors">
-                      Write Blog
-                    </Link>
                     <hr className="my-2 border-gray-100" />
                     <button 
                       onClick={handleLogout}
@@ -154,9 +150,6 @@ function Navbar() {
               <>
                 <Link to="/dashboard" className="px-4 py-2 text-text/70 hover:text-primary hover:bg-primary/5 rounded-lg font-medium transition-colors">
                   Dashboard
-                </Link>
-                <Link to="/blog/write" className="px-4 py-2 text-text/70 hover:text-primary hover:bg-primary/5 rounded-lg font-medium transition-colors">
-                  Write Blog
                 </Link>
                 <button 
                   onClick={handleLogout}

@@ -40,7 +40,7 @@ export const programs = [
     rating: 4.8,
     students: 1200,
     image: 'auto-cad',
-    imageFile: 'AutoCAD.png',
+    imageFile: 'auto-cad.jpg',
     color: 'primary',
   },
   // UI/UX Designing
@@ -60,7 +60,7 @@ export const programs = [
     rating: 4.9,
     students: 980,
     image: 'ui-ux',
-    imageFile: 'UI_UX.png',
+    imageFile: 'ui-ux.jpg',
     color: 'accent',
   },
   // Technology & Software
@@ -80,7 +80,7 @@ export const programs = [
     rating: 4.9,
     students: 2100,
     image: 'fullstack',
-    imageFile: 'Full_stack_development_program.png',
+    imageFile: 'fullstack.jpg',
     color: 'primary',
   },
   {
@@ -99,7 +99,7 @@ export const programs = [
     rating: 4.8,
     students: 1650,
     image: 'java',
-    imageFile: 'Java_full_stack.png',
+    imageFile: 'java.jpg',
     color: 'secondary',
   },
   {
@@ -118,7 +118,7 @@ export const programs = [
     rating: 4.8,
     students: 1420,
     image: 'python',
-    imageFile: 'Phyton_full_stack.png',
+    imageFile: 'python.jpg',
     color: 'accent',
   },
   {

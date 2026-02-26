@@ -14,7 +14,7 @@ function Checkout() {
   const { user, isEnrolled, enroll } = useAuth()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [demoMode, setDemoMode] = useState(import.meta.env.DEV)
+  const [demoMode, setDemoMode] = useState(false)
 
   const program = id ? getProgram(id) : null
 
@@ -52,15 +52,6 @@ function Checkout() {
     if (!program || !user) return
     setError('')
     setLoading(true)
-
-    // In local development with Vite, there is no real /api backend.
-    // Use Demo payment instead of calling the Razorpay API to avoid 404 errors.
-    if (import.meta.env.DEV) {
-      setDemoMode(true)
-      setError('In local development, use Demo payment to simulate enrollment. Real payments work after deployment.')
-      setLoading(false)
-      return
-    }
 
     try {
       const orderData = await createRazorpayOrder({

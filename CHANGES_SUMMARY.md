@@ -24,16 +24,15 @@
 
 ### 3. **Dynamic Stats System** ✅
 - Stats now update automatically from:
-  - **Active Students**: Increments when users register
-  - **Student Rating**: Calculated from testimonials
-  - **Other stats**: Use default values (can be updated in Firebase)
-- Works in both Demo Mode and Firebase Mode
+- **Active Students**: Increments when users register
+- **Student Rating**: Calculated from testimonials
+- **Other stats**: Use default values (can later be updated from a real backend)
+- Works in Demo Mode and is ready for a real backend
 - Stats refresh every 5 minutes
 - Shows loading state while fetching
 
 ### 4. **Password Reset Verified** ✅
 - **Demo Mode**: Shows helpful message explaining demo mode
-- **Firebase Mode**: Sends real email to registered address
 - Error handling for invalid emails
 - Success/error messages displayed clearly
 - Modal UI for password reset
@@ -48,8 +47,7 @@
 ### 6. **Production Readiness** ✅
 - Created `PRODUCTION_CHECKLIST.md`
 - Created `SETUP_GUIDE.md`
-- Firebase configuration guide
-- EmailJS setup guide
+- Backend/EmailJS configuration guides
 - Deployment instructions
 - Troubleshooting guide
 
@@ -65,19 +63,19 @@ Stats now show dynamically:
 
 ## 🔐 Authentication Status
 
-| Feature | Demo Mode | Firebase Mode |
-|---------|-----------|---------------|
-| Email/Password Register | ✅ | ✅ |
-| Email/Password Login | ✅ | ✅ |
-| Password Reset | ⚠️ (Message) | ✅ (Email) |
-| Google Sign-In | ❌ | ✅ |
-| Data Persistence | localStorage | Firestore |
+| Feature | Demo Mode |
+|---------|-----------|
+| Email/Password Register | ✅ |
+| Email/Password Login | ✅ |
+| Password Reset | ⚠️ (Message only) |
+| Google Sign-In | ✅ (demo account) |
+| Data Persistence | localStorage |
 
-## 🎯 What's Ready for Tomorrow
+## 🎯 Backend Ready
 
-When you configure Firebase tomorrow:
+When you configure your real backend (e.g. MongoDB + Express):
 
-1. **Create Firebase Project** (5 minutes)
+1. Add connection details to `.env`
 2. **Enable Authentication** (2 minutes)
 3. **Create Firestore Database** (2 minutes)
 4. **Copy config to `.env`** (1 minute)
@@ -133,7 +131,7 @@ After that:
 The website is **100% production-ready**:
 
 1. ✅ Works perfectly in demo mode
-2. ✅ Ready for Firebase integration
+2. ✅ Ready for real backend integration
 3. ✅ All features functional
 4. ✅ Dynamic stats system
 5. ✅ Proper error handling
@@ -141,4 +139,4 @@ The website is **100% production-ready**:
 7. ✅ Production checklist provided
 8. ✅ Setup guide included
 
-**Next Step**: Configure Firebase tomorrow using `SETUP_GUIDE.md` 🎉
+**Next Step**: Configure your real backend (e.g. MongoDB + Express) using `SETUP_GUIDE.md` 🎉

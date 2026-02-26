@@ -11,17 +11,13 @@ npm run dev
 
 Open http://localhost:5173 - Everything works in demo mode!
 
-## 🔥 Firebase Setup (For Production)
+## 🔥 Backend Setup (For Production)
 
-### Why Firebase?
-- Persistent user data (not lost on browser clear)
-- Google Sign-In
-- Real password reset emails
-- Cloud database for blogs, testimonials, stats
+> The project now uses a local demo API and is designed to plug into a real backend such as **Express + MongoDB**. Any older cloud-setup steps from previous versions can be ignored.
 
 ### Setup Steps
 
-1. **Create Firebase Project**
+1. **Create your backend project (e.g. Node.js + MongoDB)**
    - Visit https://console.firebase.google.com
    - Click "Add Project"
    - Name: "Smart Plus Innovation"
@@ -75,7 +71,7 @@ Open http://localhost:5173 - Everything works in demo mode!
 - ✅ Contact Form
 - ✅ Newsletter Subscription
 - ✅ Dynamic Stats
-- ❌ Google Sign-In (requires Firebase)
+- ✅ Google Sign-In (demo local account)
 - ❌ Password Reset Emails (shows message)
 
 ## 📊 Dynamic Stats
@@ -83,7 +79,7 @@ Open http://localhost:5173 - Everything works in demo mode!
 Stats automatically update:
 - **Active Students**: Increments when users register
 - **Student Rating**: Calculated from testimonials
-- **Other stats**: Use default values (can be updated in Firebase)
+- **Other stats**: Use default values (can later be updated from your backend)
 
 ## 🔐 Password Reset
 
@@ -91,10 +87,10 @@ Stats automatically update:
 - Shows helpful message
 - User must remember password or register new account
 
-### With Firebase
+### With a real backend
 - Sends real email to registered address
 - User clicks link to reset password
-- Works automatically once Firebase is configured
+- Works automatically once your backend is configured
 
 ## 🎨 Branding
 
@@ -122,7 +118,7 @@ Add all variables from `.env` file:
 ## 🐛 Troubleshooting
 
 **Problem**: Google Sign-In button disabled
-**Solution**: Configure Firebase (see above)
+**Solution**: In demo mode this uses a local test account. For real Google OAuth, connect it in your backend.
 
 **Problem**: Stats showing 0
 **Solution**: Normal on first load. They update as users register.
@@ -130,18 +126,18 @@ Add all variables from `.env` file:
 **Problem**: Password reset not working
 **Solution**: 
 - Demo mode: Shows message (expected)
-- Firebase: Check Authentication → Templates
+- With backend email service: verify SMTP / provider configuration
 
 **Problem**: Data lost after refresh
-**Solution**: Configure Firebase for persistent storage
+**Solution**: Demo mode uses localStorage. Connect a real database (e.g. MongoDB) for persistent storage.
 
 ## 📝 Notes
 
 - Demo mode uses `localStorage` (browser storage)
-- Firebase mode uses Firestore (cloud database)
-- Stats update automatically in both modes
-- All features work except Google Sign-In without Firebase
+- A future backend can use a real database (e.g. MongoDB)
+- Stats update automatically in demo mode
+- Google Sign-In currently uses a local demo account
 
 ---
 
-**Ready to go!** Start with demo mode, add Firebase when ready. 🚀
+**Ready to go!** Start with demo mode, add your backend when ready. 🚀

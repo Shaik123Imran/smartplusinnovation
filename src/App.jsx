@@ -9,9 +9,6 @@ import Programs from './pages/Programs'
 import ProgramDetail from './pages/ProgramDetail'
 import About from './pages/About'
 import Contact from './pages/Contact'
-import Blog from './pages/Blog'
-import BlogPost from './pages/BlogPost'
-import WriteBlog from './pages/WriteBlog'
 import FAQ from './pages/FAQ'
 import Pricing from './pages/Pricing'
 import Login from './pages/Login'
@@ -36,9 +33,6 @@ function App() {
               <Route path="/programs/:id/checkout" element={<Checkout />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/write" element={<WriteBlog />} />
-              <Route path="/blog/:id" element={<BlogPost />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/login" element={<Login />} />

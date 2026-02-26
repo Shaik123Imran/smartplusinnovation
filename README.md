@@ -7,7 +7,7 @@ A modern, production-ready educational platform built with React, Vite, and Tail
 ## 🚀 Features
 
 - **Multi-page Application** - Home, Programs, About, Pricing, Blog, FAQ, Contact, Dashboard
-- **User Authentication** - Register, Login, Password Reset (Firebase or Demo mode)
+- **User Authentication** - Register, Login, Password Reset (demo/local mode, ready for real backend)
 - **Course Enrollment** - Browse and enroll in 10+ tech programs
 - **Blog System** - Read and write blog posts
 - **Responsive Design** - Mobile-first, works on all devices
@@ -18,7 +18,7 @@ A modern, production-ready educational platform built with React, Vite, and Tail
 - **Frontend:** React 18, React Router DOM
 - **Styling:** Tailwind CSS
 - **Build Tool:** Vite
-- **Backend:** Firebase (Auth, Firestore)
+- **Backend:** Local demo API (ready for Express + MongoDB)
 - **Email:** EmailJS
 
 ## 📦 Installation
@@ -43,22 +43,28 @@ npm run dev
 
 ## 🔧 Configuration (Optional)
 
-For full Firebase functionality, create a `.env` file:
+For email features and backend services, create a `.env` file:
 
 ```env
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-VITE_FIREBASE_APP_ID=your_app_id
-
 VITE_EMAILJS_SERVICE_ID=your_service_id
 VITE_EMAILJS_TEMPLATE_ID=your_template_id
 VITE_EMAILJS_PUBLIC_KEY=your_public_key
+
+# Payment (Razorpay serverless)
+RAZORPAY_KEY_ID=your_key_id
+RAZORPAY_KEY_SECRET=your_key_secret
+
+# MongoDB (Express backend)
+MONGODB_URI=your_mongodb_connection_string
+MONGODB_DB_NAME=your_db_name
+
+# Cloudinary (video uploads)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_key
+CLOUDINARY_API_SECRET=your_cloudinary_secret
 ```
 
-> **Note:** The app works in Demo Mode without Firebase configuration. User data is stored locally in the browser.
+> **Note:** The app works fully in **demo mode** with localStorage and a small Express API, and is ready to plug into your real MongoDB backend when you add the credentials.
 
 ## 📁 Project Structure
 
@@ -72,7 +78,7 @@ src/
 ├── context/           # React Context providers
 ├── data/              # Static data files
 ├── pages/             # Page components
-├── services/          # Firebase & EmailJS services
+├── services/          # API & EmailJS services
 ├── App.jsx
 ├── main.jsx
 └── index.css

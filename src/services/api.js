@@ -36,10 +36,6 @@ const saveDemoCurrentUser = (user) => {
   }
 }
 
-// In this setup there is no remote backend yet.
-// Keep this flag for compatibility with UI but always false.
-export const isFirebaseConfigured = false
-
 // Auth functions (demo mode, localStorage)
 export const registerUser = async (email, password, displayName) => {
   const users = getDemoUsers()
@@ -82,7 +78,31 @@ export const loginUser = async (email, password) => {
 }
 
 export const loginWithGoogle = async () => {
-  throw new Error('Google Sign-In is not available in demo mode. A MongoDB-backed auth API is required.')
+  // Demo Google login: create or reuse a local user that represents a Google account.
+  const users = getDemoUsers()
+  const demoEmail = 'google.demo@smartplusinnovation.com'
+  const existing = users[demoEmail]
+
+  if (existing) {
+    const { password: _pw, ...user } = existing
+    saveDemoCurrentUser(user)
+    return user
+  }
+
+  const uid = 'google_demo_' + Date.now()
+  const user = {
+    uid,
+    email: demoEmail,
+    displayName: 'Google Demo User',
+    enrolledCourses: [],
+    createdAt: new Date().toISOString(),
+    provider: 'google-demo',
+  }
+
+  users[demoEmail] = { ...user, password: null }
+  saveDemoUsers(users)
+  saveDemoCurrentUser(user)
+  return user
 }
 
 export const logoutUser = async () => {

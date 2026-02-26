@@ -7,7 +7,6 @@ const footerLinks = {
   programs: programs.slice(0, 6).map((p) => ({ name: p.title, href: `/programs/${p.id}` })),
   company: [
     { name: 'About Us', href: '/about' },
-    { name: 'Blog', href: '/blog' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'FAQ', href: '/faq' },
   ],

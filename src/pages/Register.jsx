@@ -6,7 +6,7 @@ import Button from '../components/common/Button'
 import { Input } from '../components/common/Input'
 
 function Register() {
-  const { register, googleLogin, error: authError, isFirebaseConfigured } = useAuth()
+  const { register, googleLogin, error: authError } = useAuth()
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -51,11 +51,6 @@ function Register() {
   }
 
   const handleGoogleLogin = async () => {
-    if (!isFirebaseConfigured) {
-      setError('Google Sign-In requires Firebase configuration. Please use email/password registration, or set up Firebase.')
-      return
-    }
-    
     setLoading(true)
     setError('')
     
@@ -83,22 +78,12 @@ function Register() {
             <p className="text-text/60">Start your learning journey today</p>
           </div>
 
-          {!isFirebaseConfigured && (
-            <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-xl text-yellow-800 text-sm">
-              <strong>Demo Mode:</strong> Firebase is not configured. You can still register and login with email/password. Your data will be stored locally in your browser.
-            </div>
-          )}
-
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <button
               onClick={handleGoogleLogin}
-              disabled={loading || !isFirebaseConfigured}
-              className={`w-full flex items-center justify-center gap-3 px-4 py-3 border-2 border-gray-200 rounded-xl font-medium transition-colors ${
-                !isFirebaseConfigured 
-                  ? 'opacity-50 cursor-not-allowed bg-gray-50' 
-                  : 'text-text hover:bg-gray-50'
-              }`}
-              title={!isFirebaseConfigured ? 'Requires Firebase configuration' : 'Sign up with Google'}
+              disabled={loading}
+              className="w-full flex items-center justify-center gap-3 px-4 py-3 border-2 border-gray-200 rounded-xl font-medium transition-colors text-text hover:bg-gray-50"
+              title="Sign up with Google (demo account)"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />

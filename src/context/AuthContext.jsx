@@ -9,8 +9,7 @@ import {
   updateUserData,
   enrollInCourse,
   unenrollFromCourse,
-  resetPassword,
-  isFirebaseConfigured
+  resetPassword
 } from '../services/api'
 import { sendWelcomeEmail } from '../services/emailjs'
 
@@ -175,7 +174,6 @@ export function AuthProvider({ children }) {
     enroll,
     unenroll,
     isEnrolled,
-    isFirebaseConfigured
   }
 
   return (

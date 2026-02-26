@@ -67,7 +67,7 @@ function Hero() {
               <div className="relative bg-white rounded-3xl shadow-2xl p-8 transform hover:-rotate-1 transition-transform duration-500">
                 <div className="aspect-square rounded-2xl flex items-center justify-center overflow-hidden relative">
                   <img
-                    src="/program-images/Full_stack_development_program.png"
+                    src="/program-images/fullstack.jpg"
                     alt="Learning and building real-world projects"
                     className="absolute inset-0 w-full h-full object-cover"
                     loading="lazy"
