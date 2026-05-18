@@ -7,9 +7,11 @@ import Button from '../components/common/Button'
 import Badge from '../components/common/Badge'
 import Modal from '../components/common/Modal'
 import { Input, Textarea } from '../components/common/Input'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function Dashboard() {
-  const { user, userData, logout, unenroll, updateProfile } = useAuth()
+  usePageTitle('Dashboard')
+  const { user, userData, loading, logout, unenroll, updateProfile } = useAuth()
   const { programs, testimonials, addTestimonial } = useData()
   const navigate = useNavigate()
   
@@ -21,10 +23,44 @@ function Dashboard() {
     program: ''
   })
   const [testimonialStatus, setTestimonialStatus] = useState(null)
+  const [profileForm, setProfileForm] = useState({ fullName: '', phone: '' })
+  const [profileStatus, setProfileStatus] = useState(null)
+  const [editingProfile, setEditingProfile] = useState(false)
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="min-h-[50vh] flex items-center justify-center">
+          <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin" aria-label="Loading" />
+        </div>
+      </Layout>
+    )
+  }
 
   if (!user) {
-    navigate('/login')
+    navigate('/login', { replace: true })
     return null
+  }
+
+  const startEditProfile = () => {
+    setProfileForm({
+      fullName: user.displayName || user.fullName || '',
+      phone: user.phone || '',
+    })
+    setEditingProfile(true)
+    setProfileStatus(null)
+  }
+
+  const handleProfileSave = async (e) => {
+    e.preventDefault()
+    setProfileStatus('loading')
+    const result = await updateProfile(profileForm)
+    if (result.success) {
+      setProfileStatus('success')
+      setEditingProfile(false)
+    } else {
+      setProfileStatus('error')
+    }
   }
 
   const enrolledPrograms = (userData?.enrolledCourses || [])
@@ -46,7 +82,7 @@ function Dashboard() {
       name: user.displayName || 'Anonymous',
       image: user.displayName?.charAt(0) || 'A',
       role: 'Student',
-      company: 'Smart Plus Innovation'
+      company: 'EduGram Technologies Pvt Ltd'
     })
     
     if (result.success) {
@@ -201,23 +237,72 @@ function Dashboard() {
 
               {activeTab === 'profile' && (
                 <div className="bg-white rounded-2xl shadow-sm p-6">
-                  <h2 className="text-xl font-bold text-text mb-6">Profile Information</h2>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-text/70 mb-1">Name</label>
-                      <p className="text-text font-medium">{user.displayName || 'Not set'}</p>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-text/70 mb-1">Email</label>
-                      <p className="text-text font-medium">{user.email}</p>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-text/70 mb-1">Member Since</label>
-                      <p className="text-text font-medium">
-                        {userData?.createdAt?.toDate?.()?.toLocaleDateString() || 'Recently joined'}
-                      </p>
-                    </div>
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-bold text-text">Profile Information</h2>
+                    {!editingProfile && (
+                      <button
+                        type="button"
+                        onClick={startEditProfile}
+                        className="text-primary font-semibold text-sm hover:underline"
+                      >
+                        Edit profile
+                      </button>
+                    )}
                   </div>
+                  {editingProfile ? (
+                    <form onSubmit={handleProfileSave} className="space-y-4 max-w-md">
+                      <Input
+                        label="Full name"
+                        name="fullName"
+                        value={profileForm.fullName}
+                        onChange={(e) => setProfileForm((p) => ({ ...p, fullName: e.target.value }))}
+                        required
+                      />
+                      <Input
+                        label="Phone"
+                        name="phone"
+                        value={profileForm.phone}
+                        onChange={(e) => setProfileForm((p) => ({ ...p, phone: e.target.value }))}
+                      />
+                      <div className="flex gap-3">
+                        <Button type="submit" loading={profileStatus === 'loading'}>
+                          Save changes
+                        </Button>
+                        <Button type="button" variant="outline" onClick={() => setEditingProfile(false)}>
+                          Cancel
+                        </Button>
+                      </div>
+                      {profileStatus === 'success' && (
+                        <p className="text-green-600 text-sm">Profile updated successfully.</p>
+                      )}
+                      {profileStatus === 'error' && (
+                        <p className="text-red-600 text-sm">Could not update profile. Try again.</p>
+                      )}
+                    </form>
+                  ) : (
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-text/70 mb-1">Name</label>
+                        <p className="text-text font-medium">{user.displayName || user.fullName || 'Not set'}</p>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-text/70 mb-1">Email</label>
+                        <p className="text-text font-medium">{user.email}</p>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-text/70 mb-1">Phone</label>
+                        <p className="text-text font-medium">{user.phone || 'Not set'}</p>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-text/70 mb-1">Member Since</label>
+                        <p className="text-text font-medium">
+                          {userData?.createdAt
+                            ? new Date(userData.createdAt).toLocaleDateString()
+                            : 'Recently joined'}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -296,7 +381,7 @@ function Dashboard() {
             name="content"
             value={testimonialData.content}
             onChange={(e) => setTestimonialData(prev => ({ ...prev, content: e.target.value }))}
-            placeholder="Share your experience with Smart Plus Innovation..."
+            placeholder="Share your experience with EduGram Technologies Pvt Ltd..."
             rows={5}
             required
           />

@@ -1,9 +1,11 @@
 import Layout from '../components/layout/Layout'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function Terms() {
+  usePageTitle('Terms & Conditions')
   return (
     <Layout>
-      <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-white">
+      <section className="page-hero">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl lg:text-4xl font-extrabold text-text mb-4">
             Terms &amp; Conditions

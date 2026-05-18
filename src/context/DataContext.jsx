@@ -1,18 +1,11 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import { programs, categories, getProgramById, getProgramsByCategory, searchPrograms, getFeaturedPrograms } from '../data/programs'
-import { testimonials } from '../data/testimonials'
-import { sampleBlogs, blogCategories, getBlogById, getBlogsByCategory, getFeaturedBlogs, searchBlogs } from '../data/blog'
+import { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react'
+import { fetchCourses, fetchCategories, mapCourseToProgram } from '../services/courseService'
+import { fetchTestimonials, submitTestimonial as apiSubmitTestimonial } from '../services/testimonialService'
+import { submitContact, submitInterest, subscribeNewsletter } from '../services/formService'
 import { faqs, faqCategories, getFaqsByCategory } from '../data/faq'
-import { team, stats, values } from '../data/team'
+import { team, values } from '../data/team'
 import { pricingPlans, annualDiscount } from '../data/pricing'
-import { 
-  getBlogPosts, 
-  createBlogPost, 
-  getApprovedTestimonials,
-  submitTestimonial,
-  submitContactForm,
-  subscribeNewsletter
-} from '../services/api'
+import { isFastTrackProgram, FAST_TRACK_MAX_WEEKS } from '../utils/fastTrack'
 
 const DataContext = createContext()
 
@@ -25,150 +18,128 @@ export function useData() {
 }
 
 export function DataProvider({ children }) {
-  const [dynamicBlogs, setDynamicBlogs] = useState([])
-  const [dynamicTestimonials, setDynamicTestimonials] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [programs, setPrograms] = useState([])
+  const [categories, setCategories] = useState([{ id: 'all', name: 'All Programs' }])
+  const [testimonials, setTestimonials] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  // Combine static and dynamic blogs
-  const allBlogs = [...sampleBlogs, ...dynamicBlogs]
-  const allTestimonials = [...testimonials, ...dynamicTestimonials]
-
-  // Fetch dynamic data from the current backend (or demo/local storage)
   useEffect(() => {
-    const fetchDynamicData = async () => {
+    const load = async () => {
       try {
-        const [blogs, reviews] = await Promise.all([
-          getBlogPosts(),
-          getApprovedTestimonials()
+        const [courses, cats, reviews] = await Promise.all([
+          fetchCourses(),
+          fetchCategories(),
+          fetchTestimonials(),
         ])
-        setDynamicBlogs(blogs)
-        setDynamicTestimonials(reviews)
-      } catch (error) {
-        console.log('Using static data only:', error.message)
+        setPrograms(courses.map(mapCourseToProgram))
+        setCategories(cats)
+        setTestimonials(
+          reviews.map((t) => ({
+            id: t._id,
+            name: t.name,
+            role: t.role,
+            company: t.company,
+            content: t.content,
+            rating: t.rating,
+            image: t.image || t.name?.charAt(0) || 'U',
+            program: t.program,
+          }))
+        )
+      } catch (err) {
+        console.error('Failed to load data:', err)
+        setError(err.message)
+      } finally {
+        setLoading(false)
       }
     }
-    fetchDynamicData()
+    load()
   }, [])
 
-  // Program functions
-  const getProgram = (id) => getProgramById(id)
-  const filterProgramsByCategory = (category) => getProgramsByCategory(category)
-  const searchProgramsQuery = (query) => searchPrograms(query)
-  const featuredPrograms = getFeaturedPrograms()
+  const getProgramById = useCallback(
+    (id) => programs.find((p) => p.id === id),
+    [programs]
+  )
 
-  // Blog functions
-  const getBlog = (id) => {
-    const staticBlog = getBlogById(id)
-    if (staticBlog) return staticBlog
-    return dynamicBlogs.find(blog => blog.id === id)
-  }
-  
-  const filterBlogsByCategory = (category) => {
-    if (category === 'all') return allBlogs
-    return allBlogs.filter(blog => blog.category === category)
-  }
-  
-  const searchBlogsQuery = (query) => {
-    const lowercaseQuery = query.toLowerCase()
-    return allBlogs.filter(blog =>
-      blog.title.toLowerCase().includes(lowercaseQuery) ||
-      blog.excerpt?.toLowerCase().includes(lowercaseQuery) ||
-      blog.tags?.some(tag => tag.toLowerCase().includes(lowercaseQuery))
-    )
-  }
-  
-  const addBlogPost = async (postData) => {
-    setLoading(true)
-    try {
-      const id = await createBlogPost(postData)
-      setDynamicBlogs(prev => [{ id, ...postData }, ...prev])
-      return { success: true, id }
-    } catch (error) {
-      return { success: false, error: error.message }
-    } finally {
-      setLoading(false)
-    }
+  const getProgramsByCategory = useCallback(
+    (category) => {
+      if (category === 'all') return programs
+      return programs.filter((p) => p.category === category)
+    },
+    [programs]
+  )
+
+  const searchPrograms = useCallback(
+    (query) => {
+      const q = query.toLowerCase()
+      return programs.filter(
+        (p) =>
+          p.title.toLowerCase().includes(q) ||
+          p.shortDescription.toLowerCase().includes(q) ||
+          p.skills.some((s) => s.toLowerCase().includes(q))
+      )
+    },
+    [programs]
+  )
+
+  const featuredPrograms = useMemo(() => programs.filter((_, i) => i < 6), [programs])
+
+  const fastTrackPrograms = useMemo(
+    () => programs.filter(isFastTrackProgram),
+    [programs]
+  )
+
+  const submitContactForm = async (formData) => {
+    return submitContact(formData)
   }
 
-  // Testimonial functions
-  const addTestimonial = async (testimonialData) => {
-    setLoading(true)
-    try {
-      const id = await submitTestimonial(testimonialData)
-      return { success: true, id }
-    } catch (error) {
-      return { success: false, error: error.message }
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // Contact & Newsletter
-  const submitContact = async (formData) => {
-    try {
-      await submitContactForm(formData)
-      return { success: true }
-    } catch (error) {
-      return { success: false, error: error.message }
-    }
+  const submitInterestForm = async (formData) => {
+    return submitInterest(formData)
   }
 
   const subscribe = async (email) => {
     try {
-      const isNew = await subscribeNewsletter(email)
-      return { success: true, isNew }
-    } catch (error) {
-      return { success: false, error: error.message }
+      await subscribeNewsletter(email)
+      return { success: true }
+    } catch (err) {
+      return { success: false, error: err.message }
+    }
+  }
+
+  const addTestimonial = async (data) => {
+    try {
+      const res = await apiSubmitTestimonial(data)
+      return { success: true, message: res.message }
+    } catch (err) {
+      return { success: false, error: err.message }
     }
   }
 
   const value = {
-    // Programs
     programs,
     categories,
-    getProgram,
-    filterProgramsByCategory,
-    searchProgramsQuery,
+    testimonials,
     featuredPrograms,
-    
-    // Blogs
-    blogs: allBlogs,
-    blogCategories,
-    getBlog,
-    filterBlogsByCategory,
-    searchBlogsQuery,
-    featuredBlogs: getFeaturedBlogs(),
-    addBlogPost,
-    
-    // Testimonials
-    testimonials: allTestimonials,
-    addTestimonial,
-    
-    // FAQ
+    fastTrackPrograms,
     faqs,
     faqCategories,
     getFaqsByCategory,
-    
-    // Team & About
     team,
-    stats,
     values,
-    
-    // Pricing
     pricingPlans,
     annualDiscount,
-    
-    // Actions
-    submitContact,
+    loading,
+    error,
+    getProgramById,
+    getProgramsByCategory,
+    searchPrograms,
+    submitContact: submitContactForm,
+    submitInterest: submitInterestForm,
     subscribe,
-    
-    // State
-    loading
+    addTestimonial,
+    isFastTrackProgram,
+    FAST_TRACK_MAX_WEEKS,
   }
 
-  return (
-    <DataContext.Provider value={value}>
-      {children}
-    </DataContext.Provider>
-  )
+  return <DataContext.Provider value={value}>{children}</DataContext.Provider>
 }

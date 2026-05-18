@@ -4,8 +4,10 @@ import { useData } from '../context/DataContext'
 import { sendContactEmail } from '../services/emailjs'
 import Button from '../components/common/Button'
 import { Input, Textarea } from '../components/common/Input'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function Contact() {
+  usePageTitle('Contact Us')
   const { submitContact } = useData()
   const [formData, setFormData] = useState({
     name: '',
@@ -42,19 +44,17 @@ function Contact() {
 
   return (
     <Layout>
-      <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm mb-4">
+      <section className="page-hero">
+        <div className="page-hero-inner">
+          <div className="section-header-center mb-0">
+            <span className="section-eyebrow bg-primary/10 text-primary">
               Contact Us
             </span>
-            <h1 className="text-3xl lg:text-5xl font-extrabold text-text mb-4">
-              Get In Touch
-              <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                We're Here to Help
-              </span>
+            <h1 className="page-title">
+              <span className="section-title-line">Get In Touch</span>
+              <span className="page-title-accent">We&apos;re Here to Help</span>
             </h1>
-            <p className="text-text/60 max-w-2xl mx-auto text-lg">
+            <p className="section-subtitle-center">
               Have questions about our programs? Ready to start your journey? Reach out to us!
             </p>
           </div>
@@ -72,8 +72,8 @@ function Contact() {
                     </div>
                     <div>
                       <h3 className="font-bold text-text">Email</h3>
-                      <p className="text-text/60">hello@smartplus.com</p>
-                      <p className="text-text/60">support@smartplus.com</p>
+                      <p className="text-text/60">info@edugram.com</p>
+                      <p className="text-text/60">support@edugram.com</p>
                     </div>
                   </div>
 

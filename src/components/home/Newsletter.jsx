@@ -25,13 +25,13 @@ function Newsletter() {
   }
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-r from-primary to-secondary">
+    <section className="section-block bg-gradient-to-r from-primary to-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl lg:text-4xl font-extrabold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.15] mb-4">
             Stay Updated with Latest Tech Trends
           </h2>
-          <p className="text-white/80 text-lg mb-8">
+          <p className="text-white/80 text-base sm:text-lg leading-relaxed mb-8">
             Subscribe to our newsletter and get weekly insights, course updates, and career tips delivered to your inbox.
           </p>
 

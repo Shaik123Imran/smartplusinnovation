@@ -14,7 +14,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
-  const { user, logout } = useAuth()
+  const { user, logout, isAdmin } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -43,9 +43,12 @@ function Navbar() {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S+</span>
+                <span className="text-white font-bold text-sm leading-none">EG</span>
               </div>
-              <span className="text-xl font-bold text-text">Smart <span className="text-primary">Plus Innovation</span></span>
+              <span className="text-xl font-bold text-text leading-tight">
+                <span className="text-primary">EduGram</span>
+                <span className="text-text"> Technologies Pvt Ltd</span>
+              </span>
             </Link>
           </div>
 
@@ -87,6 +90,11 @@ function Navbar() {
                     <Link to="/dashboard" className="block px-4 py-2 text-text hover:bg-primary/5 hover:text-primary transition-colors">
                       Dashboard
                     </Link>
+                    {isAdmin && (
+                      <Link to="/admin" className="block px-4 py-2 text-text hover:bg-primary/5 hover:text-primary transition-colors">
+                        Admin
+                      </Link>
+                    )}
                     <Link to="/dashboard/profile" className="block px-4 py-2 text-text hover:bg-primary/5 hover:text-primary transition-colors">
                       Profile
                     </Link>
@@ -151,6 +159,11 @@ function Navbar() {
                 <Link to="/dashboard" className="px-4 py-2 text-text/70 hover:text-primary hover:bg-primary/5 rounded-lg font-medium transition-colors">
                   Dashboard
                 </Link>
+                {isAdmin && (
+                  <Link to="/admin" className="px-4 py-2 text-text/70 hover:text-primary hover:bg-primary/5 rounded-lg font-medium transition-colors">
+                    Admin
+                  </Link>
+                )}
                 <button 
                   onClick={handleLogout}
                   className="mx-4 mt-2 px-6 py-2.5 border-2 border-red-500 text-red-500 font-semibold rounded-full text-center hover:bg-red-50 transition-all"

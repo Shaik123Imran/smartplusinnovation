@@ -8,7 +8,7 @@ export const categories = [
 ]
 
 const defaultInstructor = {
-  name: 'Smart Plus Innovation',
+  name: 'EduGram Technologies Pvt Ltd',
   title: 'Expert Mentor',
   experience: '5+ years',
 }
@@ -291,3 +291,5 @@ export const searchPrograms = (query) => {
 export const getFeaturedPrograms = () => {
   return programs.slice(0, 6)
 }
+
+export { getFastTrackPrograms, isFastTrackProgram, FAST_TRACK_MAX_WEEKS } from '../utils/fastTrack.js'

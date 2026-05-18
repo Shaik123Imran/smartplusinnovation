@@ -1,17 +1,5 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import { 
-  onAuthStateChangedCustom, 
-  registerUser, 
-  loginUser, 
-  loginWithGoogle,
-  logoutUser, 
-  getUserData,
-  updateUserData,
-  enrollInCourse,
-  unenrollFromCourse,
-  resetPassword
-} from '../services/api'
-import { sendWelcomeEmail } from '../services/emailjs'
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import * as authService from '../services/authService'
 
 const AuthContext = createContext()
 
@@ -24,49 +12,40 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [userData, setUserData] = useState(null)
+  const [user, setUser] = useState(() => authService.getStoredUser())
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChangedCustom(async (firebaseUser) => {
-      if (firebaseUser) {
-        setUser(firebaseUser)
-        try {
-          const data = await getUserData(firebaseUser.uid)
-          setUserData(data)
-        } catch (err) {
-          console.error('Error fetching user data:', err)
-          // For demo mode, set basic userData
-          setUserData({
-            uid: firebaseUser.uid,
-            email: firebaseUser.email,
-            displayName: firebaseUser.displayName,
-            enrolledCourses: firebaseUser.enrolledCourses || []
-          })
-        }
-      } else {
-        setUser(null)
-        setUserData(null)
-      }
-      setLoading(false)
-    })
-
-    return () => unsubscribe()
+  const syncUser = useCallback((nextUser) => {
+    setUser(nextUser)
   }, [])
 
-  const register = async (email, password, displayName) => {
+  useEffect(() => {
+    const init = async () => {
+      const token = authService.getStoredToken()
+      if (!token) {
+        setLoading(false)
+        return
+      }
+      try {
+        const me = await authService.fetchMe()
+        setUser(me)
+      } catch {
+        authService.clearSession()
+        setUser(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+    init()
+  }, [])
+
+  const register = async (data) => {
     setError(null)
     try {
-      const newUser = await registerUser(email, password, displayName)
-      // Try to send welcome email but don't fail if it doesn't work
-      try {
-        await sendWelcomeEmail(email, displayName)
-      } catch (emailError) {
-        console.log('Welcome email could not be sent:', emailError)
-      }
-      return { success: true, user: newUser }
+      const res = await authService.register(data)
+      setUser(res.user)
+      return { success: true, user: res.user }
     } catch (err) {
       setError(err.message)
       return { success: false, error: err.message }
@@ -76,19 +55,21 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     setError(null)
     try {
-      const loggedInUser = await loginUser(email, password)
-      return { success: true, user: loggedInUser }
+      const res = await authService.login(email, password)
+      setUser(res.user)
+      return { success: true, user: res.user }
     } catch (err) {
       setError(err.message)
       return { success: false, error: err.message }
     }
   }
 
-  const googleLogin = async () => {
+  const googleLogin = async (credential) => {
     setError(null)
     try {
-      const googleUser = await loginWithGoogle()
-      return { success: true, user: googleUser }
+      const res = await authService.googleLogin(credential)
+      setUser(res.user)
+      return { success: true, user: res.user }
     } catch (err) {
       setError(err.message)
       return { success: false, error: err.message }
@@ -98,9 +79,8 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     setError(null)
     try {
-      await logoutUser()
+      await authService.logout()
       setUser(null)
-      setUserData(null)
       return { success: true }
     } catch (err) {
       setError(err.message)
@@ -111,8 +91,20 @@ export function AuthProvider({ children }) {
   const forgotPassword = async (email) => {
     setError(null)
     try {
-      const result = await resetPassword(email)
-      return result
+      const res = await authService.forgotPassword(email)
+      return { success: true, message: res.message }
+    } catch (err) {
+      setError(err.message)
+      return { success: false, error: err.message }
+    }
+  }
+
+  const resetPassword = async (token, password) => {
+    setError(null)
+    try {
+      const res = await authService.resetPassword(token, password)
+      setUser(res.user)
+      return { success: true, user: res.user }
     } catch (err) {
       setError(err.message)
       return { success: false, error: err.message }
@@ -122,9 +114,8 @@ export function AuthProvider({ children }) {
   const updateProfile = async (data) => {
     setError(null)
     try {
-      await updateUserData(user.uid, data)
-      const updatedData = await getUserData(user.uid)
-      setUserData(updatedData)
+      const updated = await authService.updateProfile(data)
+      setUser(updated)
       return { success: true }
     } catch (err) {
       setError(err.message)
@@ -135,9 +126,8 @@ export function AuthProvider({ children }) {
   const enroll = async (courseId) => {
     if (!user) return { success: false, error: 'Not logged in' }
     try {
-      await enrollInCourse(user.uid, courseId)
-      const updatedData = await getUserData(user.uid)
-      setUserData(updatedData)
+      const updated = await authService.enrollCourse(courseId)
+      setUser(updated)
       return { success: true }
     } catch (err) {
       return { success: false, error: err.message }
@@ -147,38 +137,36 @@ export function AuthProvider({ children }) {
   const unenroll = async (courseId) => {
     if (!user) return { success: false, error: 'Not logged in' }
     try {
-      await unenrollFromCourse(user.uid, courseId)
-      const updatedData = await getUserData(user.uid)
-      setUserData(updatedData)
+      const updated = await authService.unenrollCourse(courseId)
+      setUser(updated)
       return { success: true }
     } catch (err) {
       return { success: false, error: err.message }
     }
   }
 
-  const isEnrolled = (courseId) => {
-    return userData?.enrolledCourses?.includes(courseId) || false
-  }
+  const isEnrolled = (courseId) => user?.enrolledCourses?.includes(courseId) || false
+
+  const isAdmin = user?.role === 'admin'
 
   const value = {
     user,
-    userData,
+    userData: user,
     loading,
     error,
+    isAdmin,
     register,
     login,
     googleLogin,
     logout,
     forgotPassword,
+    resetPassword,
     updateProfile,
     enroll,
     unenroll,
     isEnrolled,
+    syncUser,
   }
 
-  return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
-    </AuthContext.Provider>
-  )
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

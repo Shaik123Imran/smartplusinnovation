@@ -1,38 +1,11 @@
-import { useState, useEffect } from 'react'
 import Layout from '../components/layout/Layout'
-import { team, values } from '../data/team'
-import { calculateDynamicStats, formatStats } from '../services/stats'
+import { team, values, stats } from '../data/team'
 import Button from '../components/common/Button'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function About() {
-  const [stats, setStats] = useState([])
-  const [loading, setLoading] = useState(true)
+  usePageTitle('About Us')
   const DEMO_VIDEO_URL = 'https://www.w3schools.com/html/mov_bbb.mp4'
-
-  useEffect(() => {
-    const loadStats = async () => {
-      try {
-        const dynamicStats = await calculateDynamicStats()
-        const formattedStats = formatStats(dynamicStats)
-        setStats(formattedStats)
-      } catch (error) {
-        console.error('Error loading stats:', error)
-        // Fallback to default
-        const defaultStats = formatStats({
-          activeStudents: 10000,
-          partnerCompanies: 200,
-          placementRate: 95,
-          expertMentors: 50,
-          countries: 30,
-          studentRating: 4.9
-        })
-        setStats(defaultStats)
-      } finally {
-        setLoading(false)
-      }
-    }
-    loadStats()
-  }, [])
 
   const iconMap = {
     star: (
@@ -60,20 +33,18 @@ function About() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm mb-4">
+      <section className="page-hero">
+        <div className="page-hero-inner">
+          <div className="max-w-3xl mx-auto section-header-center mb-0">
+            <span className="section-eyebrow bg-primary/10 text-primary">
               About Us
             </span>
-            <h1 className="text-4xl lg:text-5xl font-extrabold text-text mb-6">
-              Empowering the Next Generation of
-              <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Tech Professionals
-              </span>
+            <h1 className="page-title">
+              <span className="section-title-line">Empowering the Next Generation of</span>
+              <span className="page-title-accent">Tech Professionals</span>
             </h1>
-            <p className="text-lg text-text/60 leading-relaxed">
-              Smart Plus Innovation was founded with a mission to bridge the gap between education and industry. 
+            <p className="section-subtitle-center max-w-none">
+              EduGram Technologies Pvt Ltd was founded with a mission to bridge the gap between education and industry. 
               We believe everyone deserves access to quality tech education that leads to real career opportunities.
             </p>
           </div>
@@ -81,32 +52,21 @@ function About() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white">
+      <section className="section-block bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {loading ? (
-            <div className="grid grid-cols-2 lg:grid-cols-6 gap-8">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="text-center animate-pulse">
-                  <div className="h-10 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto"></div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-6 gap-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-3xl lg:text-4xl font-extrabold text-primary mb-2">{stat.number}</div>
-                  <div className="text-text/60">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          )}
+                    <div className="grid grid-cols-2 lg:grid-cols-6 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-3xl lg:text-4xl font-extrabold text-primary mb-2">{stat.number}</div>
+                <div className="text-text/60">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Mission Section */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+      <section className="section-block bg-gradient-to-br from-primary/5 to-secondary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -148,12 +108,12 @@ function About() {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="section-block bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-extrabold text-text mb-4">Our Values</h2>
             <p className="text-text/60 max-w-2xl mx-auto">
-              These core values guide everything we do at Smart Plus Innovation
+              These core values guide everything we do at EduGram Technologies Pvt Ltd
             </p>
           </div>
 
@@ -174,7 +134,7 @@ function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 lg:py-24 bg-background">
+      <section className="section-block bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-extrabold text-text mb-4">Meet Our Team</h2>

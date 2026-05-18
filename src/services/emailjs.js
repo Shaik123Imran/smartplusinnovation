@@ -40,10 +40,10 @@ export const sendEnrollmentConfirmation = async (userEmail, courseName) => {
 /** Send payment confirmation to the user's registered email after successful payment. */
 export const sendPaymentConfirmation = async (userEmail, userName, courseName, amount, orderId, paymentId) => {
   try {
-    const message = `Hi ${userName || 'Student'},\n\nYour payment for ${courseName} has been received successfully.\n\nAmount: ₹${typeof amount === 'number' ? amount.toLocaleString('en-IN') : amount}\nOrder ID: ${orderId || 'N/A'}\nPayment ID: ${paymentId || 'N/A'}\n\nYou are now enrolled in the course. Log in to your dashboard to start learning.\n\nThank you,\nSmart Plus Innovation`
+    const message = `Hi ${userName || 'Student'},\n\nYour payment for ${courseName} has been received successfully.\n\nAmount: ₹${typeof amount === 'number' ? amount.toLocaleString('en-IN') : amount}\nOrder ID: ${orderId || 'N/A'}\nPayment ID: ${paymentId || 'N/A'}\n\nYou are now enrolled in the course. Log in to your dashboard to start learning.\n\nThank you,\nEduGram Technologies Pvt Ltd`
     const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
       to_email: userEmail,
-      from_name: 'Smart Plus Innovation',
+      from_name: 'EduGram Technologies Pvt Ltd',
       subject: 'Payment received – ' + courseName,
       message,
     })
@@ -58,9 +58,9 @@ export const sendWelcomeEmail = async (userEmail, userName) => {
   try {
     const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
       to_email: userEmail,
-      from_name: 'Smart Plus Innovation',
-      subject: 'Welcome to Smart Plus Innovation!',
-      message: `Hi ${userName},\n\nWelcome to Smart Plus Innovation! We're thrilled to have you join our learning community.\n\nExplore our programs and start your journey to success today!\n\nBest regards,\nSmart Plus Innovation Team`
+      from_name: 'EduGram Technologies Pvt Ltd',
+      subject: 'Welcome to EduGram Technologies Pvt Ltd!',
+      message: `Hi ${userName},\n\nWelcome to EduGram Technologies Pvt Ltd! We're thrilled to have you join our learning community.\n\nExplore our programs and start your journey to success today!\n\nBest regards,\nEduGram Team`
     })
     return { success: true, response }
   } catch (error) {

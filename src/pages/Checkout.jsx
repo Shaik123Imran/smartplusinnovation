@@ -6,17 +6,19 @@ import { useAuth } from '../context/AuthContext'
 import Button from '../components/common/Button'
 import { createRazorpayOrder, verifyRazorpayPayment, loadRazorpayScript } from '../services/payment'
 import { sendPaymentConfirmation } from '../services/emailjs'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function Checkout() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { getProgram } = useData()
+  const { getProgramById } = useData()
   const { user, isEnrolled, enroll } = useAuth()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [demoMode, setDemoMode] = useState(false)
 
-  const program = id ? getProgram(id) : null
+  const program = id ? getProgramById(id) : null
+  usePageTitle(program ? `Checkout – ${program.title}` : 'Checkout')
 
   useEffect(() => {
     if (!user) {
@@ -37,7 +39,7 @@ function Checkout() {
     try {
       await sendPaymentConfirmation(
         user.email,
-        user.displayName,
+        user.displayName || user.fullName,
         program.title,
         program.price,
         orderId,
@@ -72,7 +74,7 @@ function Checkout() {
         key: orderData.key,
         amount: orderData.amount,
         currency: orderData.currency,
-        name: 'Smart Plus Innovation',
+        name: 'EduGram Technologies Pvt Ltd',
         description: program.title,
         order_id: orderData.orderId,
         handler: async (response) => {
@@ -82,6 +84,7 @@ function Checkout() {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
+              courseId: program.id,
             })
             await doEnrollAndSendEmail(response.razorpay_order_id, response.razorpay_payment_id)
             navigate(`/programs/${id}`, { state: { paymentSuccess: true }, replace: true })
@@ -91,7 +94,7 @@ function Checkout() {
             setLoading(false)
           }
         },
-        prefill: { email: user.email, name: user.displayName || '' },
+        prefill: { email: user.email, name: user.displayName || user.fullName || '' },
         theme: { color: '#6366f1' },
       }
 

@@ -1,92 +1,114 @@
 export const testimonials = [
   {
     id: 1,
-    name: "Sarah Johnson",
-    role: "Full Stack Developer",
-    company: "Google",
-    content: "Smart Plus Innovation completely transformed my career. The hands-on projects and mentorship helped me land my dream job at Google. The curriculum is cutting-edge and the community support is incredible. I went from knowing basic HTML to building full-stack applications in just 12 weeks!",
+    name: 'Mahira Kounain',
+    role: 'Junior Python Developer',
+    company: 'TCS',
+    content:
+      'Joined EduGram for Python full stack training. Trainers explained from basics and helped a lot in projects. Placement support was also good. Happy that I got selected in TCS as a Junior Python Developer.',
     rating: 5,
-    image: "SJ",
-    program: "Full Stack Web Development",
-    linkedIn: "#"
+    image: 'MK',
+    program: 'Python Full Stack',
   },
   {
     id: 2,
-    name: "Michael Chen",
-    role: "Data Scientist",
-    company: "Microsoft",
-    content: "The Data Science program exceeded all my expectations. The instructors are industry experts who provide real-world insights. Within 3 months of completing the course, I received multiple job offers. The Kaggle competition guidance was particularly valuable!",
+    name: 'Zainab Mehreen',
+    role: 'Power BI Developer',
+    company: 'EY',
+    content:
+      'I took Power BI course here. Sessions were practical and easy to understand even for non-technical students. Mock interviews helped me gain confidence before attending interviews and got placed as a Power BI Developer at EY.',
     rating: 5,
-    image: "MC",
-    program: "Data Science & Analytics",
-    linkedIn: "#"
+    image: 'ZM',
+    program: 'Power BI',
   },
   {
     id: 3,
-    name: "Emily Rodriguez",
-    role: "Senior UX Designer",
-    company: "Apple",
-    content: "As someone transitioning careers, I was nervous about entering tech. The UI/UX program gave me the confidence and skills I needed. The portfolio projects were instrumental in my hiring process. Now I'm designing products used by millions!",
+    name: 'Richard Shyam',
+    role: 'Java Trainee',
+    company: 'Wipro',
+    content:
+      'EduGram Technologies helped me improve my Java coding and interview skills. Faculty was very supportive throughout the course. Good place for freshers looking for IT jobs.',
     rating: 5,
-    image: "ER",
-    program: "UI/UX Design Mastery",
-    linkedIn: "#"
+    image: 'RS',
+    program: 'Java Development',
   },
   {
     id: 4,
-    name: "David Kim",
-    role: "Cloud Architect",
-    company: "Amazon",
-    content: "The Cloud Computing certification program is world-class. The practical labs and AWS preparation helped me pass my certification on the first attempt. The hands-on experience with real infrastructure was invaluable. Highly recommend!",
+    name: 'Reddy Vamsi',
+    role: 'Data Analyst',
+    company: 'Deloitte',
+    content:
+      'Completed Data Science course from EduGram and honestly it helped me a lot in understanding real-time industry concepts. Trainers focused on practical implementation, projects, SQL, Python and interview preparation sessions regularly. I also attended mock interviews conducted by the placement team which improved my confidence. Happy to start my career as a Data Analyst.',
     rating: 5,
-    image: "DK",
-    program: "Cloud Computing & AWS",
-    linkedIn: "#"
+    image: 'RV',
+    program: 'Data Science',
   },
   {
     id: 5,
-    name: "Priya Patel",
-    role: "Mobile Developer",
-    company: "Meta",
-    content: "Learning React Native through Smart Plus was the best decision. The project-based approach means you're building real apps from day one. The career support team helped me negotiate a 40% salary increase when I got my offer from Meta!",
+    name: 'Masrood Ahmed',
+    role: 'Cyber Security Associate',
+    company: 'MotherSon Technologies',
+    content:
+      'Cyber security training was very informative and practical. Trainers shared industry knowledge and interview questions regularly. Overall good learning experience.',
     rating: 5,
-    image: "PP",
-    program: "Mobile App Development",
-    linkedIn: "#"
+    image: 'MA',
+    program: 'Cyber Security',
   },
   {
     id: 6,
-    name: "James Wilson",
-    role: "Marketing Director",
-    company: "Spotify",
-    content: "The Digital Marketing program gave me a complete toolkit for modern marketing. From SEO to paid advertising, I learned strategies that I immediately applied at work. Our team's conversion rates improved by 150% using techniques from this course!",
+    name: 'Shaik Zara',
+    role: 'Sales & Marketing Executive',
+    company: 'NeoDove',
+    content:
+      'I joined Sales and Marketing program after graduation. Classes were interactive and trainers explained concepts with real examples. Placement team guided me well.',
     rating: 5,
-    image: "JW",
-    program: "Digital Marketing Pro",
-    linkedIn: "#"
+    image: 'SZ',
+    program: 'Sales & Marketing',
   },
   {
     id: 7,
-    name: "Anna Kowalski",
-    role: "AI Engineer",
-    company: "Tesla",
-    content: "The AI & Deep Learning program is incredibly comprehensive. Working with PyTorch and implementing research papers gave me the skills to contribute to cutting-edge projects. The mentors are actual researchers who share invaluable insights!",
+    name: 'Revanya Kumar',
+    role: 'Generative AI Intern',
+    company: 'NTT DATA',
+    content:
+      'Generative AI course was really interesting and updated with latest tools. I learned prompt engineering and AI applications in a simple way. Great support from mentors.',
     rating: 5,
-    image: "AK",
-    program: "AI & Deep Learning",
-    linkedIn: "#"
+    image: 'RK',
+    program: 'Generative AI',
   },
   {
     id: 8,
-    name: "Robert Martinez",
-    role: "Product Manager",
-    company: "Stripe",
-    content: "Transitioning from engineering to product management seemed daunting, but this program made it seamless. The PM frameworks, mock interviews, and real case studies prepared me perfectly. I landed my dream PM role within 2 months of graduation!",
+    name: 'Tousif Khan',
+    role: 'Software Engineer Trainee',
+    company: 'Mindtree',
+    content:
+      'One thing I liked about EduGram Technologies is the friendly learning environment and practical approach towards teaching. Trainers not only covered technical concepts but also guided us on communication skills, resume preparation and interview handling. Daily coding practice sessions and assignments helped me improve a lot. Placement support team was also active till the interview process was completed.',
     rating: 5,
-    image: "RM",
-    program: "Product Management",
-    linkedIn: "#"
-  }
+    image: 'TK',
+    program: 'Software Engineering',
+  },
+  {
+    id: 9,
+    name: 'Yamala Kiran',
+    role: 'Junior Technical Associate',
+    company: 'Mphasis',
+    content:
+      'Very good institute for beginners who want to start career in IT. Java and SQL classes were clear and easy to follow. Placement assistance was helpful till the end.',
+    rating: 5,
+    image: 'YK',
+    program: 'Java & SQL',
+  },
+  {
+    id: 10,
+    name: 'Biswajith',
+    role: 'Data Science Associate',
+    company: 'AstraZeneca',
+    content:
+      'Before joining EduGram I had very little knowledge about Data Science. The trainers explained concepts step by step and provided hands on practice with real datasets and projects. The learning material, assignments and mock interviews were useful during placement preparation. Overall a very good platform for students and freshers who want to enter the IT industry.',
+    rating: 5,
+    image: 'B',
+    program: 'Data Science',
+  },
 ]
 
 export const getRandomTestimonials = (count = 5) => {

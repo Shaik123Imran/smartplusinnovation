@@ -51,7 +51,7 @@ function BlogPost() {
                 {blog.author?.avatar || 'SP'}
               </div>
               <div>
-                <p className="font-semibold text-text">{blog.author?.name || 'Smart Plus Team'}</p>
+                <p className="font-semibold text-text">{blog.author?.name || 'EduGram Team'}</p>
                 <p className="text-text/60 text-sm">{blog.author?.role || 'Editorial Team'}</p>
               </div>
             </div>

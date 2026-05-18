@@ -1,17 +1,33 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { useSearchParams, Link } from 'react-router-dom'
 import Layout from '../components/layout/Layout'
+import { isFastTrackProgram, FAST_TRACK_MAX_WEEKS } from '../utils/fastTrack'
+import { usePageTitle } from '../hooks/usePageTitle'
 import { useData } from '../context/DataContext'
 import ProgramCard from '../components/programs/ProgramCard'
 import ProgramFilter from '../components/programs/ProgramFilter'
 import SearchBar from '../components/common/SearchBar'
 
 function Programs() {
+  usePageTitle('Programs')
   const { programs, categories } = useData()
+  const [searchParams] = useSearchParams()
+  const fastTrackOnly = searchParams.get('track') === 'fast'
   const [activeCategory, setActiveCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
 
+  useEffect(() => {
+    if (fastTrackOnly) {
+      setActiveCategory('all')
+    }
+  }, [fastTrackOnly])
+
   const filteredPrograms = useMemo(() => {
     let result = programs
+
+    if (fastTrackOnly) {
+      result = result.filter(isFastTrackProgram)
+    }
 
     // Filter by category
     if (activeCategory !== 'all') {
@@ -29,26 +45,49 @@ function Programs() {
     }
 
     return result
-  }, [programs, activeCategory, searchQuery])
+  }, [programs, activeCategory, searchQuery, fastTrackOnly])
 
   return (
     <Layout>
-      <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm mb-4">
-              All Programs
+      <section className="page-hero">
+        <div className="page-hero-inner">
+          <div className="section-header-center mb-0">
+            <span className="section-eyebrow bg-primary/10 text-primary">
+              {fastTrackOnly ? 'Fast Track' : 'All Programs'}
             </span>
-            <h1 className="text-3xl lg:text-5xl font-extrabold text-text mb-4">
-              Explore Our
-              <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Learning Programs
-              </span>
+            <h1 className="page-title">
+              {fastTrackOnly ? (
+                <>
+                  <span className="section-title-line">Fast Track</span>
+                  <span className="page-title-accent">Programs</span>
+                </>
+              ) : (
+                <>
+                  <span className="section-title-line">Explore Our</span>
+                  <span className="page-title-accent">Learning Programs</span>
+                </>
+              )}
             </h1>
-            <p className="text-text/60 max-w-2xl mx-auto text-lg">
-              Choose from our comprehensive range of industry-aligned programs
+            <p className="section-subtitle-center">
+              {fastTrackOnly
+                ? `Shorter courses (${FAST_TRACK_MAX_WEEKS} weeks or less) you can complete at your own pace.`
+                : 'Choose from our comprehensive range of industry-aligned programs'}
             </p>
           </div>
+
+          {fastTrackOnly && (
+            <div className="mb-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <p className="text-sm text-text/60 text-center">
+                Showing {filteredPrograms.length} Fast Track program{filteredPrograms.length !== 1 ? 's' : ''}
+              </p>
+              <Link
+                to="/programs"
+                className="text-sm font-semibold text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/30 rounded"
+              >
+                View all programs
+              </Link>
+            </div>
+          )}
 
           <div className="mb-8">
             <SearchBar

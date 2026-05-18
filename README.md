@@ -1,8 +1,8 @@
-# Smart Plus Innovation
+# EduGram Technologies Pvt Ltd
 
 A modern, production-ready educational platform built with React, Vite, and Tailwind CSS.
 
-![Smart Plus Innovation](https://img.shields.io/badge/React-18-blue) ![Vite](https://img.shields.io/badge/Vite-5-purple) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-cyan)
+![EduGram Technologies Pvt Ltd](https://img.shields.io/badge/React-18-blue) ![Vite](https://img.shields.io/badge/Vite-5-purple) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-cyan)
 
 ## 🚀 Features
 
@@ -141,4 +141,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-Built with ❤️ by Smart Plus Innovation Team
+Built with ❤️ by EduGram Technologies Pvt Ltd Team

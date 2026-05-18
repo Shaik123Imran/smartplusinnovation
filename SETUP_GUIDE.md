@@ -1,4 +1,4 @@
-# Smart Plus Innovation - Setup Guide
+# EduGram Technologies Pvt Ltd - Setup Guide
 
 ## 🚀 Quick Start (Demo Mode)
 
@@ -20,7 +20,7 @@ Open http://localhost:5173 - Everything works in demo mode!
 1. **Create your backend project (e.g. Node.js + MongoDB)**
    - Visit https://console.firebase.google.com
    - Click "Add Project"
-   - Name: "Smart Plus Innovation"
+   - Name: "EduGram Technologies Pvt Ltd"
    - Continue → Enable Analytics (optional) → Create
 
 2. **Enable Authentication**
@@ -38,7 +38,7 @@ Open http://localhost:5173 - Everything works in demo mode!
    - Go to **Project Settings** (gear icon)
    - Scroll to "Your apps"
    - Click Web icon (`</>`)
-   - Register app: "Smart Plus Innovation"
+   - Register app: "EduGram Technologies Pvt Ltd"
    - Copy config values
 
 5. **Create `.env` File**
@@ -94,7 +94,7 @@ Stats automatically update:
 
 ## 🎨 Branding
 
-All instances show: **"Smart Plus Innovation"**
+All instances show: **"EduGram Technologies Pvt Ltd"**
 - Navbar logo
 - Footer
 - Page titles

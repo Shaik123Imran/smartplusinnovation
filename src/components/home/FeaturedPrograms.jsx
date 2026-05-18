@@ -7,17 +7,19 @@ function FeaturedPrograms() {
   const { featuredPrograms } = useData()
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-b from-white to-background">
+    <section className="section-block bg-gradient-to-b from-white to-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 lg:mb-16">
-          <span className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm mb-4">
+        <div className="section-header-center">
+          <span className="section-eyebrow bg-primary/10 text-primary">
             Our Programs
           </span>
-          <h2 className="text-3xl lg:text-5xl font-extrabold text-text mb-4">
-            Choose Your Path to
-            <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Success</span>
+          <h2 className="section-title">
+            <span className="section-title-line">Choose Your Path to</span>
+            <span className="section-title-accent bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Success
+            </span>
           </h2>
-          <p className="text-text/60 max-w-2xl mx-auto text-lg">
+          <p className="section-subtitle-center">
             Industry-aligned programs designed to transform beginners into professionals
           </p>
         </div>

@@ -6,16 +6,18 @@ import { useAuth } from '../context/AuthContext'
 import Button from '../components/common/Button'
 import Badge from '../components/common/Badge'
 import Modal from '../components/common/Modal'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function ProgramDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
-  const { getProgram } = useData()
+  const { getProgramById, loading: dataLoading } = useData()
   const { user, isEnrolled } = useAuth()
   const [showEnrollModal, setShowEnrollModal] = useState(false)
 
-  const program = getProgram(id)
+  const program = getProgramById(id)
+  usePageTitle(program?.title ?? 'Program Not Found')
 
   useEffect(() => {
     if (location.state?.paymentSuccess) {

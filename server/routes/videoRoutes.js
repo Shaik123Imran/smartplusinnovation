@@ -59,7 +59,7 @@ router.post('/upload', upload.single('video'), async (req, res) => {
     }
 
     const uploadResult = await cloudinary.uploader.upload(file.path, {
-      folder: 'smartplus_videos',
+      folder: 'edugram_videos',
       resource_type: 'video',
     })
 

@@ -39,7 +39,7 @@ The demand for AI skills continues to surge, but the type of skills needed is ev
 - Building with AI APIs and frameworks
 - Understanding AI ethics and responsible development
 
-At Smart Plus Innovation, our AI & Deep Learning program covers all these emerging areas, preparing you for the AI-driven future.`,
+At EduGram Technologies Pvt Ltd, our AI & Deep Learning program covers all these emerging areas, preparing you for the AI-driven future.`,
     author: {
       name: 'Dr. Priya Sharma',
       role: 'AI Research Lead',
@@ -277,7 +277,7 @@ Leaving a stable teaching career at 35 with two kids wasn't easy. But Maria had 
 2. Enroll in an intensive bootcamp
 3. Commit fully to the transition
 
-She chose Smart Plus Innovation's Full Stack Web Development program because of its flexible schedule and career support.
+She chose EduGram Technologies Pvt Ltd's Full Stack Web Development program because of its flexible schedule and career support.
 
 ## The Journey
 
@@ -301,13 +301,13 @@ Three months after completing the program, Maria landed her first developer role
 3. **Build in public**—share your journey on LinkedIn
 4. **Find your community**—you can't do this alone
 
-Today, Maria mentors other career changers through Smart Plus Innovation's community program, paying forward the support she received.
+Today, Maria mentors other career changers through EduGram Technologies Pvt Ltd's community program, paying forward the support she received.
 
 "If a 35-year-old teacher from a small town can do this, anyone can. Your next chapter can be your best chapter."`,
     author: {
-      name: 'Smart Plus Team',
+      name: 'EduGram Team',
       role: 'Editorial',
-      avatar: 'SP'
+      avatar: 'EG'
     },
     category: 'success-stories',
     tags: ['Success Story', 'Career Change', 'Inspiration', 'Web Development'],

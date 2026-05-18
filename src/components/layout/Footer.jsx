@@ -85,9 +85,12 @@ function Footer() {
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center space-x-2 mb-6">
               <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S+</span>
+                <span className="text-white font-bold text-sm leading-none">EG</span>
               </div>
-              <span className="text-xl font-bold">Smart <span className="text-primary">Plus Innovation</span></span>
+              <span className="text-xl font-bold leading-tight">
+                <span className="text-primary">EduGram</span>
+                <span className="text-white"> Technologies Pvt Ltd</span>
+              </span>
             </Link>
             <p className="text-white/60 mb-6 max-w-sm leading-relaxed">
               Empowering the next generation of tech professionals with industry-leading education and career support.
@@ -173,7 +176,7 @@ function Footer() {
             
             <div className="mt-6">
               <h4 className="font-bold text-lg mb-2">Contact</h4>
-              <p className="text-white/60 text-sm">hello@smartplus.com</p>
+              <p className="text-white/60 text-sm">info@edugram.com</p>
               <p className="text-white/60 text-sm">+1 (555) 123-4567</p>
             </div>
           </div>
@@ -182,7 +185,7 @@ function Footer() {
         <div className="border-t border-white/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-white/60 text-sm">
-              © {new Date().getFullYear()} Smart Plus Innovation. All rights reserved.
+              © {new Date().getFullYear()} EduGram Technologies Pvt Ltd. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <Link to="/privacy" className="text-white/60 hover:text-primary text-sm transition-colors">

@@ -3,7 +3,7 @@ export const team = [
     id: 1,
     name: 'Rajesh Kumar',
     role: 'Founder & CEO',
-    bio: 'Former Google engineer with 15+ years in tech. Founded Smart Plus Innovation to democratize quality tech education.',
+    bio: 'Former Google engineer with 15+ years in tech. Founded EduGram Technologies Pvt Ltd to democratize quality tech education.',
     avatar: 'RK',
     linkedin: '#',
     twitter: '#'

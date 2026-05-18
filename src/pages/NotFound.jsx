@@ -1,7 +1,9 @@
 import Layout from '../components/layout/Layout'
 import Button from '../components/common/Button'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function NotFound() {
+  usePageTitle('Page Not Found')
   return (
     <Layout hideAnnouncement>
       <section className="py-24 lg:py-32 bg-background min-h-screen flex items-center">

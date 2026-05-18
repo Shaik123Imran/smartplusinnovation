@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import { useData } from '../context/DataContext'
 import Button from '../components/common/Button'
+import { usePageTitle } from '../hooks/usePageTitle'
 
 function FAQItem({ faq, isOpen, onToggle }) {
   return (
@@ -28,6 +29,7 @@ function FAQItem({ faq, isOpen, onToggle }) {
 }
 
 function FAQ() {
+  usePageTitle('FAQ')
   const { faqs, faqCategories, getFaqsByCategory } = useData()
   const [activeCategory, setActiveCategory] = useState('general')
   const [openItems, setOpenItems] = useState({})
@@ -43,19 +45,17 @@ function FAQ() {
 
   return (
     <Layout>
-      <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-white">
+      <section className="page-hero">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm mb-4">
+          <div className="section-header-center mb-0">
+            <span className="section-eyebrow bg-primary/10 text-primary">
               FAQ
             </span>
-            <h1 className="text-3xl lg:text-5xl font-extrabold text-text mb-4">
-              Frequently Asked
-              <span className="block bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Questions
-              </span>
+            <h1 className="page-title">
+              <span className="section-title-line">Frequently Asked</span>
+              <span className="page-title-accent">Questions</span>
             </h1>
-            <p className="text-text/60 max-w-xl mx-auto">
+            <p className="section-subtitle-center max-w-xl">
               Find answers to common questions about our programs and services
             </p>
           </div>

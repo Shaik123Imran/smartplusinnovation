@@ -10,13 +10,13 @@ export const faqs = [
   {
     id: 1,
     category: 'general',
-    question: 'What is Smart Plus Innovation?',
-    answer: 'Smart Plus Innovation is a leading online education platform that provides industry-aligned tech courses taught by expert instructors from top companies like Google, Microsoft, Apple, and Amazon. We focus on practical, hands-on learning that prepares you for real-world careers in technology.'
+    question: 'What is EduGram Technologies Pvt Ltd?',
+    answer: 'EduGram Technologies Pvt Ltd is a leading online education platform that provides industry-aligned tech courses taught by expert instructors from top companies like Google, Microsoft, Apple, and Amazon. We focus on practical, hands-on learning that prepares you for real-world careers in technology.'
   },
   {
     id: 2,
     category: 'general',
-    question: 'How is Smart Plus different from other learning platforms?',
+    question: 'How is EduGram different from other learning platforms?',
     answer: 'Unlike traditional courses, we offer: 1) Live mentorship sessions with industry experts, 2) Real-world projects that go into your portfolio, 3) Dedicated career support including resume reviews and mock interviews, 4) A thriving community of 10,000+ learners, and 5) Job placement assistance with our 200+ partner companies.'
   },
   {
@@ -82,7 +82,7 @@ export const faqs = [
   {
     id: 13,
     category: 'career',
-    question: 'What companies hire Smart Plus graduates?',
+    question: 'What companies hire EduGram graduates?',
     answer: 'Our graduates work at companies including Google, Microsoft, Amazon, Apple, Meta, Netflix, Uber, Airbnb, Stripe, and hundreds of innovative startups. We have partnerships with both Fortune 500 companies and fast-growing tech startups looking for skilled talent.'
   },
   {

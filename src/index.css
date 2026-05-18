@@ -10,12 +10,91 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: #F8FAFC;
   color: #0F172A;
+  overflow-x: hidden;
+}
+
+@layer components {
+  .section-block {
+    @apply py-16 lg:py-20;
+  }
+
+  .section-header {
+    @apply mb-10 lg:mb-12;
+  }
+
+  .section-header-center {
+    @apply section-header text-center;
+  }
+
+  .section-eyebrow {
+    @apply inline-flex items-center px-4 py-2 font-semibold rounded-full text-sm mb-4;
+  }
+
+  .section-title {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text leading-[1.15] tracking-tight;
+  }
+
+  .section-title-line {
+    @apply block;
+  }
+
+  .section-title-accent {
+    @apply block mt-2 sm:mt-3 leading-[1.15] pb-1;
+  }
+
+  .section-subtitle {
+    @apply text-text/60 text-base sm:text-lg leading-relaxed mt-4;
+  }
+
+  .section-subtitle-center {
+    @apply section-subtitle mx-auto max-w-2xl;
+  }
+
+  .page-hero {
+    @apply section-block bg-gradient-to-b from-background to-white;
+  }
+
+  .page-hero-inner {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .page-title {
+    @apply section-title text-center;
+  }
+
+  .page-title-accent {
+    @apply section-title-accent bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .logo-marquee-mask {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 8%,
+      black 92%,
+      transparent
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll {
+    animation: none !important;
+  }
 }
 
 @layer utilities {

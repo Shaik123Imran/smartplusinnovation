@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Modal from '../common/Modal'
 import { Input, Textarea, Select } from '../common/Input'
 import Button from '../common/Button'
+import TermsAgreementCheckbox from '../forms/TermsAgreementCheckbox'
 import { useData } from '../../context/DataContext'
 import { sendContactEmail } from '../../services/emailjs'
 import { programs } from '../../data/programs'
@@ -25,8 +26,7 @@ function ContactQuickForm({ open, onClose }) {
   })
 
   const [agree, setAgree] = useState(false)
-  const [hasViewedTerms, setHasViewedTerms] = useState(false)
-  const [hasViewedPrivacy, setHasViewedPrivacy] = useState(false)
+  const [termsError, setTermsError] = useState('')
   const [status, setStatus] = useState(null)
 
   const handleChange = (e) => {
@@ -37,17 +37,16 @@ function ContactQuickForm({ open, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!agree) {
-      setStatus({ type: 'error', message: 'Please accept the terms and conditions to continue.' })
+      setTermsError('Please accept the Terms & Conditions to continue.')
       return
     }
 
+    setTermsError('')
     setStatus({ type: 'loading' })
 
     try {
-      // Save contact in app storage
       await submitContact(formData)
 
-      // Try to send notification email (safe even if EmailJS not configured)
       try {
         await sendContactEmail({
           name: formData.name,
@@ -78,15 +77,7 @@ function ContactQuickForm({ open, onClose }) {
     }
   }
 
-  const handleOpenTerms = () => {
-    window.open('/terms', '_blank', 'noopener,noreferrer')
-    setHasViewedTerms(true)
-  }
-
-  const handleOpenPrivacy = () => {
-    window.open('/privacy', '_blank', 'noopener,noreferrer')
-    setHasViewedPrivacy(true)
-  }
+  const isLoading = status?.type === 'loading'
 
   return (
     <Modal isOpen={open} onClose={onClose} title="Contact Us">
@@ -115,6 +106,7 @@ function ContactQuickForm({ open, onClose }) {
           <Input
             label="Phone Number"
             name="phone"
+            type="tel"
             value={formData.phone}
             onChange={handleChange}
             placeholder="+91 98765 43210"
@@ -148,54 +140,28 @@ function ContactQuickForm({ open, onClose }) {
           rows={3}
         />
 
-        <div className="space-y-2 border-t border-gray-100 pt-4">
-          <label className="flex items-start gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={agree}
-              onChange={(e) => setAgree(e.target.checked)}
-              className="mt-1 w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={!hasViewedTerms || !hasViewedPrivacy}
-              required
-            />
-            <span className="text-sm text-text/70">
-              I agree to the{' '}
-              <button
-                type="button"
-                onClick={handleOpenTerms}
-                className="font-semibold text-primary underline-offset-2 hover:underline"
-              >
-                Terms &amp; Conditions
-              </button>{' '}
-              and{' '}
-              <button
-                type="button"
-                onClick={handleOpenPrivacy}
-                className="font-semibold text-primary underline-offset-2 hover:underline"
-              >
-                Privacy Policy
-              </button>
-              . Please read them before accepting.
-            </span>
-          </label>
-          <p className="text-xs text-text/50">
-            You must open both the Terms & Conditions and Privacy Policy links above before the checkbox can be
-            accepted. Replace this text with your exact legal content from your documents.
-          </p>
-        </div>
+        <TermsAgreementCheckbox
+          id="contact-quick-terms"
+          agree={agree}
+          onAgreeChange={(checked) => {
+            setAgree(checked)
+            if (checked) setTermsError('')
+          }}
+          error={termsError}
+        />
 
         {status?.type === 'success' && (
-          <p className="text-sm text-green-600 text-center">{status.message}</p>
+          <p className="text-sm text-green-600 text-center" role="status">
+            {status.message}
+          </p>
         )}
         {status?.type === 'error' && (
-          <p className="text-sm text-red-600 text-center">{status.message}</p>
+          <p className="text-sm text-red-600 text-center" role="alert">
+            {status.message}
+          </p>
         )}
 
-        <Button
-          type="submit"
-          loading={status?.type === 'loading'}
-          className="w-full"
-        >
+        <Button type="submit" loading={isLoading} disabled={!agree || isLoading} className="w-full">
           Submit
         </Button>
       </form>
@@ -204,4 +170,3 @@ function ContactQuickForm({ open, onClose }) {
 }
 
 export default ContactQuickForm
-

@@ -34,18 +34,18 @@ function Blog() {
 
   return (
     <Layout>
-      <section className="py-16 lg:py-24 bg-gradient-to-b from-background to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12">
-            <div>
-              <span className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm mb-4">
+      <section className="page-hero">
+        <div className="page-hero-inner">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 section-header mb-0">
+            <div className="min-w-0">
+              <span className="section-eyebrow bg-primary/10 text-primary">
                 Our Blog
               </span>
-              <h1 className="text-3xl lg:text-5xl font-extrabold text-text mb-4">
-                Insights &
-                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"> Resources</span>
+              <h1 className="page-title text-left">
+                <span className="section-title-line">Insights &amp;</span>
+                <span className="page-title-accent">Resources</span>
               </h1>
-              <p className="text-text/60 max-w-xl">
+              <p className="section-subtitle max-w-xl">
                 Stay updated with the latest in tech, career tips, and learning resources
               </p>
             </div>
@@ -137,7 +137,7 @@ function Blog() {
                         {blog.author?.avatar || 'SP'}
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-text">{blog.author?.name || 'Smart Plus Team'}</p>
+                        <p className="text-sm font-medium text-text">{blog.author?.name || 'EduGram Team'}</p>
                         <p className="text-xs text-text/40">{blog.publishedAt}</p>
                       </div>
                     </div>
