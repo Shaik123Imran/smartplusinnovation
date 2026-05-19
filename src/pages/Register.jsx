@@ -7,6 +7,7 @@ import { Input } from '../components/common/Input'
 import GoogleSignInButton from '../components/auth/GoogleSignInButton'
 import { usePageTitle } from '../hooks/usePageTitle'
 import toast from 'react-hot-toast'
+import TermsAgreementCheckbox from '../components/forms/TermsAgreementCheckbox'
 
 function Register() {
   usePageTitle('Create Account')
@@ -21,6 +22,7 @@ function Register() {
     confirmPassword: '',
   })
   const [termsAccepted, setTermsAccepted] = useState(false)
+  const [termsError, setTermsError] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -34,9 +36,10 @@ function Register() {
     e.preventDefault()
 
     if (!termsAccepted) {
-      setError('You must accept the Terms & Conditions')
+      setTermsError('Please accept the Terms & Conditions to continue.')
       return
     }
+    setTermsError('')
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match')
       return
@@ -151,24 +154,15 @@ function Register() {
                 required
               />
 
-              <label className="flex items-start gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={termsAccepted}
-                  onChange={(e) => setTermsAccepted(e.target.checked)}
-                  className="w-4 h-4 mt-0.5 rounded border-gray-300 text-primary focus:ring-primary"
-                />
-                <span className="text-sm text-text/70">
-                  I agree to the{' '}
-                  <Link to="/terms" className="text-primary hover:underline">
-                    Terms of Service
-                  </Link>{' '}
-                  and{' '}
-                  <Link to="/privacy" className="text-primary hover:underline">
-                    Privacy Policy
-                  </Link>
-                </span>
-              </label>
+              <TermsAgreementCheckbox
+                id="register-terms"
+                agree={termsAccepted}
+                onAgreeChange={(checked) => {
+                  setTermsAccepted(checked)
+                  if (checked) setTermsError('')
+                }}
+                error={termsError}
+              />
 
               {(error || authError) && (
                 <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">

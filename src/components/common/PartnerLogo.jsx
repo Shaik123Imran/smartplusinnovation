@@ -22,7 +22,9 @@ function PartnerLogo({ logo, className = '', variant = 'default' }) {
         decoding="async"
         className={
           isAccreditation
-            ? 'h-16 sm:h-20 lg:h-24 w-auto max-w-full object-contain object-center'
+            ? logo.layout === 'tall'
+              ? 'h-[4.5rem] sm:h-24 lg:h-28 w-auto max-w-[9rem] sm:max-w-[10rem] object-contain object-center'
+              : 'h-16 sm:h-20 lg:h-24 w-auto max-w-full object-contain object-center'
             : 'h-9 sm:h-11 w-auto max-w-full object-contain object-center grayscale opacity-75 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100'
         }
       />

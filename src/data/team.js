@@ -56,12 +56,7 @@ export const team = [
 ]
 
 export const stats = [
-  { number: '10,000+', label: 'Active Students' },
   { number: '200+', label: 'Partner Companies' },
-  { number: '95%', label: 'Placement Rate' },
-  { number: '50+', label: 'Expert Mentors' },
-  { number: '30+', label: 'Countries' },
-  { number: '4.9/5', label: 'Student Rating' }
 ]
 
 export const values = [

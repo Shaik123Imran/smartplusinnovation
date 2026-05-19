@@ -1,6 +1,7 @@
+/** Home page student testimonials — also used by server/scripts/seed.js */
 export const testimonials = [
   {
-    id: 1,
+    id: 'mahira-kounain',
     name: 'Mahira Kounain',
     role: 'Junior Python Developer',
     company: 'TCS',
@@ -11,7 +12,7 @@ export const testimonials = [
     program: 'Python Full Stack',
   },
   {
-    id: 2,
+    id: 'zainab-mehreen',
     name: 'Zainab Mehreen',
     role: 'Power BI Developer',
     company: 'EY',
@@ -22,7 +23,7 @@ export const testimonials = [
     program: 'Power BI',
   },
   {
-    id: 3,
+    id: 'richard-shyam',
     name: 'Richard Shyam',
     role: 'Java Trainee',
     company: 'Wipro',
@@ -33,7 +34,7 @@ export const testimonials = [
     program: 'Java Development',
   },
   {
-    id: 4,
+    id: 'reddy-vamsi',
     name: 'Reddy Vamsi',
     role: 'Data Analyst',
     company: 'Deloitte',
@@ -44,7 +45,7 @@ export const testimonials = [
     program: 'Data Science',
   },
   {
-    id: 5,
+    id: 'masrood-ahmed',
     name: 'Masrood Ahmed',
     role: 'Cyber Security Associate',
     company: 'MotherSon Technologies',
@@ -55,7 +56,7 @@ export const testimonials = [
     program: 'Cyber Security',
   },
   {
-    id: 6,
+    id: 'shaik-zara',
     name: 'Shaik Zara',
     role: 'Sales & Marketing Executive',
     company: 'NeoDove',
@@ -66,7 +67,7 @@ export const testimonials = [
     program: 'Sales & Marketing',
   },
   {
-    id: 7,
+    id: 'revanya-kumar',
     name: 'Revanya Kumar',
     role: 'Generative AI Intern',
     company: 'NTT DATA',
@@ -77,7 +78,7 @@ export const testimonials = [
     program: 'Generative AI',
   },
   {
-    id: 8,
+    id: 'tousif-khan',
     name: 'Tousif Khan',
     role: 'Software Engineer Trainee',
     company: 'Mindtree',
@@ -88,7 +89,7 @@ export const testimonials = [
     program: 'Software Engineering',
   },
   {
-    id: 9,
+    id: 'yamala-kiran',
     name: 'Yamala Kiran',
     role: 'Junior Technical Associate',
     company: 'Mphasis',
@@ -99,7 +100,7 @@ export const testimonials = [
     program: 'Java & SQL',
   },
   {
-    id: 10,
+    id: 'biswajith',
     name: 'Biswajith',
     role: 'Data Science Associate',
     company: 'AstraZeneca',

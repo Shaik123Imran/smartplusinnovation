@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useData } from '../../context/DataContext'
 import { programs } from '../../data/programs'
+import { TermsPolicyLink, PrivacyPolicyLink } from '../legal/LegalPolicyLink'
 
 const footerLinks = {
   programs: programs.slice(0, 6).map((p) => ({ name: p.title, href: `/programs/${p.id}` })),
@@ -12,8 +13,6 @@ const footerLinks = {
   ],
   support: [
     { name: 'Contact Us', href: '/contact' },
-    { name: 'Privacy Policy', href: '/privacy' },
-    { name: 'Terms of Service', href: '/terms' },
   ],
 }
 
@@ -172,6 +171,12 @@ function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <PrivacyPolicyLink className="text-white/60 hover:text-primary font-normal" />
+              </li>
+              <li>
+                <TermsPolicyLink className="text-white/60 hover:text-primary font-normal" />
+              </li>
             </ul>
             
             <div className="mt-6">
@@ -188,12 +193,8 @@ function Footer() {
               © {new Date().getFullYear()} EduGram Technologies Pvt Ltd. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <Link to="/privacy" className="text-white/60 hover:text-primary text-sm transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/terms" className="text-white/60 hover:text-primary text-sm transition-colors">
-                Terms of Service
-              </Link>
+              <PrivacyPolicyLink className="text-white/60 hover:text-primary text-sm" />
+              <TermsPolicyLink className="text-white/60 hover:text-primary text-sm" />
             </div>
           </div>
         </div>

@@ -2,7 +2,9 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { DataProvider } from './context/DataContext'
+import { LegalModalProvider } from './context/LegalModalContext'
 import ScrollToTop from './components/layout/ScrollToTop'
+import WhatsAppWidget from './components/whatsapp/WhatsAppWidget'
 import ProtectedRoute from './components/routes/ProtectedRoute'
 import Loader from './components/common/Loader'
 
@@ -37,6 +39,7 @@ function App() {
       <ScrollToTop />
       <AuthProvider>
         <DataProvider>
+          <LegalModalProvider>
           <div className="min-h-screen bg-background">
             <Suspense fallback={<PageLoader />}>
               <Routes>
@@ -88,6 +91,8 @@ function App() {
               </Routes>
             </Suspense>
           </div>
+          </LegalModalProvider>
+          <WhatsAppWidget />
         </DataProvider>
       </AuthProvider>
     </Router>

@@ -20,8 +20,9 @@ export const partnerLogos = [
     id: 'msme',
     name: 'Ministry of Micro, Small and Medium Enterprises, Government of India',
     src: '/partners/msme.png',
-    width: 220,
-    height: 80,
+    width: 160,
+    height: 120,
+    layout: 'tall',
   },
   {
     id: 'iso-9001',

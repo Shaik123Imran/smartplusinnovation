@@ -1,6 +1,5 @@
 import Layout from '../components/layout/Layout'
 import { team, values, stats } from '../data/team'
-import Button from '../components/common/Button'
 import { usePageTitle } from '../hooks/usePageTitle'
 
 function About() {
@@ -44,7 +43,7 @@ function About() {
               <span className="page-title-accent">Tech Professionals</span>
             </h1>
             <p className="section-subtitle-center max-w-none">
-              EduGram Technologies Pvt Ltd was founded with a mission to bridge the gap between education and industry. 
+              EduGram Technologies Pvt Ltd was founded with a mission to bridge the gap between education and industry.
               We believe everyone deserves access to quality tech education that leads to real career opportunities.
             </p>
           </div>
@@ -52,13 +51,15 @@ function About() {
       </section>
 
       {/* Stats Section */}
-      <section className="section-block bg-white">
+      <section className="py-10 sm:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-2 lg:grid-cols-6 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl lg:text-4xl font-extrabold text-primary mb-2">{stat.number}</div>
-                <div className="text-text/60">{stat.label}</div>
+          <div className="flex justify-center">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center px-4">
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-text/60 text-sm sm:text-base">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -74,13 +75,13 @@ function About() {
                 Our Mission
               </h2>
               <p className="text-text/70 text-lg leading-relaxed mb-6">
-                We're on a mission to democratize tech education and create pathways to successful careers 
-                in technology. Through hands-on learning, expert mentorship, and strong industry connections, 
+                We're on a mission to democratize tech education and create pathways to successful careers
+                in technology. Through hands-on learning, expert mentorship, and strong industry connections,
                 we help students transform their lives.
               </p>
               <p className="text-text/70 text-lg leading-relaxed">
-                Since our founding, we've helped thousands of students from diverse backgrounds break into tech, 
-                land jobs at top companies, and build fulfilling careers. Our 95% placement rate speaks to 
+                Since our founding, we've helped thousands of students from diverse backgrounds break into tech,
+                land jobs at top companies, and build fulfilling careers. Our 95% placement rate speaks to
                 our commitment to student success.
               </p>
             </div>

@@ -38,7 +38,7 @@ function Hero({ onRegisterInterest }) {
             </h1>
 
             <p className="text-lg text-text/60 max-w-xl leading-relaxed">
-              Join thousands of learners who have transformed their careers with our industry-leading programs. 
+              Join thousands of learners who have transformed their careers with our industry-leading programs.
               Get hands-on experience with real-world projects and expert mentorship.
             </p>
 
@@ -71,26 +71,9 @@ function Hero({ onRegisterInterest }) {
                 Or scroll to the registration form
               </button>
             </p>
-
-            <div className="flex items-center gap-6 pt-4">
-              <div className="flex -space-x-3">
-                {['S', 'M', 'E', 'D'].map((letter, i) => (
-                  <div 
-                    key={i} 
-                    className="w-10 h-10 rounded-full border-2 border-white bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center"
-                  >
-                    <span className="text-xs font-bold text-primary">{letter}</span>
-                  </div>
-                ))}
-              </div>
-              <div>
-                <p className="font-bold text-text">10,000+</p>
-                <p className="text-sm text-text/60">Happy Students</p>
-              </div>
-            </div>
           </div>
 
-          <div className="relative lg:pl-8 pt-10 pb-10 sm:pt-0 sm:pb-0">
+          <div className="relative lg:pl-8 pt-10 pb-4 sm:pt-0 sm:pb-0">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-3xl transform rotate-3 opacity-20"></div>
               <div className="relative bg-white rounded-3xl shadow-2xl p-4 sm:p-5 transform hover:-rotate-1 transition-transform duration-500">
@@ -144,23 +127,6 @@ function Hero({ onRegisterInterest }) {
                 </div>
               </div>
             </div>
-
-            <a
-              href="#fast-track"
-              className="absolute bottom-0 right-0 sm:-bottom-4 sm:-right-4 z-10 flex items-center gap-2 sm:gap-3 rounded-2xl bg-white p-3 sm:p-4 shadow-lg ring-1 ring-primary/10 transition-all hover:shadow-xl hover:ring-primary/25 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-primary/30 max-w-[calc(100%-1rem)] sm:max-w-none"
-              aria-label="Jump to Fast Track programs — shorter courses from 4 to 10 weeks, learn at your pace"
-            >
-              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/20 opacity-75" aria-hidden />
-                <svg className="relative h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </span>
-              <span className="text-left pr-1">
-                <span className="block font-semibold text-text text-sm">Fast Track</span>
-                <span className="block text-xs text-text/60">4–10 week programs →</span>
-              </span>
-            </a>
 
           </div>
         </div>
