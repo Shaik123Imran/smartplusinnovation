@@ -6,15 +6,19 @@ import { usePageTitle } from '../hooks/usePageTitle'
 import { useData } from '../context/DataContext'
 import ProgramCard from '../components/programs/ProgramCard'
 import ProgramFilter from '../components/programs/ProgramFilter'
+import ProgramsEmptyState from '../components/programs/ProgramsEmptyState'
 import SearchBar from '../components/common/SearchBar'
+import Loader from '../components/common/Loader'
 
 function Programs() {
   usePageTitle('Programs')
-  const { programs, categories } = useData()
+  const { programs, categories, loading } = useData()
   const [searchParams] = useSearchParams()
   const fastTrackOnly = searchParams.get('track') === 'fast'
   const [activeCategory, setActiveCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
+
+  const hasCatalog = programs.length > 0
 
   useEffect(() => {
     if (fastTrackOnly) {
@@ -29,23 +33,24 @@ function Programs() {
       result = result.filter(isFastTrackProgram)
     }
 
-    // Filter by category
     if (activeCategory !== 'all') {
-      result = result.filter(program => program.category === activeCategory)
+      result = result.filter((program) => program.category === activeCategory)
     }
 
-    // Filter by search query
     if (searchQuery) {
       const lowercaseQuery = searchQuery.toLowerCase()
-      result = result.filter(program =>
-        program.title.toLowerCase().includes(lowercaseQuery) ||
-        program.shortDescription.toLowerCase().includes(lowercaseQuery) ||
-        program.skills.some(skill => skill.toLowerCase().includes(lowercaseQuery))
+      result = result.filter(
+        (program) =>
+          program.title.toLowerCase().includes(lowercaseQuery) ||
+          program.shortDescription.toLowerCase().includes(lowercaseQuery) ||
+          (program.skills || []).some((skill) => skill.toLowerCase().includes(lowercaseQuery))
       )
     }
 
     return result
   }, [programs, activeCategory, searchQuery, fastTrackOnly])
+
+  const showFilters = hasCatalog && !loading
 
   return (
     <Layout>
@@ -71,14 +76,17 @@ function Programs() {
             <p className="section-subtitle-center">
               {fastTrackOnly
                 ? `Shorter courses (${FAST_TRACK_MAX_WEEKS} weeks or less) you can complete at your own pace.`
-                : 'Choose from our comprehensive range of industry-aligned programs'}
+                : hasCatalog
+                  ? 'Choose from our industry-aligned, career-focused programs'
+                  : 'New industry-focused programs are being added soon'}
             </p>
           </div>
 
-          {fastTrackOnly && (
+          {fastTrackOnly && hasCatalog && (
             <div className="mb-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <p className="text-sm text-text/60 text-center">
-                Showing {filteredPrograms.length} Fast Track program{filteredPrograms.length !== 1 ? 's' : ''}
+                Showing {filteredPrograms.length} Fast Track program
+                {filteredPrograms.length !== 1 ? 's' : ''}
               </p>
               <Link
                 to="/programs"
@@ -89,37 +97,45 @@ function Programs() {
             </div>
           )}
 
-          <div className="mb-8">
-            <SearchBar
-              placeholder="Search programs by name or skill..."
-              value={searchQuery}
-              onChange={setSearchQuery}
-              className="max-w-md mx-auto"
-            />
-          </div>
-
-          <div className="mb-12">
-            <ProgramFilter
-              categories={categories}
-              activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
-            />
-          </div>
-
-          {filteredPrograms.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {filteredPrograms.map((program) => (
-                <ProgramCard key={program.id} program={program} />
-              ))}
+          {loading ? (
+            <div className="flex justify-center py-20">
+              <Loader />
             </div>
+          ) : !hasCatalog ? (
+            <ProgramsEmptyState variant="catalog" />
           ) : (
-            <div className="text-center py-16">
-              <svg className="w-16 h-16 mx-auto text-text/20 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h3 className="text-xl font-bold text-text mb-2">No programs found</h3>
-              <p className="text-text/60">Try adjusting your search or filter criteria</p>
-            </div>
+            <>
+              <div className="mb-8">
+                <SearchBar
+                  placeholder="Search programs by name or skill..."
+                  value={searchQuery}
+                  onChange={setSearchQuery}
+                  className="max-w-md mx-auto"
+                />
+              </div>
+
+              {showFilters && (
+                <div className="mb-12">
+                  <ProgramFilter
+                    categories={categories}
+                    activeCategory={activeCategory}
+                    onCategoryChange={setActiveCategory}
+                  />
+                </div>
+              )}
+
+              {filteredPrograms.length > 0 ? (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+                  {filteredPrograms.map((program) => (
+                    <div key={program.id} className="h-full min-h-0">
+                      <ProgramCard program={program} />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <ProgramsEmptyState variant="filtered" />
+              )}
+            </>
           )}
         </div>
       </section>

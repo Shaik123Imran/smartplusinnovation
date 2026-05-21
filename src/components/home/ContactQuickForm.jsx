@@ -1,20 +1,22 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Modal from '../common/Modal'
 import { Input, Textarea, Select } from '../common/Input'
 import Button from '../common/Button'
 import TermsAgreementCheckbox from '../forms/TermsAgreementCheckbox'
 import { useData } from '../../context/DataContext'
 import { sendContactEmail } from '../../services/emailjs'
-import { programs } from '../../data/programs'
-
-const COURSE_OPTIONS = [
-  { value: '', label: 'Select course type' },
-  ...programs.map((p) => ({ value: p.id, label: p.title })),
-  { value: 'other', label: 'Other / Not sure yet' },
-]
 
 function ContactQuickForm({ open, onClose }) {
-  const { submitContact } = useData()
+  const { submitContact, programs } = useData()
+
+  const courseOptions = useMemo(
+    () => [
+      { value: '', label: 'Select course type' },
+      ...programs.map((p) => ({ value: p.id, label: p.title })),
+      { value: 'other', label: 'Other / Not sure yet' },
+    ],
+    [programs]
+  )
 
   const [formData, setFormData] = useState({
     name: '',
@@ -127,7 +129,7 @@ function ContactQuickForm({ open, onClose }) {
           name="courseType"
           value={formData.courseType}
           onChange={handleChange}
-          options={COURSE_OPTIONS}
+          options={courseOptions}
           required
         />
 

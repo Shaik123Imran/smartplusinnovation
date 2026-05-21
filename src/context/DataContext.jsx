@@ -1,11 +1,19 @@
 import { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react'
-import { fetchCourses, fetchCategories, mapCourseToProgram } from '../services/courseService'
+import {
+  fetchCourses,
+  fetchCategories,
+  mapCourseToProgram,
+  mapListingToProgram,
+} from '../services/courseService'
+import { publishedCourseEntries } from '../data/courses/catalog'
 import { fetchTestimonials, submitTestimonial as apiSubmitTestimonial } from '../services/testimonialService'
 import { submitContact, submitInterest, subscribeNewsletter } from '../services/formService'
 import { faqs, faqCategories, getFaqsByCategory } from '../data/faq'
 import { team, values } from '../data/team'
 import { pricingPlans, annualDiscount } from '../data/pricing'
 import { isFastTrackProgram, FAST_TRACK_MAX_WEEKS } from '../utils/fastTrack'
+import { mergeProgramWithDetail } from '../utils/mergeProgramWithDetail'
+import { DEFAULT_CATEGORIES } from '../data/programs'
 
 const DataContext = createContext()
 
@@ -17,9 +25,15 @@ export function useData() {
   return context
 }
 
+function programsFromCatalog() {
+  return publishedCourseEntries.map(({ listing }) =>
+    mergeProgramWithDetail(mapListingToProgram(listing))
+  )
+}
+
 export function DataProvider({ children }) {
   const [programs, setPrograms] = useState([])
-  const [categories, setCategories] = useState([{ id: 'all', name: 'All Programs' }])
+  const [categories, setCategories] = useState(DEFAULT_CATEGORIES)
   const [testimonials, setTestimonials] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -32,8 +46,9 @@ export function DataProvider({ children }) {
           fetchCategories(),
           fetchTestimonials(),
         ])
-        setPrograms(courses.map(mapCourseToProgram))
-        setCategories(cats)
+        const apiPrograms = courses.map((c) => mergeProgramWithDetail(mapCourseToProgram(c)))
+        setPrograms(apiPrograms.length > 0 ? apiPrograms : programsFromCatalog())
+        setCategories(cats?.length > 1 ? cats : DEFAULT_CATEGORIES)
         setTestimonials(
           reviews.map((t) => ({
             id: t._id,
@@ -46,9 +61,12 @@ export function DataProvider({ children }) {
             program: t.program,
           }))
         )
+        setError(null)
       } catch (err) {
         console.error('Failed to load data:', err)
         setError(err.message)
+        setPrograms(programsFromCatalog())
+        setCategories(DEFAULT_CATEGORIES)
       } finally {
         setLoading(false)
       }
@@ -57,7 +75,7 @@ export function DataProvider({ children }) {
   }, [])
 
   const getProgramById = useCallback(
-    (id) => programs.find((p) => p.id === id),
+    (id) => mergeProgramWithDetail(programs.find((p) => p.id === id || p.slug === id)),
     [programs]
   )
 
@@ -76,13 +94,16 @@ export function DataProvider({ children }) {
         (p) =>
           p.title.toLowerCase().includes(q) ||
           p.shortDescription.toLowerCase().includes(q) ||
-          p.skills.some((s) => s.toLowerCase().includes(q))
+          (p.skills || []).some((s) => s.toLowerCase().includes(q))
       )
     },
     [programs]
   )
 
-  const featuredPrograms = useMemo(() => programs.filter((_, i) => i < 6), [programs])
+  const featuredPrograms = useMemo(
+    () => programs.filter((p) => p.isFeatured),
+    [programs]
+  )
 
   const fastTrackPrograms = useMemo(
     () => programs.filter(isFastTrackProgram),

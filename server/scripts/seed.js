@@ -1,11 +1,12 @@
 import 'dotenv/config'
 import mongoose from 'mongoose'
-import bcrypt from 'bcryptjs'
 import connectDB from '../config/db.js'
 import User from '../models/User.js'
 import Course from '../models/Course.js'
 import Testimonial from '../models/Testimonial.js'
-import { programs } from '../../src/data/programs.js'
+import { publishedCourseEntries } from '../../src/data/courses/catalog.js'
+import { buildAllMongoCoursesFromCatalog } from '../../src/data/courses/buildMongoCourse.js'
+import '../../src/data/courses/index.js'
 import { testimonials } from '../../src/data/testimonials.js'
 
 async function seed() {
@@ -14,32 +15,12 @@ async function seed() {
   console.log('Clearing existing data...')
   await Promise.all([User.deleteMany({}), Course.deleteMany({}), Testimonial.deleteMany({})])
 
-  const featuredIds = programs.slice(0, 6).map((p) => p.id)
+  const courseDocs = buildAllMongoCoursesFromCatalog(publishedCourseEntries)
 
-  const courseDocs = programs.map((p) => ({
-    slug: p.id,
-    title: p.title,
-    shortDescription: p.shortDescription,
-    description: p.description,
-    duration: p.duration,
-    level: p.level,
-    price: p.price,
-    originalPrice: p.originalPrice,
-    category: p.category,
-    skills: p.skills,
-    features: p.features,
-    instructor: p.instructor,
-    rating: p.rating,
-    students: p.students,
-    image: p.image,
-    imageFile: p.imageFile || '',
-    color: p.color,
-    isPublished: true,
-    isFeatured: featuredIds.includes(p.id),
-  }))
-
-  await Course.insertMany(courseDocs)
-  console.log(`Seeded ${courseDocs.length} courses`)
+  if (courseDocs.length > 0) {
+    await Course.insertMany(courseDocs)
+  }
+  console.log(`Seeded ${courseDocs.length} course(s) from catalog`)
 
   const testimonialDocs = testimonials.map((t) => ({
     name: t.name,

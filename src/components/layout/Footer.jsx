@@ -1,20 +1,15 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useData } from '../../context/DataContext'
-import { programs } from '../../data/programs'
 import { TermsPolicyLink, PrivacyPolicyLink } from '../legal/LegalPolicyLink'
 
-const footerLinks = {
-  programs: programs.slice(0, 6).map((p) => ({ name: p.title, href: `/programs/${p.id}` })),
-  company: [
-    { name: 'About Us', href: '/about' },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'FAQ', href: '/faq' },
-  ],
-  support: [
-    { name: 'Contact Us', href: '/contact' },
-  ],
-}
+const companyLinks = [
+  { name: 'About Us', href: '/about' },
+  { name: 'Pricing', href: '/pricing' },
+  { name: 'FAQ', href: '/faq' },
+]
+
+const supportLinks = [{ name: 'Contact Us', href: '/contact' }]
 
 const socialLinks = [
   {
@@ -58,7 +53,17 @@ const socialLinks = [
 function Footer() {
   const [email, setEmail] = useState('')
   const [subscribeStatus, setSubscribeStatus] = useState(null)
-  const { subscribe } = useData()
+  const { subscribe, programs } = useData()
+
+  const programLinks = useMemo(() => {
+    if (programs.length === 0) {
+      return [{ name: 'All Programs', href: '/programs' }]
+    }
+    return programs.slice(0, 6).map((p) => ({
+      name: p.title,
+      href: `/programs/${p.id}`,
+    }))
+  }, [programs])
 
   const handleSubscribe = async (e) => {
     e.preventDefault()
@@ -138,7 +143,7 @@ function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-4">Programs</h4>
             <ul className="space-y-3">
-              {footerLinks.programs.map((link) => (
+              {programLinks.map((link) => (
                 <li key={link.name}>
                   <Link to={link.href} className="text-white/60 hover:text-primary transition-colors duration-200">
                     {link.name}
@@ -151,7 +156,7 @@ function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-4">Company</h4>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {companyLinks.map((link) => (
                 <li key={link.name}>
                   <Link to={link.href} className="text-white/60 hover:text-primary transition-colors duration-200">
                     {link.name}
@@ -164,7 +169,7 @@ function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-4">Support</h4>
             <ul className="space-y-3">
-              {footerLinks.support.map((link) => (
+              {supportLinks.map((link) => (
                 <li key={link.name}>
                   <Link to={link.href} className="text-white/60 hover:text-primary transition-colors duration-200">
                     {link.name}

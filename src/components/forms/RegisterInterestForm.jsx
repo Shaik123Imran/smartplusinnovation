@@ -1,17 +1,10 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useData } from '../../context/DataContext'
 import Button from '../common/Button'
 import { Input, Select } from '../common/Input'
 import TermsAgreementCheckbox from './TermsAgreementCheckbox'
 import { sendContactEmail } from '../../services/emailjs'
 import { openWhatsAppRegistration } from '../../services/whatsapp'
-import { programs } from '../../data/programs'
-
-const COURSE_OPTIONS = [
-  { value: '', label: 'Select course type' },
-  ...programs.map((p) => ({ value: p.id, label: p.title })),
-  { value: 'other', label: 'Other / Not sure yet' },
-]
 
 const initialFormState = {
   name: '',
@@ -22,7 +15,16 @@ const initialFormState = {
 }
 
 function RegisterInterestForm({ formId = 'register-interest-form', onSuccess }) {
-  const { submitInterest } = useData()
+  const { submitInterest, programs } = useData()
+
+  const courseOptions = useMemo(
+    () => [
+      { value: '', label: 'Select course type' },
+      ...programs.map((p) => ({ value: p.id, label: p.title })),
+      { value: 'other', label: 'Other / Not sure yet' },
+    ],
+    [programs]
+  )
   const [formData, setFormData] = useState(initialFormState)
   const [agree, setAgree] = useState(false)
   const [termsError, setTermsError] = useState('')
@@ -122,7 +124,7 @@ function RegisterInterestForm({ formId = 'register-interest-form', onSuccess }) 
         name="courseType"
         value={formData.courseType}
         onChange={handleChange}
-        options={COURSE_OPTIONS}
+        options={courseOptions}
         required
       />
 

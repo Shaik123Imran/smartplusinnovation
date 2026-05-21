@@ -1,5 +1,22 @@
 import mongoose from 'mongoose'
 
+const syllabusModuleSchema = new mongoose.Schema(
+  {
+    id: String,
+    title: String,
+    topics: [String],
+  },
+  { _id: false }
+)
+
+const faqSchema = new mongoose.Schema(
+  {
+    question: String,
+    answer: String,
+  },
+  { _id: false }
+)
+
 const courseSchema = new mongoose.Schema(
   {
     slug: { type: String, required: true, unique: true },
@@ -25,6 +42,63 @@ const courseSchema = new mongoose.Schema(
     color: { type: String, default: 'primary' },
     isPublished: { type: Boolean, default: true },
     isFeatured: { type: Boolean, default: false },
+    hasDetailPage: { type: Boolean, default: false },
+    meta: {
+      title: String,
+      description: String,
+    },
+    hero: {
+      title: String,
+      subtitle: String,
+      tagline: String,
+      badge: String,
+    },
+    about: {
+      intro: String,
+      sections: [
+        {
+          title: String,
+          content: String,
+        },
+      ],
+    },
+    skillsCovered: [
+      {
+        name: String,
+        description: String,
+      },
+    ],
+    technologies: [
+      {
+        name: String,
+        color: String,
+      },
+    ],
+    learningOutcomes: [String],
+    programFeatures: [String],
+    careerRoles: [
+      {
+        title: String,
+        description: String,
+      },
+    ],
+    syllabus: [syllabusModuleSchema],
+    faqs: [faqSchema],
+    whatsappMessage: String,
+    courseTestimonials: [
+      {
+        name: String,
+        role: String,
+        company: String,
+        content: String,
+        rating: Number,
+        image: String,
+      },
+    ],
+    cta: {
+      headline: String,
+      subline: String,
+    },
   },
   { timestamps: true }
 )

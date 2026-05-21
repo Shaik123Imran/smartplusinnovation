@@ -9,7 +9,7 @@ import { sendPaymentConfirmation } from '../services/emailjs'
 import { usePageTitle } from '../hooks/usePageTitle'
 
 function Checkout() {
-  const { id } = useParams()
+  const { slug } = useParams()
   const navigate = useNavigate()
   const { getProgramById } = useData()
   const { user, isEnrolled, enroll } = useAuth()
@@ -17,19 +17,19 @@ function Checkout() {
   const [error, setError] = useState('')
   const [demoMode, setDemoMode] = useState(false)
 
-  const program = id ? getProgramById(id) : null
+  const program = slug ? getProgramById(slug) : null
   usePageTitle(program ? `Checkout – ${program.title}` : 'Checkout')
 
   useEffect(() => {
     if (!user) {
-      navigate('/login', { state: { from: `/programs/${id}/checkout` } })
+      navigate('/login', { state: { from: `/programs/${slug}/checkout` } })
       return
     }
     if (!program) return
     if (isEnrolled(program.id)) {
-      navigate(`/programs/${id}`, { replace: true })
+      navigate(`/programs/${slug}`, { replace: true })
     }
-  }, [user, program, id, isEnrolled, navigate])
+  }, [user, program, slug, isEnrolled, navigate])
 
   const amount = program?.price ?? 0
   const amountDisplay = amount ? `₹${amount.toLocaleString('en-IN')}` : ''
@@ -87,7 +87,7 @@ function Checkout() {
               courseId: program.id,
             })
             await doEnrollAndSendEmail(response.razorpay_order_id, response.razorpay_payment_id)
-            navigate(`/programs/${id}`, { state: { paymentSuccess: true }, replace: true })
+            navigate(`/programs/${slug}`, { state: { paymentSuccess: true }, replace: true })
           } catch (err) {
             setError(err.message || 'Payment verification failed.')
           } finally {
@@ -122,7 +122,7 @@ function Checkout() {
     setLoading(true)
     try {
       await doEnrollAndSendEmail()
-      navigate(`/programs/${id}`, { state: { paymentSuccess: true }, replace: true })
+      navigate(`/programs/${slug}`, { state: { paymentSuccess: true }, replace: true })
     } catch (err) {
       setError(err.message || 'Enrollment failed.')
     } finally {
@@ -199,7 +199,7 @@ function Checkout() {
           </p>
 
           <div className="mt-8 text-center">
-            <Button to={`/programs/${id}`} variant="ghost">
+            <Button to={`/programs/${slug}`} variant="ghost">
               ← Back to program
             </Button>
           </div>

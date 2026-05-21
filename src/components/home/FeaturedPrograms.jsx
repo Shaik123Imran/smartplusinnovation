@@ -4,7 +4,11 @@ import Button from '../common/Button'
 import ProgramCard from '../programs/ProgramCard'
 
 function FeaturedPrograms() {
-  const { featuredPrograms } = useData()
+  const { featuredPrograms, loading } = useData()
+
+  if (loading || featuredPrograms.length === 0) {
+    return null
+  }
 
   return (
     <section className="section-block bg-gradient-to-b from-white to-background">
@@ -24,16 +28,18 @@ function FeaturedPrograms() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {featuredPrograms.map((program) => (
-            <ProgramCard key={program.id} program={program} />
+            <div key={program.id} className="h-full min-h-0">
+              <ProgramCard program={program} />
+            </div>
           ))}
         </div>
 
         <div className="text-center mt-12">
           <Button to="/programs" size="lg">
             View All Programs
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Button>
