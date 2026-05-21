@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="AI Prompt Engineering and Generative AI">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc"/>
+      <stop offset="50%" style="stop-color:#f1f5f9"/>
+      <stop offset="100%" style="stop-color:#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:0.08"/>
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0.12"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#glow)"/>
+  <circle cx="620" cy="140" r="80" fill="none" stroke="#0f172a" stroke-width="1" opacity="0.08"/>
+  <circle cx="620" cy="140" r="55" fill="none" stroke="#6366f1" stroke-width="1" opacity="0.15"/>
+  <circle cx="620" cy="140" r="30" fill="#0f172a" opacity="0.9"/>
+  <path d="M605 135 L620 120 L635 135 L620 155 Z" fill="#fff" opacity="0.9"/>
+  <rect x="48" y="80" width="340" height="260" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="72" y="115" fill="#6366f1" font-family="system-ui,sans-serif" font-size="10" font-weight="700" letter-spacing="0.05em">PROMPT</text>
+  <rect x="72" y="128" width="280" height="10" rx="4" fill="#e2e8f0"/>
+  <rect x="72" y="148" width="220" height="10" rx="4" fill="#cbd5e1"/>
+  <rect x="72" y="168" width="250" height="10" rx="4" fill="#94a3b8"/>
+  <rect x="72" y="198" width="300" height="72" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="88" y="222" fill="#475569" font-family="ui-monospace,monospace" font-size="10">You are an expert assistant...</text>
+  <text x="88" y="242" fill="#0f172a" font-family="ui-monospace,monospace" font-size="10" font-weight="600">Chain-of-thought ù output</text>
+  <rect x="72" y="288" width="100" height="32" rx="8" fill="#0f172a"/>
+  <text x="88" y="309" fill="#fff" font-family="system-ui,sans-serif" font-size="11" font-weight="700">Generate</text>
+  <rect x="400" y="100" width="340" height="220" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="420" y="130" width="80" height="80" rx="10" fill="url(#glow)" stroke="#c7d2fe"/>
+  <rect x="510" y="130" width="80" height="80" rx="10" fill="#f1f5f9" stroke="#e2e8f0"/>
+  <rect x="600" y="130" width="120" height="80" rx="10" fill="#0f172a" opacity="0.85"/>
+  <text x="428" y="118" fill="#0f172a" font-family="system-ui,sans-serif" font-size="11" font-weight="600">GenAI Outputs</text>
+  <circle cx="460" cy="170" r="18" fill="#6366f1" opacity="0.3"/>
+  <rect x="518" y="155" width="60" height="40" rx="6" fill="#94a3b8" opacity="0.4"/>
+  <text x="628" y="175" fill="#fff" font-family="system-ui,sans-serif" font-size="10" font-weight="700">LLM</text>
+  <rect x="420" y="230" width="300" height="8" rx="3" fill="#e2e8f0"/>
+  <rect x="420" y="248" width="240" height="8" rx="3" fill="#c7d2fe"/>
+  <rect x="420" y="266" width="180" height="8" rx="3" fill="#94a3b8"/>
+  <text x="48" y="380" fill="#0f172a" font-family="system-ui,sans-serif" font-size="26" font-weight="800">AI Prompt Engineering</text>
+  <text x="48" y="412" fill="#475569" font-family="system-ui,sans-serif" font-size="15">Generative AI ù LLMs ù RAG ù Agents ù EduGram</text>
+</svg>

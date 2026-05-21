@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="UI UX Designing">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#faf5ff"/>
+      <stop offset="100%" style="stop-color:#f1f5f9"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect x="100" y="70" width="200" height="360" rx="24" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+  <rect x="115" y="95" width="170" height="28" rx="14" fill="#e2e8f0"/>
+  <rect x="115" y="140" width="170" height="100" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <rect x="115" y="260" width="80" height="12" rx="4" fill="#cbd5e1"/>
+  <rect x="115" y="285" width="120" height="12" rx="4" fill="#e2e8f0"/>
+  <rect x="115" y="310" width="100" height="12" rx="4" fill="#e2e8f0"/>
+  <rect x="340" y="90" width="380" height="300" rx="16" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+  <rect x="365" y="120" width="140" height="24" rx="6" fill="#0f172a" opacity="0.08"/>
+  <rect x="365" y="160" width="330" height="180" rx="12" fill="#f1f5f9" stroke="#e2e8f0"/>
+  <circle cx="420" cy="220" r="32" fill="#a78bfa" opacity="0.5"/>
+  <rect x="480" y="190" width="180" height="16" rx="4" fill="#cbd5e1"/>
+  <rect x="480" y="220" width="140" height="12" rx="4" fill="#e2e8f0"/>
+  <rect x="480" y="245" width="160" height="12" rx="4" fill="#e2e8f0"/>
+  <rect x="365" y="360" width="100" height="36" rx="18" fill="#0f172a"/>
+  <text x="60" y="400" fill="#0f172a" font-family="system-ui,sans-serif" font-size="30" font-weight="800">UI/UX Designing</text>
+  <text x="60" y="430" fill="#64748b" font-family="system-ui,sans-serif" font-size="15">Figma · Research · Prototypes · EduGram</text>
+</svg>

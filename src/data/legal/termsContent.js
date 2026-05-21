@@ -9,7 +9,7 @@ export const termsSections = [
   {
     heading: 'About Us',
     paragraphs: [
-      'EduGram Technologies Pvt Ltd is dedicated to providing upskilling and certification programs across various technical and non-technical domains, including digital marketing, web development, data analytics, and more. We aim to empower learners with industry-relevant skills and certifications.',
+      'EduGram Technologies Pvt Ltd is a dynamic EdTech platform committed to delivering the ultimate next-generation advantage. By merging cutting-edge innovation with educational excellence, we close the divide between traditional academic theory and modern industry requirements through AI-integrated curriculums designed for students, graduates, and professionals.',
     ],
   },
   {

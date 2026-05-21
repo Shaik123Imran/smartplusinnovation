@@ -41,5 +41,14 @@ export function mergeProgramWithDetail(program) {
     courseTestimonials: detail.testimonials ?? program.courseTestimonials,
     cta: detail.cta ?? program.cta,
     pricing: detail.pricing ?? program.pricing,
+    curriculum: detail.curriculum ?? program.curriculum,
+    realTimeProjects: detail.realTimeProjects ?? program.realTimeProjects,
+    projectsSection: detail.projectsSection ?? program.projectsSection,
+    portfolio: detail.portfolio ?? program.portfolio,
+    showcaseSection: detail.showcaseSection ?? program.showcaseSection,
+    businessShowcase: detail.businessShowcase ?? program.businessShowcase,
+    trainingActivities: detail.trainingActivities ?? program.trainingActivities,
+    trainingSection: detail.trainingSection ?? program.trainingSection,
+    technologiesSection: detail.technologiesSection ?? program.technologiesSection,
   }
 }

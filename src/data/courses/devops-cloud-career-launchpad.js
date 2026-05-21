@@ -24,6 +24,12 @@ export const devopsCloudCareerLaunchpad = {
     imageFile: 'devops-cloud.svg',
   },
 
+  curriculum: {
+    title: '12-Week Program Syllabus',
+    subtitle:
+      'Month 1: Foundations · Month 2: Containers, CI/CD & Automation · Month 3: Advanced Cloud & Orchestration',
+  },
+
   cta: {
     headline: 'Start Your Career Journey',
     subline:
@@ -36,6 +42,7 @@ export const devopsCloudCareerLaunchpad = {
   },
 
   about: {
+    heading: 'Build a Future-Ready DevOps Career',
     intro:
       'An intensive, career-focused program that bridges the gap between academic learning and production-grade DevOps engineering. Built for students, IT beginners, career switchers, and working professionals who want job-ready cloud and automation skills.',
     sections: [

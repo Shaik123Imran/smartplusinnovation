@@ -99,6 +99,55 @@ const courseSchema = new mongoose.Schema(
       headline: String,
       subline: String,
     },
+    curriculum: {
+      title: String,
+      subtitle: String,
+    },
+    realTimeProjects: [
+      {
+        title: String,
+        description: String,
+      },
+    ],
+    projectsSection: {
+      title: String,
+      subtitle: String,
+    },
+    portfolio: [
+      {
+        type: String,
+        title: String,
+        description: String,
+        preview: String,
+      },
+    ],
+    showcaseSection: {
+      title: String,
+      subtitle: String,
+    },
+    businessShowcase: [
+      {
+        type: String,
+        title: String,
+        description: String,
+        preview: String,
+      },
+    ],
+    trainingActivities: [
+      {
+        name: String,
+        description: String,
+      },
+    ],
+    trainingSection: {
+      title: String,
+      subtitle: String,
+    },
+    technologiesSection: {
+      eyebrow: String,
+      title: String,
+      subtitle: String,
+    },
   },
   { timestamps: true }
 )

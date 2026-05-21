@@ -5,7 +5,9 @@ import { usePageMeta } from '../../hooks/usePageMeta'
 import { PROGRAM_ROUTES } from '../../config/routes'
 import { openWhatsAppChat } from '../../config/whatsapp'
 import Button from '../common/Button'
-import Accordion from './Accordion'
+import CurriculumAccordion from './CurriculumAccordion'
+import PortfolioShowcase from './PortfolioShowcase'
+import BusinessShowcase from './BusinessShowcase'
 
 const ContactQuickForm = lazy(() => import('../home/ContactQuickForm'))
 
@@ -32,7 +34,16 @@ function CourseDetailView({ program }) {
   const courseSlug = program.slug || program.id
   const hero = program.hero || {}
   const about = program.about || {}
+  const curriculum = program.curriculum || {}
   const cta = program.cta || {}
+  const realTimeProjects = program.realTimeProjects || []
+  const projectsSection = program.projectsSection || {}
+  const portfolio = program.portfolio || []
+  const businessShowcase = program.businessShowcase || []
+  const showcaseSection = program.showcaseSection || {}
+  const trainingActivities = program.trainingActivities || []
+  const trainingSection = program.trainingSection || {}
+  const technologiesSection = program.technologiesSection || {}
   const testimonials = program.courseTestimonials || program.testimonials || []
   const heroImageFile =
     hero.imageFile || program.imageFile || (program.image ? `${program.image}.jpg` : null)
@@ -52,6 +63,16 @@ function CourseDetailView({ program }) {
   }, [testimonials.length])
 
   const handleEnroll = () => {
+    if (!user) {
+      navigate('/login', { state: { from: PROGRAM_ROUTES.checkout(courseSlug) } })
+      return
+    }
+    navigate(PROGRAM_ROUTES.checkout(courseSlug))
+  }
+
+  /** Locked chapter: guests → login; signed-in → checkout directly */
+  const handleLockedChapter = () => {
+    if (enrolled) return
     if (!user) {
       navigate('/login', { state: { from: PROGRAM_ROUTES.checkout(courseSlug) } })
       return
@@ -177,10 +198,15 @@ function CourseDetailView({ program }) {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Curriculum"
-            title="12-Week Program Syllabus"
-            subtitle="Month 1: Foundations · Month 2: Containers, CI/CD & Automation · Month 3: Advanced Cloud & Orchestration"
+            title={curriculum.title || 'Course Curriculum'}
+            subtitle={curriculum.subtitle}
           />
-          <Accordion items={program.syllabus || []} defaultOpen={0} />
+          <CurriculumAccordion
+            items={program.syllabus || []}
+            unlocked={enrolled}
+            isLoggedIn={Boolean(user)}
+            onLockedChapter={handleLockedChapter}
+          />
         </div>
       </section>
 
@@ -189,7 +215,7 @@ function CourseDetailView({ program }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="About the Program"
-            title="Build a Future-Ready DevOps Career"
+            title={about.heading || 'About the Program'}
             subtitle={about.intro}
           />
           <div className="grid md:grid-cols-2 gap-6">
@@ -218,10 +244,59 @@ function CourseDetailView({ program }) {
         </div>
       </section>
 
+      {/* Training & activities */}
+      {trainingActivities.length > 0 && (
+        <section className="py-14 lg:py-16 border-b border-neutral-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Interactive Training"
+              title={trainingSection.title || 'Training & Activities'}
+              subtitle={trainingSection.subtitle}
+            />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {trainingActivities.map((activity) => (
+                <div
+                  key={activity.name}
+                  className="rounded-lg border border-neutral-200 p-5 hover:shadow-md hover:border-indigo-200 transition-all duration-300"
+                >
+                  <h3 className="font-bold text-neutral-900 mb-2">{activity.name}</h3>
+                  <p className="text-sm text-neutral-600 leading-relaxed">{activity.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Real-time projects */}
+      {realTimeProjects.length > 0 && (
+        <section className="py-14 lg:py-16 border-b border-neutral-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Hands-On Learning"
+              title={projectsSection.title || 'Real-Time Projects'}
+              subtitle={projectsSection.subtitle}
+            />
+            <div className="grid sm:grid-cols-2 gap-5">
+              {realTimeProjects.map((project) => (
+                <div key={project.title} className="rounded-lg border border-neutral-200 p-6">
+                  <h3 className="font-bold text-neutral-900 mb-2">{project.title}</h3>
+                  <p className="text-sm text-neutral-600 leading-relaxed">{project.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Tech stack */}
       <section className="py-14 lg:py-16 border-b border-neutral-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Tools & Technologies" title="Industry-Standard Tech Stack" />
+          <SectionHeading
+            eyebrow={technologiesSection.eyebrow || 'Tools & Platforms'}
+            title={technologiesSection.title || 'Industry-Standard Tech Stack'}
+            subtitle={technologiesSection.subtitle}
+          />
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
             {(program.technologies || []).map((tech) => (
               <span
@@ -282,6 +357,37 @@ function CourseDetailView({ program }) {
           </div>
         </div>
       </section>
+
+      {/* Portfolio */}
+      {portfolio.length > 0 && (
+        <section className="py-14 lg:py-16 border-b border-neutral-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Portfolio"
+              title={showcaseSection.title || 'What You Will Build'}
+              subtitle={
+                showcaseSection.subtitle ||
+                'Graduate with showcase-ready deliverables for interviews, clients, and mentors.'
+              }
+            />
+            <PortfolioShowcase items={portfolio} />
+          </div>
+        </section>
+      )}
+
+      {/* Business / pitch showcase */}
+      {businessShowcase.length > 0 && (
+        <section className="py-14 lg:py-16 border-b border-neutral-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Showcase"
+              title={showcaseSection.title || 'Pitch & Business Showcase'}
+              subtitle={showcaseSection.subtitle}
+            />
+            <BusinessShowcase items={businessShowcase} />
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <section id="enroll-cta" className="py-14 lg:py-16 border-b border-neutral-100">

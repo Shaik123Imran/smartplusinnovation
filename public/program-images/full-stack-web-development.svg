@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Full Stack Web Development">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc"/>
+      <stop offset="100%" style="stop-color:#e2e8f0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect x="40" y="64" width="280" height="300" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="60" y="88" width="240" height="24" rx="6" fill="#f1f5f9"/>
+  <rect x="60" y="124" width="180" height="10" rx="4" fill="#e2e8f0"/>
+  <rect x="60" y="142" width="220" height="10" rx="4" fill="#cbd5e1"/>
+  <rect x="60" y="160" width="150" height="10" rx="4" fill="#94a3b8"/>
+  <rect x="60" y="190" width="100" height="70" rx="8" fill="#0f172a" opacity="0.85"/>
+  <rect x="170" y="190" width="110" height="45" rx="8" fill="#334155" opacity="0.65"/>
+  <rect x="170" y="245" width="110" height="15" rx="5" fill="#64748b" opacity="0.4"/>
+  <text x="60" y="106" fill="#0f172a" font-family="system-ui,sans-serif" font-size="11" font-weight="600">React · HTML · CSS</text>
+  <rect x="360" y="80" width="400" height="284" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="380" y="112" fill="#0f172a" font-family="ui-monospace,monospace" font-size="11" font-weight="600">const app = express()</text>
+  <text x="380" y="132" fill="#475569" font-family="ui-monospace,monospace" font-size="10">app.use('/api', routes)</text>
+  <rect x="380" y="148" width="340" height="8" rx="3" fill="#e2e8f0"/>
+  <rect x="380" y="166" width="260" height="8" rx="3" fill="#94a3b8"/>
+  <rect x="380" y="184" width="300" height="8" rx="3" fill="#cbd5e1"/>
+  <rect x="380" y="212" width="100" height="36" rx="8" fill="#0f172a"/>
+  <text x="396" y="235" fill="#fff" font-family="system-ui,sans-serif" font-size="10" font-weight="700">Node.js</text>
+  <rect x="490" y="212" width="100" height="36" rx="8" fill="#334155"/>
+  <text x="508" y="235" fill="#fff" font-family="system-ui,sans-serif" font-size="10" font-weight="700">Express</text>
+  <rect x="600" y="212" width="100" height="36" rx="8" fill="#475569"/>
+  <text x="622" y="235" fill="#fff" font-family="system-ui,sans-serif" font-size="10" font-weight="700">MongoDB</text>
+  <circle cx="680" cy="300" r="28" fill="none" stroke="#0f172a" stroke-width="2" opacity="0.2"/>
+  <text x="668" y="306" fill="#0f172a" font-family="system-ui,sans-serif" font-size="11" font-weight="800">API</text>
+  <line x1="320" y1="200" x2="360" y2="200" stroke="#0f172a" stroke-width="2" stroke-dasharray="6 4" opacity="0.45"/>
+  <text x="40" y="400" fill="#0f172a" font-family="system-ui,sans-serif" font-size="28" font-weight="800">Full Stack Web Dev</text>
+  <text x="40" y="434" fill="#475569" font-family="system-ui,sans-serif" font-size="16">React · Node · Express · MongoDB · EduGram</text>
+</svg>

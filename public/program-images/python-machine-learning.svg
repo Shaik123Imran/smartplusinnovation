@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Python with Machine Learning">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc"/>
+      <stop offset="100%" style="stop-color:#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#334155"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect x="48" y="72" width="340" height="260" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="72" y="108" fill="#0f172a" font-family="ui-monospace,monospace" font-size="13" font-weight="600">import numpy as np</text>
+  <text x="72" y="132" fill="#475569" font-family="ui-monospace,monospace" font-size="12">from sklearn.model_selection</text>
+  <text x="72" y="152" fill="#475569" font-family="ui-monospace,monospace" font-size="12">import train_test_split</text>
+  <rect x="72" y="168" width="280" height="8" rx="3" fill="#e2e8f0"/>
+  <rect x="72" y="184" width="220" height="8" rx="3" fill="#94a3b8"/>
+  <rect x="72" y="200" width="250" height="8" rx="3" fill="#cbd5e1"/>
+  <rect x="72" y="228" width="120" height="36" rx="8" fill="url(#accent)"/>
+  <text x="88" y="251" fill="#fff" font-family="system-ui,sans-serif" font-size="11" font-weight="700">model.fit(X, y)</text>
+  <rect x="420" y="88" width="320" height="220" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+  <circle cx="500" cy="200" r="48" fill="none" stroke="#0f172a" stroke-width="3" opacity="0.15"/>
+  <circle cx="500" cy="200" r="32" fill="none" stroke="#0f172a" stroke-width="2" opacity="0.25"/>
+  <circle cx="500" cy="200" r="16" fill="#0f172a" opacity="0.9"/>
+  <line x1="548" y1="168" x2="620" y2="140" stroke="#0f172a" stroke-width="2" opacity="0.4"/>
+  <line x1="548" y1="232" x2="620" y2="260" stroke="#0f172a" stroke-width="2" opacity="0.4"/>
+  <line x1="452" y1="168" x2="380" y2="140" stroke="#0f172a" stroke-width="2" opacity="0.4"/>
+  <line x1="452" y1="232" x2="380" y2="260" stroke="#0f172a" stroke-width="2" opacity="0.4"/>
+  <circle cx="620" cy="140" r="10" fill="#334155"/>
+  <circle cx="620" cy="260" r="10" fill="#64748b"/>
+  <circle cx="380" cy="140" r="10" fill="#64748b"/>
+  <circle cx="380" cy="260" r="10" fill="#334155"/>
+  <text x="440" y="118" fill="#0f172a" font-family="system-ui,sans-serif" font-size="13" font-weight="600">ML Pipeline</text>
+  <rect x="440" y="280" width="80" height="48" rx="6" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <rect x="530" y="260" width="80" height="68" rx="6" fill="#e2e8f0" stroke="#cbd5e1"/>
+  <rect x="620" y="240" width="80" height="88" rx="6" fill="#0f172a" opacity="0.85"/>
+  <text x="48" y="368" fill="#0f172a" font-family="system-ui,sans-serif" font-size="28" font-weight="800">Python + ML</text>
+  <text x="48" y="402" fill="#475569" font-family="system-ui,sans-serif" font-size="16">Machine Learning Career Program · EduGram</text>
+</svg>

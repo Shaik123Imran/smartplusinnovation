@@ -50,6 +50,15 @@ export function buildMongoCourseFromListing(listing, detailOverride = null) {
     whatsappMessage: detail.whatsappMessage,
     courseTestimonials: detail.testimonials || [],
     cta: detail.cta,
+    curriculum: detail.curriculum,
+    realTimeProjects: detail.realTimeProjects || [],
+    projectsSection: detail.projectsSection,
+    portfolio: detail.portfolio || [],
+    showcaseSection: detail.showcaseSection,
+    businessShowcase: detail.businessShowcase || [],
+    trainingActivities: detail.trainingActivities || [],
+    trainingSection: detail.trainingSection,
+    technologiesSection: detail.technologiesSection,
   }
 }
 

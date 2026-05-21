@@ -76,4 +76,13 @@ export const mapCourseToProgram = (course) => ({
   whatsappMessage: course.whatsappMessage,
   courseTestimonials: course.courseTestimonials,
   cta: course.cta,
+  curriculum: course.curriculum,
+  realTimeProjects: course.realTimeProjects,
+  projectsSection: course.projectsSection,
+  portfolio: course.portfolio,
+  showcaseSection: course.showcaseSection,
+  businessShowcase: course.businessShowcase,
+  trainingActivities: course.trainingActivities,
+  trainingSection: course.trainingSection,
+  technologiesSection: course.technologiesSection,
 })
