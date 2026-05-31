@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import { useData } from '../context/DataContext'
 import Button from '../components/common/Button'
@@ -6,61 +5,28 @@ import Badge from '../components/common/Badge'
 import { usePageTitle } from '../hooks/usePageTitle'
 
 function Pricing() {
-  usePageTitle('Pricing')
-  const { pricingPlans, annualDiscount } = useData()
-  const [isAnnual, setIsAnnual] = useState(false)
-
-  const getPrice = (plan) => {
-    if (plan.price === 0) return 'Free'
-    const price = isAnnual ? Math.round(plan.price * (1 - annualDiscount / 100)) : plan.price
-    return `₹${price.toLocaleString('en-IN')}`
-  }
+  usePageTitle('Quote')
+  const { pricingPlans } = useData()
 
   return (
     <Layout>
       <section className="page-hero">
         <div className="page-hero-inner">
-          <div className="section-header-center mb-0">
-            <span className="section-eyebrow bg-primary/10 text-primary">
-              Pricing
-            </span>
-            <h1 className="page-title">
-              <span className="section-title-line">Simple, Transparent</span>
-              <span className="page-title-accent">Pricing</span>
+          <div className="text-center mb-8">
+            <h1 className="text-3xl lg:text-4xl font-extrabold text-text">
+              <span className="section-title-line">Choose Your</span>
+              <span className="page-title-accent">Plan</span>
             </h1>
-            <p className="section-subtitle-center max-w-xl">
-              Choose the plan that fits your learning goals
-            </p>
-
-            {/* Billing Toggle */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
-              <span className={`font-medium ${!isAnnual ? 'text-text' : 'text-text/50'}`}>Monthly</span>
-              <button
-                onClick={() => setIsAnnual(!isAnnual)}
-                className={`relative w-14 h-8 rounded-full transition-colors ${isAnnual ? 'bg-primary' : 'bg-gray-300'} focus:outline-none focus:ring-4 focus:ring-primary/20`}
-                aria-label="Toggle billing period"
-                type="button"
-              >
-                <span
-                  className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full shadow transition-transform ${isAnnual ? 'translate-x-6' : 'translate-x-0'}`}
-                />
-              </button>
-              <div className="flex items-center gap-2">
-                <span className={`font-medium ${isAnnual ? 'text-text' : 'text-text/50'}`}>Annually</span>
-                <Badge variant="success">Save {annualDiscount}%</Badge>
-              </div>
-            </div>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {pricingPlans.map((plan) => (
               <div
                 key={plan.id}
-                className={`group relative bg-white rounded-2xl p-8 transform-gpu transition-all duration-300 ${
-                  plan.popular 
-                    ? 'ring-2 ring-primary shadow-2xl scale-[1.03] hover:scale-[1.06]' 
-                    : 'shadow-lg hover:shadow-2xl hover:shadow-primary/10 hover:scale-[1.04]'
-                } hover:-translate-y-1 hover:ring-2 hover:ring-primary/40`}
+                className={`group relative bg-white rounded-2xl p-8 transform-gpu transition-all duration-300 ${plan.popular
+                  ? 'ring-2 ring-primary shadow-2xl scale-[1.03] hover:scale-[1.06]'
+                  : 'shadow-lg hover:shadow-2xl hover:shadow-primary/10 hover:scale-[1.04]'
+                  } hover:-translate-y-1 hover:ring-2 hover:ring-primary/40`}
               >
                 {plan.popular && (
                   <div className="absolute -top-6 left-1/2 -translate-x-1/2">
@@ -73,16 +39,6 @@ function Pricing() {
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-bold text-text mb-2">{plan.name}</h3>
                   <p className="text-text/60 text-sm mb-6">{plan.description}</p>
-                  
-                  <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-4xl font-extrabold text-text">{getPrice(plan)}</span>
-                    {plan.price > 0 && (
-                      <span className="text-text/60">/{plan.period}</span>
-                    )}
-                  </div>
-                  {plan.perUser && (
-                    <p className="text-text/50 text-sm mt-1">per user (min {plan.minUsers} users)</p>
-                  )}
                 </div>
 
                 <div className="space-y-4 mb-8">

@@ -148,7 +148,7 @@ function CourseDetailView({ program }) {
                   </Button>
                 )}
                 <Button type="button" size="lg" variant="outline" onClick={() => openWhatsAppChat(waMessage)}>
-                  Talk to Counselor
+                  Talk to Counsellor
                 </Button>
                 <Button
                   type="button"

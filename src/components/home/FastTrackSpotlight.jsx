@@ -62,10 +62,7 @@ function FastTrackSpotlight() {
                   <p className="mt-2 text-sm text-text/60 line-clamp-2 flex-1">
                     {program.shortDescription}
                   </p>
-                  <div className="mt-4 flex items-center justify-between pt-3 border-t border-gray-100">
-                    <span className="text-sm font-semibold text-primary">
-                      ₹{program.price.toLocaleString('en-IN')}
-                    </span>
+                  <div className="mt-4 pt-3 border-t border-gray-100">
                     <span className="text-sm font-medium text-text/50 group-hover:text-primary transition-colors">
                       {weeks <= 6 ? 'Quick start →' : 'Enroll →'}
                     </span>

@@ -5,7 +5,7 @@ import { TermsPolicyLink, PrivacyPolicyLink } from '../legal/LegalPolicyLink'
 
 const companyLinks = [
   { name: 'About Us', href: '/about' },
-  { name: 'Pricing', href: '/pricing' },
+  { name: 'Quote', href: '/pricing' },
   { name: 'FAQ', href: '/faq' },
 ]
 
@@ -186,8 +186,8 @@ function Footer() {
             
             <div className="mt-6">
               <h4 className="font-bold text-lg mb-2">Contact</h4>
-              <p className="text-white/60 text-sm">info@edugram.com</p>
-              <p className="text-white/60 text-sm">+1 (555) 123-4567</p>
+              <a href="mailto:Contact@edugramtechnologies.in" className="text-white/60 hover:text-primary transition-colors text-sm block">Contact@edugramtechnologies.in</a>
+              <a href="tel:+919036284010" className="text-white/60 hover:text-primary transition-colors text-sm block">+91-9036284010</a>
             </div>
           </div>
         </div>

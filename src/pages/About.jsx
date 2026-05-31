@@ -5,7 +5,7 @@ import AboutWhatWeDo from '../components/about/AboutWhatWeDo'
 import AboutCoreValues from '../components/about/AboutCoreValues'
 import AboutCoreTeam from '../components/about/AboutCoreTeam'
 import AboutLegacyStory from '../components/about/AboutLegacyStory'
-import { values, stats } from '../data/team'
+import { values } from '../data/team'
 import { usePageTitle } from '../hooks/usePageTitle'
 
 const DEMO_VIDEO_URL = 'https://www.w3schools.com/html/mov_bbb.mp4'
@@ -54,22 +54,6 @@ function About() {
               curriculums are purposefully designed to equip students, recent graduates, and seasoned professionals
               with the practical experience and advanced skills necessary to succeed in today&apos;s digital landscape.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats — existing */}
-      <section className="py-10 sm:py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-8 sm:gap-12">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center px-4">
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-text/60 text-sm sm:text-base">{stat.label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

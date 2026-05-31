@@ -72,8 +72,8 @@ function Contact() {
                     </div>
                     <div>
                       <h3 className="font-bold text-text">Email</h3>
-                      <p className="text-text/60">info@edugram.com</p>
-                      <p className="text-text/60">support@edugram.com</p>
+                      <a href="mailto:Contact@edugramtechnologies.in" className="text-text/60 hover:text-primary transition-colors block">Contact@edugramtechnologies.in</a>
+                      <a href="mailto:ceo@edugramtechnologies.in" className="text-text/60 hover:text-primary transition-colors block">ceo@edugramtechnologies.in</a>
                     </div>
                   </div>
 
@@ -85,8 +85,8 @@ function Contact() {
                     </div>
                     <div>
                       <h3 className="font-bold text-text">Phone</h3>
-                      <p className="text-text/60">+1 (555) 123-4567</p>
-                      <p className="text-text/60">Mon-Fri 9am-6pm EST</p>
+                      <a href="tel:+919036284010" className="text-text/60 hover:text-primary transition-colors block">+91-9036284010</a>
+                      <p className="text-text/60">Monday to Saturday - 8 Am to 9 pm</p>
                     </div>
                   </div>
 
@@ -99,8 +99,8 @@ function Contact() {
                     </div>
                     <div>
                       <h3 className="font-bold text-text">Office</h3>
-                      <p className="text-text/60">123 Innovation Street</p>
-                      <p className="text-text/60">Tech City, TC 12345</p>
+                      <p className="text-text/60">Yellakunte, 2nd cross Mamgammapalya,</p>
+                      <p className="text-text/60">Bommanahalli, Bengaluru, Karnataka 560068</p>
                     </div>
                   </div>
                 </div>

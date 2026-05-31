@@ -1,7 +1,7 @@
 export const pricingPlans = [
   {
     id: 'starter',
-    name: 'Starter',
+    name: 'Self Paced',
     description: 'Perfect for exploring and getting started with tech learning',
     price: 0,
     period: 'forever',
@@ -50,7 +50,7 @@ export const pricingPlans = [
   },
   {
     id: 'enterprise',
-    name: 'Enterprise',
+    name: 'Premium',
     description: 'For teams and organizations investing in talent development',
     price: 14999,
     period: 'month',
