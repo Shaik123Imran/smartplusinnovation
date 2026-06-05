@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Data Analytics and Business Intelligence with Power BI">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc"/>
+      <stop offset="100%" style="stop-color:#e2e8f0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect x="60" y="70" width="320" height="220" rx="12" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="80" y="95" width="260" height="30" rx="6" fill="#f59e0b"/>
+  <rect x="355" y="95" width="12" height="30" rx="4" fill="#f59e0b"/>
+  <rect x="80" y="135" width="180" height="30" rx="6" fill="#3b82f6"/>
+  <rect x="355" y="135" width="12" height="30" rx="4" fill="#3b82f6"/>
+  <rect x="80" y="175" width="220" height="30" rx="6" fill="#10b981"/>
+  <rect x="355" y="175" width="12" height="30" rx="4" fill="#10b981"/>
+  <rect x="80" y="215" width="140" height="30" rx="6" fill="#8b5cf6"/>
+  <rect x="355" y="215" width="12" height="30" rx="4" fill="#8b5cf6"/>
+  <circle cx="370" cy="245" r="20" fill="#e2e8f0"/>
+  <polygon points="370,232 375,245 363,245" fill="#94a3b8"/>
+  <rect x="80" y="260" width="50" height="12" rx="4" fill="#f59e0b"/>
+  <rect x="140" y="260" width="50" height="12" rx="4" fill="#3b82f6"/>
+  <rect x="200" y="260" width="50" height="12" rx="4" fill="#10b981"/>
+  <rect x="260" y="260" width="50" height="12" rx="4" fill="#8b5cf6"/>
+  <rect x="420" y="70" width="300" height="220" rx="12" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="440" y="105" fill="#0f172a" font-family="system-ui,sans-serif" font-size="15" font-weight="700">Insights Dashboard</text>
+  <rect x="440" y="120" width="260" height="8" rx="4" fill="#e2e8f0"/>
+  <rect x="440" y="120" width="180" height="8" rx="4" fill="#f59e0b"/>
+  <rect x="440" y="145" width="80" height="60" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="450" y="155" width="60" height="8" rx="3" fill="#3b82f6"/>
+  <rect x="450" y="168" width="40" height="8" rx="3" fill="#10b981"/>
+  <rect x="450" y="181" width="50" height="8" rx="3" fill="#f59e0b"/>
+  <rect x="535" y="145" width="165" height="60" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="545" y="155" width="60" height="25" rx="3" fill="#8b5cf6"/>
+  <rect x="615" y="162" width="60" height="18" rx="3" fill="#3b82f6"/>
+  <rect x="685" y="168" width="60" height="12" rx="3" fill="#f59e0b"/>
+  <text x="440" y="235" fill="#0f172a" font-family="system-ui,sans-serif" font-size="13" font-weight="600">DAX � Power Query � M</text>
+  <rect x="440" y="250" width="260" height="6" rx="3" fill="#e2e8f0"/>
+  <rect x="440" y="250" width="130" height="6" rx="3" fill="#0f172a"/>
+  <text x="60" y="360" fill="#0f172a" font-family="system-ui,sans-serif" font-size="28" font-weight="800">Data Analytics &amp; BI</text>
+  <text x="60" y="395" fill="#475569" font-family="system-ui,sans-serif" font-size="16">Power BI � DAX � ETL � EduGram</text>
+</svg>

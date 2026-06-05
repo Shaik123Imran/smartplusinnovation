@@ -19,7 +19,7 @@ export const pricingPlans = [
       'Job referrals',
       'Full program access'
     ],
-    cta: 'Get Started Free',
+    cta: 'Start Learning',
     popular: false,
     color: 'gray'
   },
@@ -62,14 +62,14 @@ export const pricingPlans = [
       'Custom learning paths',
       'Team analytics dashboard',
       'Priority job referrals',
-      'Guaranteed job placement*',
+      'Guaranteed placement assistance',
       'On-site workshops available',
       'API access for LMS integration',
       'Invoice billing',
       'Custom certificates'
     ],
     notIncluded: [],
-    cta: 'Contact Sales',
+    cta: 'Start Learning',
     popular: false,
     color: 'secondary'
   }

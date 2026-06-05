@@ -41,14 +41,8 @@ function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 lg:h-20">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-sm leading-none">EG</span>
-              </div>
-              <span className="text-xl font-bold text-text leading-tight">
-                <span className="text-primary">EduGram</span>
-                <span className="text-text"> Technologies Pvt Ltd</span>
-              </span>
+            <Link to="/" className="flex items-center">
+              <img src="/assets/edugram-logo.jpg" alt="EduGram Technologies" className="h-16 lg:h-20 w-auto" />
             </Link>
           </div>
 

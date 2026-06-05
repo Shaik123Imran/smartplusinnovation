@@ -26,6 +26,7 @@ import pythonFullStack from './python-full-stack.js'
 import javaFullStack from './java-full-stack.js'
 import fullStackWebDevelopment from './full-stack-web-development.js'
 import aiPromptEngineeringGenerativeAi from './ai-prompt-engineering-generative-ai.js'
+import dataAnalyticsPowerBi from './data-analytics-power-bi.js'
 
 /**
  * @typedef {import('./schema.js').CourseListing} CourseListing
@@ -59,6 +60,47 @@ export function definePublishedCourse(listing, detail = null) {
  * @type {PublishedCourseEntry[]}
  */
 export const publishedCourseEntries = [
+  definePublishedCourse(
+    {
+      slug: 'data-analytics-and-business-intelligence-with-power-bi',
+      title: 'Data Analytics and Business Intelligence with Power BI',
+      shortDescription:
+        'Master Power BI, DAX, Power Query, and data modeling. Build interactive dashboards and automate business insights with capstone projects.',
+      description:
+        'A 3-month industry-aligned program covering the complete data lifecycle: data extraction and transformation (ETL), relational data modeling, advanced analytical calculations (DAX), and interactive visual storytelling with Microsoft Power BI.',
+      duration: '3 Months',
+      level: 'All Levels',
+      price: 49999,
+      originalPrice: 89999,
+      category: 'data-ai',
+      skills: [
+        'Power BI',
+        'DAX',
+        'Power Query',
+        'Data Modeling',
+        'ETL',
+        'Data Visualization',
+        'SQL',
+        'Excel',
+      ],
+      features: [
+        'Live instructor-led sessions',
+        'Real-time capstone projects',
+        'Mock interviews & resume support',
+        'Placement assistance',
+        'Recorded session library',
+        'Certificate on completion',
+      ],
+      rating: 4.9,
+      students: 0,
+      image: 'data-analytics-power-bi',
+      imageFile: 'data-analytics-power-bi.svg',
+      color: 'primary',
+      isFeatured: true,
+      hasDetailPage: true,
+    },
+    dataAnalyticsPowerBi
+  ),
   definePublishedCourse(
     {
       slug: 'devops-and-cloud-career-launchpad',

@@ -115,7 +115,7 @@ const courseSchema = new mongoose.Schema(
     },
     portfolio: [
       {
-        type: String,
+        type: { type: String },
         title: String,
         description: String,
         preview: String,
@@ -127,7 +127,7 @@ const courseSchema = new mongoose.Schema(
     },
     businessShowcase: [
       {
-        type: String,
+        type: { type: String },
         title: String,
         description: String,
         preview: String,

@@ -14,7 +14,8 @@ export const sendContactEmail = async (formData) => {
       from_name: formData.name,
       from_email: formData.email,
       message: formData.message,
-      to_email: formData.email // Sends to the user's email as well
+      to_email: 'Contact@edugramtechnologies.in',
+      reply_to: formData.email
     })
     return { success: true, response }
   } catch (error) {

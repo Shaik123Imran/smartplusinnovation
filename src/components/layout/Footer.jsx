@@ -87,14 +87,8 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-sm leading-none">EG</span>
-              </div>
-              <span className="text-xl font-bold leading-tight">
-                <span className="text-primary">EduGram</span>
-                <span className="text-white"> Technologies Pvt Ltd</span>
-              </span>
+            <Link to="/" className="flex items-center mb-6">
+              <img src="/assets/edugram-logo.jpg" alt="EduGram Technologies" className="h-10 w-auto" />
             </Link>
             <p className="text-white/60 mb-6 max-w-sm leading-relaxed">
               Empowering the next generation of tech professionals with industry-leading education and career support.
