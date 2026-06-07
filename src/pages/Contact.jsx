@@ -47,7 +47,7 @@ function Contact() {
       <section className="page-hero">
         <div className="page-hero-inner">
           <div className="section-header-center mb-0">
-            <span className="section-eyebrow bg-primary/10 text-primary">
+            <span className="section-eyebrow bg-gradient-to-r from-primary/10 to-secondary/10 text-primary">
               Contact Us
             </span>
             <h1 className="page-title">
@@ -106,7 +106,7 @@ function Contact() {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl p-6">
+              <div className="bg-gradient-to-br from-primary/5 via-secondary/5 to-emerald/5 rounded-2xl p-6 border border-primary/10">
                 <h3 className="font-bold text-text mb-4">FAQ</h3>
                 <p className="text-text/60 mb-4">
                   Check out our frequently asked questions for quick answers to common queries.
@@ -121,7 +121,7 @@ function Contact() {
             </div>
 
             <div>
-              <div className="bg-white rounded-2xl shadow-xl p-8">
+              <div className="bg-white rounded-2xl shadow-xl shadow-primary/5 p-8 border border-gray-100">
                 <h2 className="text-2xl font-bold text-text mb-6">Send us a Message</h2>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">

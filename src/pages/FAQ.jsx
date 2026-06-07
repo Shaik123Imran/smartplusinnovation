@@ -1,28 +1,85 @@
 import { useState } from 'react'
 import Layout from '../components/layout/Layout'
-import { useData } from '../context/DataContext'
 import Button from '../components/common/Button'
 import { usePageTitle } from '../hooks/usePageTitle'
 
+const faqs = [
+  {
+    id: 1,
+    question: 'Who can enroll in EduGram courses?',
+    answer:
+      'Our programs are suitable for students, fresh graduates, working professionals, career switchers, and anyone looking to upgrade their skills in today\u2019s competitive job market.',
+  },
+  {
+    id: 2,
+    question: 'What if I miss a class?',
+    answer:
+      'No worries! Recorded sessions are available for every class. You can catch up at your own pace without missing anything. Plus, our mentors are available for doubt-clearing sessions throughout the week.',
+  },
+  {
+    id: 3,
+    question: 'How is EduGram Technologies different from other institutes?',
+    answer:
+      'At EduGram Technologies, we focus on practical learning and career readiness. Our programs include hands-on training, real-world projects, portfolio development, and mentorship from experienced industry professionals. We aim to help learners build skills that can be applied directly in real workplace environments.',
+  },
+  {
+    id: 4,
+    question: 'Is the training online or offline?',
+    answer:
+      'Currently, all our programs are delivered online to provide learners with maximum flexibility and accessibility. Our live instructor-led sessions allow students to learn from anywhere while benefiting from interactive classes, hands-on projects, mentorship, and career support. We may introduce offline training options in the future as we continue to expand our offerings.',
+  },
+  {
+    id: 5,
+    question: 'Do you provide placement support?',
+    answer:
+      'Yes, 100% placement assistance is included in all our flagship programs. This includes resume building, LinkedIn profile optimization, mock interviews, soft skills training, and direct introductions to our network of 120+ hiring partners.',
+  },
+  {
+    id: 6,
+    question: 'Do you offer scholarships or discounts?',
+    answer:
+      'Yes, EduGram Technologies periodically offers scholarships, promotional discounts, and special offers for eligible learners. Available benefits may vary by program and enrollment period, so we recommend contacting our admissions team for the latest details.',
+  },
+  {
+    id: 7,
+    question: 'Is there a refund policy?',
+    answer:
+      'EduGram Technologies Pvt Ltd does not offer any refunds for course enrollments or services.',
+  },
+]
+
 function FAQItem({ faq, isOpen, onToggle }) {
   return (
-    <div className="border-b border-gray-100 last:border-0">
+    <div className="group rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20">
       <button
+        type="button"
         onClick={onToggle}
-        className="w-full py-5 flex items-center justify-between text-left"
+        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+        aria-expanded={isOpen}
       >
-        <span className="font-semibold text-text pr-4">{faq.question}</span>
-        <svg 
-          className={`w-5 h-5 text-primary flex-shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
+        <span className="font-semibold text-text pr-4 text-sm sm:text-base leading-snug">
+          {faq.question}
+        </span>
+        <span
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 text-primary transition-all duration-300 ${
+            isOpen ? 'rotate-180 from-primary to-secondary text-white shadow-md shadow-primary/30' : ''
+          }`}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </span>
       </button>
-      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-5' : 'max-h-0'}`}>
-        <p className="text-text/60 leading-relaxed">{faq.answer}</p>
+      <div
+        className={`grid transition-all duration-300 ease-out ${
+          isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="px-6 pb-5 border-t border-gray-100 pt-4">
+            <p className="text-text/60 text-sm sm:text-base leading-relaxed">{faq.answer}</p>
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -30,17 +87,10 @@ function FAQItem({ faq, isOpen, onToggle }) {
 
 function FAQ() {
   usePageTitle('FAQ')
-  const { faqs, faqCategories, getFaqsByCategory } = useData()
-  const [activeCategory, setActiveCategory] = useState('general')
-  const [openItems, setOpenItems] = useState({})
-
-  const filteredFaqs = getFaqsByCategory(activeCategory)
+  const [openId, setOpenId] = useState(null)
 
   const toggleItem = (id) => {
-    setOpenItems(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }))
+    setOpenId((prev) => (prev === id ? null : id))
   }
 
   return (
@@ -48,57 +98,40 @@ function FAQ() {
       <section className="page-hero">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="section-header-center mb-0">
-            <span className="section-eyebrow bg-primary/10 text-primary">
+            <span className="section-eyebrow bg-gradient-to-r from-primary/10 to-secondary/10 text-primary">
               FAQ
             </span>
             <h1 className="page-title">
               <span className="section-title-line">Frequently Asked</span>
               <span className="page-title-accent">Questions</span>
             </h1>
-            <p className="section-subtitle-center max-w-xl">
-              Find answers to common questions about our programs and services
+            <p className="section-subtitle-center max-w-2xl">
+              Find answers to the most common questions about EduGram Technologies programs, learning
+              experience, placement support, and enrollment process. For any additional queries, feel free
+              to contact our team.
             </p>
           </div>
 
-          {/* Category Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {faqCategories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  activeCategory === category.id
-                    ? 'bg-primary text-white shadow-lg shadow-primary/30'
-                    : 'bg-white text-text/70 hover:bg-primary/10 hover:text-primary'
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-
-          {/* FAQ List */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 lg:p-8">
-            {filteredFaqs.map((faq) => (
+          <div className="space-y-4">
+            {faqs.map((faq) => (
               <FAQItem
                 key={faq.id}
                 faq={faq}
-                isOpen={openItems[faq.id]}
+                isOpen={openId === faq.id}
                 onToggle={() => toggleItem(faq.id)}
               />
             ))}
           </div>
 
-          {/* Contact CTA */}
-          <div className="mt-12 text-center bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8">
+          <div className="mt-12 text-center bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 rounded-2xl p-8 border border-primary/10">
             <h3 className="text-xl font-bold text-text mb-2">Still have questions?</h3>
-            <p className="text-text/60 mb-6">
-              Can't find what you're looking for? We're here to help!
+            <p className="text-text/60 mb-6 max-w-lg mx-auto">
+              Our team is here to help. Contact EduGram Technologies for personalized guidance and support.
             </p>
             <div className="flex items-center justify-center gap-3">
               <Button to="/contact">
                 Contact Us
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Button>
@@ -106,7 +139,7 @@ function FAQ() {
                 href="https://wa.me/919036284010"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 bg-green-500 hover:bg-green-600 rounded-xl flex items-center justify-center transition-colors"
+                className="w-11 h-11 bg-[#25D366] hover:bg-[#20bd5a] rounded-xl flex items-center justify-center transition-all duration-300 hover:shadow-lg hover:shadow-[#25D366]/30 hover:-translate-y-0.5"
                 aria-label="Chat on WhatsApp"
               >
                 <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">

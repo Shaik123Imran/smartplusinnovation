@@ -8,7 +8,7 @@ import AboutLegacyStory from '../components/about/AboutLegacyStory'
 import { values } from '../data/team'
 import { usePageTitle } from '../hooks/usePageTitle'
 
-const DEMO_VIDEO_URL = 'https://www.w3schools.com/html/mov_bbb.mp4'
+const DEMO_VIDEO_URL = '/hero/edugram-motion.mp4'
 
 function About() {
   usePageTitle('About Us')
@@ -42,7 +42,7 @@ function About() {
       <section className="page-hero">
         <div className="page-hero-inner">
           <div className="max-w-3xl mx-auto section-header-center mb-0">
-            <span className="section-eyebrow bg-primary/10 text-primary">About Us</span>
+            <span className="section-eyebrow bg-gradient-to-r from-primary/10 to-secondary/10 text-primary">About Us</span>
             <h1 className="page-title">
               <span className="section-title-line">Future-Proof Your Career With</span>
               <span className="page-title-accent">AI-Enhanced Learning</span>
@@ -80,7 +80,7 @@ function About() {
       <section className="section-block bg-background" aria-labelledby="about-values-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <span className="section-eyebrow bg-primary/10 text-primary">Founding Principles</span>
+            <span className="section-eyebrow bg-gradient-to-r from-primary/10 to-accent/10 text-primary">Founding Principles</span>
             <h2 id="about-values-heading" className="text-3xl lg:text-4xl font-extrabold text-text mb-4 mt-4">
               Our Values
             </h2>
@@ -92,7 +92,7 @@ function About() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <div key={index} className="text-center group">
-                <div className="w-16 h-16 mx-auto bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:from-primary group-hover:via-secondary group-hover:to-accent group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-lg group-hover:shadow-primary/25">
                   <span className="text-primary group-hover:text-white transition-colors">
                     {iconMap[value.icon]}
                   </span>

@@ -38,13 +38,20 @@ function Testimonials() {
   }
 
   return (
-    <section className="section-block bg-gradient-to-br from-primary/5 via-background to-secondary/5 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="section-block bg-gradient-to-br from-secondary/[0.03] via-background to-accent/[0.03] overflow-hidden relative">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/3 w-[25rem] h-[25rem] bg-gradient-to-b from-emerald/5 via-secondary/5 to-transparent rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-[20rem] h-[20rem] bg-gradient-to-t from-accent/5 via-rose/5 to-transparent rounded-full blur-[80px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="section-header-center mb-10 sm:mb-12">
-          <span className="section-eyebrow bg-accent/10 text-accent">Testimonials</span>
+          <span className="section-eyebrow bg-gradient-to-r from-emerald/10 to-secondary/10 text-emerald border border-emerald/10 shadow-sm">
+            Testimonials
+          </span>
           <h2 className="section-title mt-3">
             <span className="section-title-line block">What Our Students</span>
-            <span className="section-title-accent block mt-1 bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+            <span className="section-title-accent block mt-1 bg-gradient-to-r from-emerald via-secondary to-accent bg-clip-text text-transparent">
               Say About Us
             </span>
           </h2>
@@ -54,17 +61,17 @@ function Testimonials() {
         </div>
 
         <div className="relative max-w-4xl mx-auto px-10 sm:px-14 lg:px-16">
-          <div className="overflow-hidden rounded-3xl">
+          <div className="overflow-hidden rounded-3xl shadow-xl shadow-primary/5">
             <div
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {testimonials.map((testimonial) => (
                 <div key={testimonial.id} className="w-full flex-shrink-0 px-2 sm:px-4">
-                  <article className="bg-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xl transition-all duration-300 hover:shadow-2xl min-h-[28rem] sm:min-h-[30rem] flex flex-col">
+                  <article className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 sm:p-8 lg:p-10 shadow-lg transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:shadow-secondary/5 min-h-[28rem] sm:min-h-[30rem] flex flex-col border border-gray-100/50">
                     <div className="flex flex-col items-center text-center flex-1 min-h-0">
                       <div
-                        className="w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem] bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl mb-4 sm:mb-5 shadow-lg shadow-primary/30 shrink-0"
+                        className="w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem] bg-gradient-to-br from-primary via-secondary to-accent rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl mb-4 sm:mb-5 shadow-xl shadow-primary/30 shrink-0 ring-2 ring-white/50"
                         aria-hidden
                       >
                         {testimonial.image}
@@ -77,7 +84,7 @@ function Testimonials() {
                         {[...Array(testimonial.rating)].map((_, i) => (
                           <svg
                             key={i}
-                            className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400"
+                            className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 drop-shadow-sm"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                             aria-hidden
@@ -113,7 +120,7 @@ function Testimonials() {
             type="button"
             onClick={prevSlide}
             aria-label="Previous testimonial"
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-text hover:text-primary hover:shadow-xl transition-all duration-300 z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/95 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-text hover:text-primary hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1/2 hover:scale-105 transition-all duration-300 z-10 border border-gray-100/50"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -124,7 +131,7 @@ function Testimonials() {
             type="button"
             onClick={nextSlide}
             aria-label="Next testimonial"
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-text hover:text-primary hover:shadow-xl transition-all duration-300 z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/95 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-text hover:text-primary hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-1/2 hover:scale-105 transition-all duration-300 z-10 border border-gray-100/50"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -140,7 +147,9 @@ function Testimonials() {
                 aria-label={`Go to testimonial ${index + 1}`}
                 aria-current={currentIndex === index ? 'true' : undefined}
                 className={`h-3 rounded-full transition-all duration-300 ${
-                  currentIndex === index ? 'bg-primary w-8' : 'w-3 bg-text/20 hover:bg-text/40'
+                  currentIndex === index
+                    ? 'bg-gradient-to-r from-primary via-secondary to-accent w-8 shadow-sm shadow-primary/30'
+                    : 'w-3 bg-text/20 hover:bg-text/40'
                 }`}
               />
             ))}

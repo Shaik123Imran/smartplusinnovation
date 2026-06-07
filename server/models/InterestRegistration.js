@@ -7,6 +7,7 @@ const interestRegistrationSchema = new mongoose.Schema(
     phone: { type: String, required: true },
     city: { type: String, default: '' },
     courseType: { type: String, default: '' },
+    message: { type: String, default: '' },
     source: { type: String, default: 'register-interest' },
     status: { type: String, enum: ['new', 'contacted', 'enrolled'], default: 'new' },
   },

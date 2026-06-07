@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 
 const variants = {
-  primary: 'bg-gradient-to-r from-primary to-secondary text-white hover:shadow-xl hover:shadow-primary/30',
-  secondary: 'bg-gradient-to-r from-secondary to-accent text-white hover:shadow-xl hover:shadow-secondary/30',
-  outline: 'border-2 border-text/20 text-text hover:border-primary hover:text-primary',
+  primary: 'bg-gradient-to-r from-primary via-secondary to-accent text-white hover:shadow-xl hover:shadow-primary/30 hover:shadow-secondary/20',
+  secondary: 'bg-gradient-to-r from-secondary to-emerald text-white hover:shadow-xl hover:shadow-secondary/30',
+  outline: 'border-2 border-text/20 text-text hover:border-primary hover:text-primary hover:bg-primary/5',
   ghost: 'text-text/70 hover:text-primary hover:bg-primary/5',
-  danger: 'bg-red-500 text-white hover:bg-red-600',
+  danger: 'bg-gradient-to-r from-rose to-orange text-white hover:shadow-xl hover:shadow-rose/30',
 }
 
 const sizes = {

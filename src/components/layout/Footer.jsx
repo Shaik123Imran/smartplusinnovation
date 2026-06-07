@@ -83,12 +83,18 @@ function Footer() {
   }
 
   return (
-    <footer className="bg-text text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <footer className="bg-gradient-to-br from-[#0a0f2c] via-[#0d1333] to-[#0a1028] text-white relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-primary/10 via-secondary/5 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-accent/10 via-emerald/5 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-1/2 w-64 h-64 bg-rose/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center mb-6">
-              <img src="/assets/edugram-logo.jpg" alt="EduGram Technologies" className="h-10 w-auto" />
+              <img src="/assets/edugram-logo.jpg" alt="EduGram Technologies" className="h-10 w-auto brightness-0 invert" />
             </Link>
             <p className="text-white/60 mb-6 max-w-sm leading-relaxed">
               Empowering the next generation of tech professionals with industry-leading education and career support.
@@ -102,12 +108,12 @@ function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-primary"
+                  className="flex-1 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-secondary/50 focus:ring-2 focus:ring-secondary/20 focus:shadow-lg focus:shadow-secondary/10 transition-all"
                 />
                 <button
                   type="submit"
                   disabled={subscribeStatus === 'loading'}
-                  className="px-4 py-2 bg-primary hover:bg-primary/90 rounded-lg font-medium transition-colors disabled:opacity-50"
+                  className="px-4 py-2 bg-gradient-to-r from-primary via-secondary to-emerald hover:shadow-xl hover:shadow-primary/25 hover:shadow-secondary/15 rounded-lg font-medium transition-all duration-300 disabled:opacity-50 hover:-translate-y-0.5"
                 >
                   {subscribeStatus === 'loading' ? '...' : 'Subscribe'}
                 </button>
@@ -125,7 +131,7 @@ function Footer() {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-primary transition-colors duration-300"
+                  className="w-10 h-10 bg-white/5 border border-white/5 rounded-xl flex items-center justify-center hover:bg-gradient-to-r hover:from-primary hover:via-secondary hover:to-accent hover:border-transparent transition-all duration-300 hover:shadow-xl hover:shadow-primary/25"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -135,11 +141,11 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold text-lg mb-4">Programs</h4>
+            <h4 className="font-bold text-lg mb-4 bg-gradient-to-r from-secondary to-emerald bg-clip-text text-transparent">Programs</h4>
             <ul className="space-y-3">
               {programLinks.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.href} className="text-white/60 hover:text-primary transition-colors duration-200">
+                  <Link to={link.href} className="text-white/50 hover:text-primary transition-colors duration-200">
                     {link.name}
                   </Link>
                 </li>
@@ -148,11 +154,11 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold text-lg mb-4">Company</h4>
+            <h4 className="font-bold text-lg mb-4 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">Company</h4>
             <ul className="space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.href} className="text-white/60 hover:text-primary transition-colors duration-200">
+                  <Link to={link.href} className="text-white/50 hover:text-primary transition-colors duration-200">
                     {link.name}
                   </Link>
                 </li>
@@ -161,39 +167,39 @@ function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold text-lg mb-4">Support</h4>
+            <h4 className="font-bold text-lg mb-4 bg-gradient-to-r from-accent to-rose bg-clip-text text-transparent">Support</h4>
             <ul className="space-y-3">
               {supportLinks.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.href} className="text-white/60 hover:text-primary transition-colors duration-200">
+                  <Link to={link.href} className="text-white/50 hover:text-primary transition-colors duration-200">
                     {link.name}
                   </Link>
                 </li>
               ))}
               <li>
-                <PrivacyPolicyLink className="text-white/60 hover:text-primary font-normal" />
+                <PrivacyPolicyLink className="text-white/50 hover:text-primary font-normal transition-colors duration-200" />
               </li>
               <li>
-                <TermsPolicyLink className="text-white/60 hover:text-primary font-normal" />
+                <TermsPolicyLink className="text-white/50 hover:text-primary font-normal transition-colors duration-200" />
               </li>
             </ul>
             
             <div className="mt-6">
-              <h4 className="font-bold text-lg mb-2">Contact</h4>
-              <a href="mailto:Contact@edugramtechnologies.in" className="text-white/60 hover:text-primary transition-colors text-sm block">Contact@edugramtechnologies.in</a>
-              <a href="tel:+919036284010" className="text-white/60 hover:text-primary transition-colors text-sm block">+91-9036284010</a>
+              <h4 className="font-bold text-lg mb-2 bg-gradient-to-r from-primary to-emerald bg-clip-text text-transparent">Contact</h4>
+              <a href="mailto:Contact@edugramtechnologies.in" className="text-white/50 hover:text-primary transition-colors duration-200 text-sm block">Contact@edugramtechnologies.in</a>
+              <a href="tel:+919036284010" className="text-white/50 hover:text-primary transition-colors duration-200 text-sm block">+91-9036284010</a>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-12 pt-8">
+        <div className="border-t border-white/5 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/60 text-sm">
+            <p className="text-white/40 text-sm">
               © {new Date().getFullYear()} EduGram Technologies Pvt Ltd. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <PrivacyPolicyLink className="text-white/60 hover:text-primary text-sm" />
-              <TermsPolicyLink className="text-white/60 hover:text-primary text-sm" />
+              <PrivacyPolicyLink className="text-white/40 hover:text-primary text-sm transition-colors duration-200" />
+              <TermsPolicyLink className="text-white/40 hover:text-primary text-sm transition-colors duration-200" />
             </div>
           </div>
         </div>

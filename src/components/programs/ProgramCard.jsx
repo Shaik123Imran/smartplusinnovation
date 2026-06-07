@@ -42,6 +42,7 @@ function ProgramCard({ program, compact = false }) {
   const courseSlug = program.slug || program.id
   const detailPath = PROGRAM_ROUTES.detail(courseSlug)
   const imageFile =
+    program.thumbnail ||
     program.imageFile ||
     (program.image?.includes('.') ? program.image : program.image ? `${program.image}.jpg` : null)
   const imageSrc = imageFile && showImage ? `/program-images/${imageFile}` : null
@@ -57,7 +58,7 @@ function ProgramCard({ program, compact = false }) {
   }
 
   return (
-    <article className="group relative flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-6 lg:p-7 shadow-sm hover:shadow-2xl hover:border-primary/20 transition-all duration-500 hover:-translate-y-1 overflow-hidden">
+    <article className="group relative flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-6 lg:p-7 shadow-sm hover:shadow-2xl hover:shadow-primary/10 hover:shadow-secondary/5 hover:border-primary/20 transition-all duration-500 hover:-translate-y-1 overflow-hidden">
       <div
         className={`absolute top-0 right-0 w-36 h-36 bg-gradient-to-br ${theme.gradient} rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
         aria-hidden
@@ -65,19 +66,20 @@ function ProgramCard({ program, compact = false }) {
 
       <div className="relative flex flex-1 flex-col min-h-0">
         {imageSrc ? (
-          <Link to={detailPath} className="mb-5 block overflow-hidden rounded-xl aspect-[16/9] bg-gradient-to-br from-slate-100 to-slate-50">
+          <Link to={detailPath} className="mb-5 block overflow-hidden rounded-xl bg-gradient-to-br from-slate-100 to-slate-50 relative group/image">
             <img
               src={imageSrc}
               alt={`${program.title} program`}
-              className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               loading="lazy"
               onError={() => setShowImage(false)}
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </Link>
         ) : (
           <Link
             to={detailPath}
-            className={`mb-5 flex aspect-[16/9] items-center justify-center rounded-xl bg-gradient-to-br ${theme.gradient} border border-slate-100`}
+            className={`mb-5 flex aspect-[16/9] items-center justify-center rounded-xl bg-gradient-to-br ${theme.gradient} border border-slate-100 shadow-sm`}
           >
             <div
               className={`w-16 h-16 ${theme.light} rounded-2xl flex items-center justify-center ${theme.text} group-hover:scale-110 transition-transform duration-300`}
@@ -88,7 +90,7 @@ function ProgramCard({ program, compact = false }) {
         )}
 
         <Link to={detailPath} className="block flex-1 min-h-0">
-          <h3 className="text-xl font-bold text-text mb-2 group-hover:text-primary transition-colors line-clamp-2">
+          <h3 className="text-xl font-bold text-text mb-2 group-hover:text-primary group-hover:drop-shadow-sm transition-all line-clamp-2">
             {program.title}
           </h3>
 
@@ -102,7 +104,7 @@ function ProgramCard({ program, compact = false }) {
                 {(program.skills || []).slice(0, 4).map((skill) => (
                   <span
                     key={skill}
-                    className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-text/70"
+                    className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-text/70 hover:bg-primary/10 hover:text-primary transition-colors"
                   >
                     {skill}
                   </span>

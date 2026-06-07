@@ -58,16 +58,16 @@ function Community({ onContactClick }) {
   }
 
   return (
-    <section className="section-block bg-white overflow-hidden">
+    <section className="section-block bg-gradient-to-b from-white via-accent/[0.02] via-emerald/[0.01] to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto flex flex-col gap-10 lg:gap-12">
           <header className="section-header-center mb-0">
-            <span className="section-eyebrow bg-secondary/10 text-secondary">
+            <span className="section-eyebrow bg-gradient-to-r from-accent/10 to-rose/10 text-accent border border-accent/10 shadow-sm">
               Why Choose Us
             </span>
             <h2 className="section-title">
               <span className="section-title-line">Join Our Thriving</span>
-              <span className="section-title-accent bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+              <span className="section-title-accent bg-gradient-to-r from-accent via-rose to-emerald bg-clip-text text-transparent">
                 Learning Community
               </span>
             </h2>
@@ -82,11 +82,11 @@ function Community({ onContactClick }) {
                 key={feature.title}
                 type="button"
                 onClick={() => handleFeatureClick(feature)}
-                className="group text-left w-full min-h-[7.5rem] p-4 sm:p-5 rounded-xl border border-gray-100 bg-white shadow-sm hover:border-primary/15 hover:bg-primary/5 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all duration-300"
+                className="group text-left w-full min-h-[7.5rem] p-5 sm:p-6 rounded-xl bg-white shadow-sm border border-gray-100/80 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/10 hover:shadow-secondary/5 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all duration-300"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors duration-300">
-                    <span className="text-primary group-hover:text-white transition-colors">{feature.icon}</span>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:from-primary group-hover:via-secondary group-hover:to-accent group-hover:shadow-lg group-hover:shadow-primary/25">
+                    <span className="text-primary group-hover:text-white transition-colors duration-300">{feature.icon}</span>
                   </div>
                   <div className="min-w-0 flex-1 space-y-1">
                     <h4 className="font-bold text-text leading-snug group-hover:text-primary transition-colors">
@@ -94,7 +94,7 @@ function Community({ onContactClick }) {
                     </h4>
                     <p className="text-text/60 text-sm leading-relaxed">{feature.description}</p>
                     {feature.cta && (
-                      <p className="text-primary text-xs font-semibold pt-1 opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                      <p className="text-primary text-xs font-semibold pt-1 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-0 group-hover:translate-x-1">
                         {feature.cta} →
                       </p>
                     )}
@@ -105,13 +105,13 @@ function Community({ onContactClick }) {
           </div>
 
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            <Button to="/about" variant="secondary" size="lg">
+            <Button to="/about" variant="secondary" size="lg" className="shadow-lg shadow-secondary/25 hover:shadow-xl hover:shadow-secondary/35 hover:shadow-emerald/20 transition-all duration-300">
               Learn More About Us
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Button>
-            <Button type="button" variant="outline" size="lg" onClick={onContactClick}>
+            <Button type="button" variant="outline" size="lg" onClick={onContactClick} className="hover:shadow-lg hover:shadow-primary/10 transition-all duration-300">
               Contact Us
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

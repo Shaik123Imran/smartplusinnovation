@@ -62,18 +62,18 @@ function RegisterInterestForm({ formId = 'register-interest-form', onSuccess }) 
       }
 
       const courseLabel =
-        COURSE_OPTIONS.find((o) => o.value === formData.courseType)?.label || formData.courseType
+        courseOptions.find((o) => o.value === formData.courseType)?.label || formData.courseType
       openWhatsAppRegistration({ ...formData, courseLabel })
 
       setStatus({
         type: 'success',
-        message: 'Registration submitted! We will reach out to you soon.',
+        message: 'Registration submitted successfully!',
       })
       setFormData(initialFormState)
       setAgree(false)
       onSuccess?.()
     } catch (err) {
-      setStatus({ type: 'error', message: 'Something went wrong. Please try again.' })
+      setStatus({ type: 'error', message: err.response?.data?.message || 'Something went wrong. Please try again.' })
     }
   }
 

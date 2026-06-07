@@ -4,6 +4,29 @@ import NewsletterSubscriber from '../models/NewsletterSubscriber.js'
 import { asyncHandler } from '../utils/asyncHandler.js'
 import { sendContactNotification, sendInterestNotification } from '../services/emailService.js'
 
+const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdIhnHhAjWuzzLYQXXK6xQrYSQEFzDpEbYFe57lOITDAMXeSw/formResponse'
+
+async function submitToGoogleForm(data) {
+  const params = new URLSearchParams({
+    'entry.510307354': data.name || '',
+    'entry.1280008216': data.email || '',
+    'entry.79514962': data.phone || '',
+    'entry.1241231701': data.city || '',
+    'entry.1839725247': data.courseType || '',
+  })
+
+  try {
+    await fetch(GOOGLE_FORM_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString(),
+    })
+  } catch (e) {
+    console.warn('Google Form submission failed:', e.message)
+  }
+}
+
 export const submitContact = asyncHandler(async (req, res) => {
   const { name, email, phone, subject, message, city, source } = req.body
 
@@ -27,7 +50,7 @@ export const submitContact = asyncHandler(async (req, res) => {
 })
 
 export const submitInterest = asyncHandler(async (req, res) => {
-  const { name, email, phone, city, courseType, source } = req.body
+  const { name, email, phone, city, courseType, message, source } = req.body
 
   const existing = await InterestRegistration.findOne({ email, courseType, createdAt: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) } })
   if (existing) {
@@ -41,6 +64,7 @@ export const submitInterest = asyncHandler(async (req, res) => {
     phone,
     city: city || '',
     courseType: courseType || '',
+    message: message || '',
     source: source || 'register-interest',
   })
 
@@ -49,6 +73,8 @@ export const submitInterest = asyncHandler(async (req, res) => {
   } catch (e) {
     console.warn('Interest notification email failed:', e.message)
   }
+
+  submitToGoogleForm(doc)
 
   res.status(201).json({ success: true, message: 'Registration submitted successfully' })
 })

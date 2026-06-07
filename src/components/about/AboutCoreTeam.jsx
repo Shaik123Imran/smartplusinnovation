@@ -15,9 +15,9 @@ function AboutCoreTeam() {
           {coreTeam.map((member) => (
             <article
               key={member.id}
-              className="group bg-white rounded-2xl border border-text/10 p-6 text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="group bg-white rounded-2xl border border-text/10 p-6 text-center shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:scale-105 transition-transform duration-300">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-primary/25 transition-all duration-300">
                 {member.avatar}
               </div>
               <h3 className="text-lg font-bold text-text mb-1">{member.name}</h3>

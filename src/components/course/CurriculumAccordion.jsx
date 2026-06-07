@@ -29,7 +29,7 @@ function DocumentIcon() {
 function LockIcon({ locked }) {
   if (!locked) {
     return (
-      <svg className="w-5 h-5 text-green-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+      <svg className="w-5 h-5 text-emerald shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -54,7 +54,7 @@ function LockIcon({ locked }) {
 function Chevron({ open }) {
   return (
     <svg
-      className={`w-5 h-5 text-neutral-500 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+      className={`w-5 h-5 text-text/40 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -97,9 +97,9 @@ function CurriculumAccordion({ items = [], unlocked = false, isLoggedIn = false,
   return (
     <div className="space-y-3">
       {!unlocked && (
-        <p className="text-sm text-neutral-600 text-center px-4 py-3 rounded-lg border border-neutral-200 bg-neutral-50">
-          Preview the full syllabus below. Chapters are{' '}
-          <span className="font-semibold text-neutral-900">locked</span> until you enroll.
+          <p className="text-sm text-text/60 text-center px-4 py-3 rounded-lg border border-primary/10 bg-primary/5">
+            Preview the full syllabus below. Chapters are{' '}
+            <span className="font-semibold text-text">locked</span> until you enroll.
         </p>
       )}
 
@@ -112,7 +112,7 @@ function CurriculumAccordion({ items = [], unlocked = false, isLoggedIn = false,
           <button
             type="button"
             onClick={() => onLockedChapter?.()}
-            className="shrink-0 font-semibold text-neutral-900 underline underline-offset-2 hover:no-underline"
+            className="shrink-0 font-semibold text-amber-900 underline underline-offset-2 hover:no-underline"
           >
             {lockedCtaLabel} →
           </button>
@@ -122,14 +122,14 @@ function CurriculumAccordion({ items = [], unlocked = false, isLoggedIn = false,
       {months.map((month, monthIndex) => {
         const monthOpen = openMonthIndex === monthIndex
         return (
-          <div key={month.title} className="rounded-lg border border-neutral-200 bg-white overflow-hidden">
+          <div key={month.title} className="rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md hover:border-primary/20 transition-all duration-300">
             <button
               type="button"
               onClick={() => setOpenMonthIndex(monthOpen ? -1 : monthIndex)}
-              className="w-full flex items-center justify-between gap-4 px-4 sm:px-5 py-4 text-left hover:bg-neutral-50 transition-colors"
+              className="w-full flex items-center justify-between gap-4 px-4 sm:px-5 py-4 text-left hover:bg-primary/5 transition-colors"
               aria-expanded={monthOpen}
             >
-              <span className="font-bold text-neutral-900 text-sm sm:text-base pr-2">{month.title}</span>
+              <span className="font-bold text-text text-sm sm:text-base pr-2">{month.title}</span>
               <Chevron open={monthOpen} />
             </button>
 
@@ -138,24 +138,24 @@ function CurriculumAccordion({ items = [], unlocked = false, isLoggedIn = false,
                 monthOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
               }`}
             >
-              <div className="overflow-hidden border-t border-neutral-100">
-                <div className="p-3 sm:p-4 space-y-2 bg-neutral-50/50">
+              <div className="overflow-hidden border-t border-gray-100">
+                <div className="p-3 sm:p-4 space-y-2 bg-primary/[0.02]">
                   {month.weeks.map((week) => {
                     const weekOpen = openWeekId === week.id
                     return (
                       <div
                         key={week.id}
-                        className="rounded-lg border border-neutral-200 bg-white overflow-hidden"
+                        className="rounded-lg border border-gray-200 bg-white overflow-hidden"
                       >
                         <button
                           type="button"
                           onClick={() => setOpenWeekId(weekOpen ? null : week.id)}
                           className={`w-full flex items-center justify-between gap-4 px-4 py-3.5 text-left transition-colors ${
-                            weekOpen ? 'bg-neutral-50' : 'hover:bg-neutral-50'
+                            weekOpen ? 'bg-primary/5' : 'hover:bg-primary/5'
                           }`}
                           aria-expanded={weekOpen}
                         >
-                          <span className="font-semibold text-neutral-900 text-sm sm:text-base pr-2">
+                          <span className="font-semibold text-text text-sm sm:text-base pr-2">
                             {week.title}
                           </span>
                           <Chevron open={weekOpen} />
@@ -166,8 +166,8 @@ function CurriculumAccordion({ items = [], unlocked = false, isLoggedIn = false,
                             weekOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                           }`}
                         >
-                          <div className="overflow-hidden border-t border-neutral-100">
-                            <ul className="divide-y divide-neutral-100">
+                          <div className="overflow-hidden border-t border-gray-100">
+                            <ul className="divide-y divide-gray-100">
                               {(week.topics || []).map((topic, topicIndex) => {
                                 const chapterKey = `${week.id}-ch-${topicIndex}`
                                 const chapterOpen = openChapterKey === chapterKey
@@ -179,31 +179,31 @@ function CurriculumAccordion({ items = [], unlocked = false, isLoggedIn = false,
                                       type="button"
                                       onClick={() => handleChapterClick(chapterKey)}
                                       className={`w-full flex items-center gap-3 px-4 py-3.5 text-left transition-colors ${
-                                        locked
-                                          ? 'hover:bg-neutral-50 cursor-pointer'
-                                          : chapterOpen
-                                            ? 'bg-neutral-50'
-                                            : 'hover:bg-neutral-50'
+                                          locked
+                                            ? 'hover:bg-primary/5 cursor-pointer'
+                                            : chapterOpen
+                                              ? 'bg-primary/5'
+                                              : 'hover:bg-primary/5'
                                       }`}
                                       aria-expanded={chapterOpen && !locked}
                                     >
                                       <DocumentIcon />
                                       <span
-                                        className={`flex-1 text-sm sm:text-base ${
-                                          locked ? 'text-neutral-500' : 'text-neutral-800'
-                                        }`}
+                                          className={`flex-1 text-sm sm:text-base ${
+                                            locked ? 'text-text/50' : 'text-text'
+                                          }`}
                                       >
                                         {topic}
                                       </span>
                                       <LockIcon locked={locked} />
                                     </button>
 
-                                    {chapterOpen && unlocked && (
-                                      <div className="px-4 pb-4 pl-12 pr-4 border-t border-neutral-50 bg-white">
-                                        <p className="text-sm text-neutral-600 leading-relaxed">
+                                      {chapterOpen && unlocked && (
+                                      <div className="px-4 pb-4 pl-12 pr-4 border-t border-gray-50 bg-white">
+                                        <p className="text-sm text-text/60 leading-relaxed">
                                           This chapter is unlocked. Access lesson materials, assignments, and
                                           recordings from your{' '}
-                                          <span className="font-semibold text-neutral-900">Dashboard</span> after
+                                          <span className="font-semibold text-text">Dashboard</span> after
                                           the batch starts.
                                         </p>
                                       </div>

@@ -21,7 +21,7 @@ function Input({
         )}
         <input
           type={type}
-          className={`w-full px-4 py-3 rounded-xl border border-text/10 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none bg-white ${
+          className={`w-full px-4 py-3 rounded-xl border border-text/10 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-lg focus:shadow-primary/10 transition-all duration-200 outline-none bg-white ${
             icon ? 'pl-12' : ''
           } ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''}`}
           {...props}
@@ -50,7 +50,7 @@ function Textarea({
       )}
       <textarea
         rows={rows}
-        className={`w-full px-4 py-3 rounded-xl border border-text/10 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none bg-white resize-none ${
+        className={`w-full px-4 py-3 rounded-xl border border-text/10 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-lg focus:shadow-primary/10 transition-all duration-200 outline-none bg-white resize-none ${
           error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''
         }`}
         {...props}
@@ -77,7 +77,7 @@ function Select({
         </label>
       )}
       <select
-        className={`w-full px-4 py-3 rounded-xl border border-text/10 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none bg-white ${
+        className={`w-full px-4 py-3 rounded-xl border border-text/10 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-lg focus:shadow-primary/10 transition-all duration-200 outline-none bg-white ${
           error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''
         }`}
         {...props}

@@ -15,9 +15,9 @@ function AboutMissionSection() {
           {missionPoints.map((point) => (
             <article
               key={point.id}
-              className="group relative bg-white rounded-2xl border border-text/10 p-6 lg:p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="group relative bg-white rounded-2xl border border-text/10 p-6 lg:p-7 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-secondary/15 flex items-center justify-center text-primary mb-5 group-hover:from-primary group-hover:to-secondary group-hover:text-white transition-all duration-300">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 via-secondary/15 to-emerald/15 flex items-center justify-center text-primary mb-5 group-hover:from-primary group-hover:via-secondary group-hover:to-accent group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-lg group-hover:shadow-primary/25">
                 {aboutMissionIcons[point.icon]}
               </div>
               <h3 className="text-lg font-bold text-text mb-3">{point.title}</h3>

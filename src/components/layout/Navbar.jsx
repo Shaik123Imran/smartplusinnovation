@@ -37,7 +37,7 @@ function Navbar() {
   }
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white'}`}>
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-primary/5' : 'bg-white'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 lg:h-20">
           <div className="flex items-center">
@@ -51,13 +51,13 @@ function Navbar() {
               <Link
                 key={link.name}
                 to={link.href}
-                className={`font-medium transition-colors duration-200 relative group ${
-                  location.pathname === link.href ? 'text-primary' : 'text-text/70 hover:text-primary'
+                className={`font-medium transition-all duration-200 relative group ${
+                  location.pathname === link.href ? 'text-primary after:bg-gradient-to-r after:from-primary after:to-secondary' : 'text-text/70 hover:text-primary'
                 }`}
               >
                 {link.name}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-200 ${
-                  location.pathname === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                <span className={`absolute -bottom-1 left-0 h-0.5 transition-all duration-200 ${
+                  location.pathname === link.href ? 'w-full bg-gradient-to-r from-primary to-secondary' : 'w-0 bg-primary group-hover:w-full'
                 }`}></span>
               </Link>
             ))}
@@ -104,10 +104,10 @@ function Navbar() {
               </div>
             ) : (
               <>
-                <Link to="/login" className="px-4 py-2 text-text/70 font-medium hover:text-primary transition-colors">
+                <Link to="/login" className="px-4 py-2 text-text/70 font-medium hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
                   Login
                 </Link>
-                <Link to="/register" className="px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-full hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 hover:-translate-y-0.5">
+                <Link to="/register" className="px-6 py-2.5 bg-gradient-to-r from-primary via-secondary to-accent text-white font-semibold rounded-full hover:shadow-xl hover:shadow-primary/30 hover:shadow-secondary/20 transition-all duration-300 hover:-translate-y-0.5">
                   Join Now
                 </Link>
               </>
@@ -117,7 +117,7 @@ function Navbar() {
           <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-text hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-lg text-text hover:bg-primary/5 transition-colors"
             >
               {isOpen ? (
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,7 +172,7 @@ function Navbar() {
                 </Link>
                 <Link
                   to="/register"
-                  className="mx-4 mt-2 px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-full text-center hover:shadow-lg transition-all"
+                  className="mx-4 mt-2 px-6 py-2.5 bg-gradient-to-r from-primary via-secondary to-accent text-white font-semibold rounded-full text-center hover:shadow-xl hover:shadow-primary/25 transition-all"
                 >
                   Join Now
                 </Link>

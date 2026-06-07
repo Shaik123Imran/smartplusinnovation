@@ -9,7 +9,7 @@ function Card({
   ...props 
 }) {
   const baseClasses = `bg-white rounded-2xl p-6 lg:p-8 shadow-sm border border-transparent ${
-    hover ? 'hover:shadow-xl hover:-translate-y-2 hover:border-primary/20 transition-all duration-300' : ''
+    hover ? 'hover:shadow-2xl hover:-translate-y-2 hover:border-primary/20 hover:shadow-primary/10 transition-all duration-300' : ''
   } ${className}`
 
   if (to) {

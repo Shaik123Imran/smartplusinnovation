@@ -56,7 +56,7 @@ function SearchBar({
           value={value}
           onChange={handleChange}
           placeholder={placeholder}
-          className="w-full pl-12 pr-10 py-3 rounded-xl border border-text/10 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none bg-white"
+          className="w-full pl-12 pr-10 py-3 rounded-xl border border-text/10 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:shadow-lg focus:shadow-primary/10 transition-all duration-200 outline-none bg-white"
         />
         
         {value && (

@@ -71,35 +71,7 @@ function Pricing() {
             ))}
           </div>
 
-          {/* FAQ Section */}
-          <div className="mt-16 max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-text text-center mb-8">Pricing FAQ</h2>
-            <div className="space-y-4">
-              {[
-                {
-                  q: 'Can I switch plans later?',
-                  a: 'Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately for upgrades.'
-                },
-                {
-                  q: 'Is there a free trial?',
-                  a: 'Yes, we offer a 7-day free trial for the Professional plan. No credit card required to start.'
-                },
-                {
-                  q: 'What payment methods do you accept?',
-                  a: 'We accept all major credit cards, PayPal, and bank transfers for Enterprise plans.'
-                },
-                {
-                  q: 'Can I get a refund?',
-                  a: 'We offer a 30-day money-back guarantee for all paid plans if you\'re not satisfied.'
-                }
-              ].map((item, index) => (
-                <div key={index} className="bg-white rounded-xl p-6 shadow-sm">
-                  <h4 className="font-semibold text-text mb-2">{item.q}</h4>
-                  <p className="text-text/60">{item.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+
         </div>
       </section>
     </Layout>

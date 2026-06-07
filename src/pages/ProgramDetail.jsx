@@ -80,7 +80,7 @@ function ProgramDetail() {
   }
 
   const enrolled = user && isEnrolled(program.id)
-  const detailImageFile = program.imageFile || (program.image ? `${program.image}.jpg` : null)
+  const detailImageFile = program.bannerImage || program.heroImage || program.imageFile || (program.image ? `${program.image}.jpg` : null)
   const detailImageSrc = detailImageFile ? `/program-images/${detailImageFile}` : null
 
   const handleEnrollClick = () => {
@@ -93,7 +93,7 @@ function ProgramDetail() {
 
   return (
     <Layout>
-      <section className="py-12 lg:py-20 bg-gradient-to-b from-background to-white">
+      <section className="py-12 lg:py-20 bg-gradient-to-b from-background via-white to-secondary/[0.02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
             <div className="lg:col-span-2 space-y-8">
@@ -106,13 +106,14 @@ function ProgramDetail() {
                 </Button>
 
                 {detailImageSrc && (
-                  <div className="mb-5 overflow-hidden rounded-2xl aspect-[16/9] bg-gray-100 shadow-sm">
+                  <div className="mb-6 overflow-hidden rounded-2xl aspect-[16/9] bg-gray-100 shadow-md relative group">
                     <img
                       src={detailImageSrc}
                       alt={`${program.title} banner`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                       loading="lazy"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   </div>
                 )}
 
@@ -172,7 +173,7 @@ function ProgramDetail() {
             </div>
 
             <div className="lg:col-span-1">
-              <div className="sticky top-24 bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
+              <div className="sticky top-24 bg-white rounded-2xl shadow-xl shadow-primary/5 p-6 border border-gray-100">
                 {enrolled ? (
                   <p className="text-text/60 text-sm py-2 mb-4">You are enrolled in this program.</p>
                 ) : (

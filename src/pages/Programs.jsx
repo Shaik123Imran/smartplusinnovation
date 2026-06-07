@@ -57,7 +57,7 @@ function Programs() {
       <section className="page-hero">
         <div className="page-hero-inner">
           <div className="section-header-center mb-0">
-            <span className="section-eyebrow bg-primary/10 text-primary">
+            <span className="section-eyebrow bg-gradient-to-r from-primary/10 to-secondary/10 text-primary">
               {fastTrackOnly ? 'Fast Track' : 'All Programs'}
             </span>
             <h1 className="page-title">
@@ -90,7 +90,7 @@ function Programs() {
               </p>
               <Link
                 to="/programs"
-                className="text-sm font-semibold text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/30 rounded"
+                className="text-sm font-semibold text-primary hover:text-secondary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/30 rounded transition-colors"
               >
                 View all programs
               </Link>

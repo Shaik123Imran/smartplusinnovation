@@ -25,8 +25,14 @@ function Newsletter() {
   }
 
   return (
-    <section className="section-block bg-gradient-to-r from-primary to-secondary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="section-block bg-gradient-to-r from-primary via-secondary to-accent relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-emerald/15 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 w-56 h-56 bg-rose/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-[1.15] mb-4">
             Stay Updated with Latest Tech Trends
@@ -41,7 +47,7 @@ function Newsletter() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
-              className="flex-1 px-6 py-4 rounded-full text-text focus:outline-none focus:ring-4 focus:ring-white/30"
+              className="flex-1 px-6 py-4 rounded-full text-text focus:outline-none focus:ring-4 focus:ring-white/40 shadow-lg shadow-black/10"
               required
             />
             <Button 
@@ -49,20 +55,20 @@ function Newsletter() {
               variant="outline" 
               size="lg"
               loading={status === 'loading'}
-              className="bg-white text-primary border-white hover:bg-white/90 hover:text-primary"
+              className="bg-white text-primary border-white hover:bg-white/95 hover:text-primary shadow-lg shadow-black/10 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
             >
               Subscribe
             </Button>
           </form>
 
           {status === 'success' && (
-            <p className="mt-4 text-white font-medium">
+            <p className="mt-4 text-white font-medium bg-white/10 rounded-lg px-4 py-2 inline-block backdrop-blur-sm">
               🎉 Thank you for subscribing! Check your inbox for confirmation.
             </p>
           )}
           {status === 'error' && (
-            <p className="mt-4 text-white/80">
-              You're already subscribed or something went wrong. Please try again.
+            <p className="mt-4 text-white/80 bg-white/10 rounded-lg px-4 py-2 inline-block backdrop-blur-sm">
+              You&apos;re already subscribed or something went wrong. Please try again.
             </p>
           )}
 

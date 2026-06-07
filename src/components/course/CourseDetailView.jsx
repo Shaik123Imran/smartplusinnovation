@@ -15,10 +15,10 @@ function SectionHeading({ eyebrow, title, subtitle }) {
   return (
     <div className="mb-10 lg:mb-12 text-center max-w-3xl mx-auto">
       {eyebrow && (
-        <p className="text-xs font-semibold uppercase tracking-widest text-neutral-500 mb-2">{eyebrow}</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-text/50 mb-2">{eyebrow}</p>
       )}
-      <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900">{title}</h2>
-      {subtitle && <p className="mt-3 text-neutral-600 leading-relaxed">{subtitle}</p>}
+      <h2 className="text-2xl sm:text-3xl font-bold text-text">{title}</h2>
+      {subtitle && <p className="mt-3 text-text/60 leading-relaxed">{subtitle}</p>}
     </div>
   )
 }
@@ -46,7 +46,11 @@ function CourseDetailView({ program }) {
   const technologiesSection = program.technologiesSection || {}
   const testimonials = program.courseTestimonials || program.testimonials || []
   const heroImageFile =
-    hero.imageFile || program.imageFile || (program.image ? `${program.image}.jpg` : null)
+    hero.imageFile ||
+    program.heroImage ||
+    program.bannerImage ||
+    program.imageFile ||
+    (program.image ? `${program.image}.jpg` : null)
   const heroImageSrc = heroImageFile ? `/program-images/${heroImageFile}` : null
 
   usePageMeta({
@@ -88,13 +92,13 @@ function CourseDetailView({ program }) {
     program.whatsappMessage || `Hello EduGram Technologies, I am interested in ${program.title}.`
 
   return (
-    <div className="bg-white text-neutral-900">
+    <div className="bg-white text-text">
       {/* Hero */}
-      <section className="border-b border-neutral-200 py-12 lg:py-16">
+      <section className="border-b border-gray-100 py-12 lg:py-16 bg-gradient-to-b from-white via-primary/[0.02] to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             to="/programs"
-            className="inline-flex items-center gap-2 text-neutral-600 hover:text-neutral-900 text-sm font-medium mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-text/60 hover:text-primary text-sm font-medium mb-8 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -105,21 +109,21 @@ function CourseDetailView({ program }) {
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div className="space-y-5">
               {hero.badge && (
-                <span className="inline-block px-3 py-1 rounded-md border border-neutral-300 text-xs font-semibold text-neutral-700 uppercase tracking-wide">
+                <span className="inline-block px-3 py-1 rounded-md border border-primary/20 bg-primary/5 text-xs font-semibold text-primary uppercase tracking-wide">
                   {hero.badge}
                 </span>
               )}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-neutral-900">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-text">
                 {hero.title || program.title}
               </h1>
-              <p className="text-lg sm:text-xl text-neutral-800 font-medium">
+              <p className="text-lg sm:text-xl text-text/80 font-medium">
                 {hero.subtitle || program.shortDescription}
               </p>
-              <p className="text-neutral-600 leading-relaxed max-w-xl">
+              <p className="text-text/60 leading-relaxed max-w-xl">
                 {hero.tagline || program.description}
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600">
+              <div className="flex flex-wrap items-center gap-4 text-sm text-text/60">
                 <span className="flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -132,7 +136,7 @@ function CourseDetailView({ program }) {
                   </svg>
                   {program.level}
                 </span>
-                <span className="px-2.5 py-0.5 rounded border border-neutral-300 text-neutral-700 capitalize">
+                <span className="px-2.5 py-0.5 rounded border border-primary/20 text-primary bg-primary/5 capitalize">
                   {program.category?.replace(/-/g, ' ')}
                 </span>
               </div>
@@ -162,25 +166,26 @@ function CourseDetailView({ program }) {
               </div>
             </div>
 
-            <div className="relative">
+            <div className="relative group">
               {heroImageSrc ? (
-                <div className="rounded-lg overflow-hidden border border-neutral-200">
+                <div className="rounded-xl overflow-hidden border border-gray-200 shadow-lg shadow-primary/10 relative">
                   <img
                     src={heroImageSrc}
                     alt={program.title}
-                    className="w-full h-auto object-cover"
+                    className="w-full h-full object-cover aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                     loading="lazy"
                     width={640}
-                    height={360}
+                    height={480}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
               ) : (
-                <div className="rounded-lg border border-neutral-200 p-6">
+                <div className="rounded-lg border border-gray-200 bg-gradient-to-br from-primary/[0.02] to-secondary/[0.02] p-6">
                   <div className="flex flex-wrap gap-2">
                     {(program.technologies || []).slice(0, 8).map((tech) => (
                       <span
                         key={tech.name}
-                        className="px-3 py-1.5 rounded border border-neutral-300 text-sm font-medium text-neutral-800"
+                        className="px-3 py-1.5 rounded border border-primary/20 text-sm font-medium text-text bg-white/50"
                       >
                         {tech.name}
                       </span>
@@ -194,7 +199,7 @@ function CourseDetailView({ program }) {
       </section>
 
       {/* Syllabus — 12 weeks (before About) */}
-      <section id="curriculum" className="py-14 lg:py-16 border-b border-neutral-100">
+      <section id="curriculum" className="py-14 lg:py-16 border-b border-gray-100 bg-gradient-to-b from-white to-primary/[0.01]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Curriculum"
@@ -211,7 +216,7 @@ function CourseDetailView({ program }) {
       </section>
 
       {/* About */}
-      <section id="about-program" className="py-14 lg:py-16 border-b border-neutral-100">
+      <section id="about-program" className="py-14 lg:py-16 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="About the Program"
@@ -220,9 +225,9 @@ function CourseDetailView({ program }) {
           />
           <div className="grid md:grid-cols-2 gap-6">
             {(about.sections || []).map((block) => (
-              <div key={block.title} className="rounded-lg border border-neutral-200 p-6 lg:p-7">
-                <h3 className="text-lg font-bold text-neutral-900 mb-3">{block.title}</h3>
-                <p className="text-neutral-600 leading-relaxed text-sm sm:text-base">{block.content}</p>
+              <div key={block.title} className="rounded-lg border border-gray-200 bg-white p-6 lg:p-7 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 transition-all duration-300">
+                <h3 className="text-lg font-bold text-text mb-3">{block.title}</h3>
+                <p className="text-text/60 leading-relaxed text-sm sm:text-base">{block.content}</p>
               </div>
             ))}
           </div>
@@ -230,14 +235,14 @@ function CourseDetailView({ program }) {
       </section>
 
       {/* Skills */}
-      <section className="py-14 lg:py-16 border-b border-neutral-100">
+      <section className="py-14 lg:py-16 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Skills Covered" title="What You Will Master" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {(program.skillsCovered || []).map((skill) => (
-              <div key={skill.name} className="rounded-lg border border-neutral-200 p-5">
-                <h3 className="font-bold text-neutral-900 mb-2">{skill.name}</h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">{skill.description}</p>
+              <div key={skill.name} className="rounded-lg border border-gray-200 bg-white p-5 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 transition-all duration-300">
+                <h3 className="font-bold text-text mb-2">{skill.name}</h3>
+                <p className="text-sm text-text/60 leading-relaxed">{skill.description}</p>
               </div>
             ))}
           </div>
@@ -246,7 +251,7 @@ function CourseDetailView({ program }) {
 
       {/* Training & activities */}
       {trainingActivities.length > 0 && (
-        <section className="py-14 lg:py-16 border-b border-neutral-100">
+        <section className="py-14 lg:py-16 border-b border-gray-100 bg-gradient-to-b from-primary/[0.01] to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeading
               eyebrow="Interactive Training"
@@ -257,10 +262,10 @@ function CourseDetailView({ program }) {
               {trainingActivities.map((activity) => (
                 <div
                   key={activity.name}
-                  className="rounded-lg border border-neutral-200 p-5 hover:shadow-md hover:border-indigo-200 transition-all duration-300"
+                  className="rounded-lg border border-gray-200 bg-white p-5 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 transition-all duration-300"
                 >
-                  <h3 className="font-bold text-neutral-900 mb-2">{activity.name}</h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{activity.description}</p>
+                  <h3 className="font-bold text-text mb-2">{activity.name}</h3>
+                  <p className="text-sm text-text/60 leading-relaxed">{activity.description}</p>
                 </div>
               ))}
             </div>
@@ -270,7 +275,7 @@ function CourseDetailView({ program }) {
 
       {/* Real-time projects */}
       {realTimeProjects.length > 0 && (
-        <section className="py-14 lg:py-16 border-b border-neutral-100">
+        <section className="py-14 lg:py-16 border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeading
               eyebrow="Hands-On Learning"
@@ -279,9 +284,9 @@ function CourseDetailView({ program }) {
             />
             <div className="grid sm:grid-cols-2 gap-5">
               {realTimeProjects.map((project) => (
-                <div key={project.title} className="rounded-lg border border-neutral-200 p-6">
-                  <h3 className="font-bold text-neutral-900 mb-2">{project.title}</h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{project.description}</p>
+                <div key={project.title} className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 transition-all duration-300">
+                  <h3 className="font-bold text-text mb-2">{project.title}</h3>
+                  <p className="text-sm text-text/60 leading-relaxed">{project.description}</p>
                 </div>
               ))}
             </div>
@@ -290,7 +295,7 @@ function CourseDetailView({ program }) {
       )}
 
       {/* Tech stack */}
-      <section className="py-14 lg:py-16 border-b border-neutral-100">
+      <section className="py-14 lg:py-16 border-b border-gray-100 bg-gradient-to-b from-white to-secondary/[0.01]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow={technologiesSection.eyebrow || 'Tools & Platforms'}
@@ -301,7 +306,7 @@ function CourseDetailView({ program }) {
             {(program.technologies || []).map((tech) => (
               <span
                 key={tech.name}
-                className="px-4 py-2 rounded-md border border-neutral-300 text-neutral-900 font-medium text-sm"
+                className="px-4 py-2 rounded-md border border-primary/20 bg-white text-text font-medium text-sm hover:bg-primary/5 hover:border-primary/30 transition-all"
               >
                 {tech.name}
               </span>
@@ -311,29 +316,29 @@ function CourseDetailView({ program }) {
       </section>
 
       {/* Outcomes & Features */}
-      <section className="py-14 lg:py-16 border-b border-neutral-100">
+      <section className="py-14 lg:py-16 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
             <div>
-              <h2 className="text-2xl font-bold text-neutral-900 mb-6">Learning Outcomes</h2>
+              <h2 className="text-2xl font-bold text-text mb-6">Learning Outcomes</h2>
               <ul className="space-y-3">
                 {(program.learningOutcomes || []).map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-neutral-700">
-                    <span className="text-neutral-900 font-bold mt-0.5">•</span>
+                  <li key={item} className="flex items-start gap-3 text-text/70">
+                    <span className="text-primary font-bold mt-0.5">•</span>
                     <span className="leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-neutral-900 mb-6">Program Features</h2>
+              <h2 className="text-2xl font-bold text-text mb-6">Program Features</h2>
               <ul className="space-y-2">
                 {(program.programFeatures || program.features || []).map((feature) => (
                   <li
                     key={feature}
-                    className="flex items-start gap-2 text-neutral-700 border-b border-neutral-100 pb-2 last:border-0"
+                    className="flex items-start gap-2 text-text/70 border-b border-gray-100 pb-2 last:border-0"
                   >
-                    <span className="text-neutral-900 font-bold">✓</span>
+                    <span className="text-emerald font-bold">✓</span>
                     <span className="text-sm leading-relaxed">{feature}</span>
                   </li>
                 ))}
@@ -344,14 +349,14 @@ function CourseDetailView({ program }) {
       </section>
 
       {/* Careers */}
-      <section className="py-14 lg:py-16 border-b border-neutral-100">
+      <section className="py-14 lg:py-16 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Career Path" title="Roles You Can Pursue" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {(program.careerRoles || []).map((role) => (
-              <div key={role.title} className="rounded-lg border border-neutral-200 p-6">
-                <h3 className="font-bold text-neutral-900 mb-2">{role.title}</h3>
-                <p className="text-sm text-neutral-600">{role.description}</p>
+              <div key={role.title} className="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 transition-all duration-300">
+                <h3 className="font-bold text-text mb-2">{role.title}</h3>
+                <p className="text-sm text-text/60">{role.description}</p>
               </div>
             ))}
           </div>
@@ -360,7 +365,7 @@ function CourseDetailView({ program }) {
 
       {/* Portfolio */}
       {portfolio.length > 0 && (
-        <section className="py-14 lg:py-16 border-b border-neutral-100">
+        <section className="py-14 lg:py-16 border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeading
               eyebrow="Portfolio"
@@ -377,7 +382,7 @@ function CourseDetailView({ program }) {
 
       {/* Business / pitch showcase */}
       {businessShowcase.length > 0 && (
-        <section className="py-14 lg:py-16 border-b border-neutral-100">
+        <section className="py-14 lg:py-16 border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeading
               eyebrow="Showcase"
@@ -390,12 +395,12 @@ function CourseDetailView({ program }) {
       )}
 
       {/* CTA */}
-      <section id="enroll-cta" className="py-14 lg:py-16 border-b border-neutral-100">
+      <section id="enroll-cta" className="py-14 lg:py-16 border-b border-gray-100 bg-gradient-to-b from-white to-accent/[0.02]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-neutral-900 mb-4">
+          <h2 className="text-3xl font-bold text-text mb-4">
             {cta.headline || 'Start Your Career Journey'}
           </h2>
-          <p className="text-neutral-600 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-text/60 text-lg mb-8 max-w-2xl mx-auto">
             {cta.subline ||
               `Take the next step with ${program.title}. Book counseling or enroll today with EduGram Technologies.`}
           </p>
@@ -426,25 +431,25 @@ function CourseDetailView({ program }) {
       </section>
 
       {/* FAQ */}
-      <section className="py-14 lg:py-16 border-b border-neutral-100">
+      <section className="py-14 lg:py-16 border-b border-gray-100">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="FAQ" title="Frequently Asked Questions" />
           <div className="space-y-2">
             {(program.faqs || []).map((faq, index) => (
-              <div key={faq.question} className="rounded-lg border border-neutral-200 overflow-hidden">
+              <div key={faq.question} className="rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md hover:border-primary/20 transition-all duration-300">
                 <button
                   type="button"
                   onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
-                  className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-neutral-900 hover:bg-neutral-50 transition-colors"
+                  className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-text hover:bg-primary/5 transition-colors"
                   aria-expanded={openFaq === index}
                 >
                   {faq.question}
-                  <span className="text-neutral-500 text-xl leading-none">
+                  <span className="text-primary text-xl leading-none">
                     {openFaq === index ? '−' : '+'}
                   </span>
                 </button>
                 {openFaq === index && (
-                  <p className="px-5 pb-4 text-neutral-600 text-sm leading-relaxed border-t border-neutral-100 pt-3">
+                  <p className="px-5 pb-4 text-text/60 text-sm leading-relaxed border-t border-gray-100 pt-3">
                     {faq.answer}
                   </p>
                 )}
@@ -459,7 +464,7 @@ function CourseDetailView({ program }) {
         <section className="py-14 lg:py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <SectionHeading eyebrow="Success Stories" title="What Learners Say" />
-            <div className="relative rounded-lg border border-neutral-200 p-8 sm:p-10 min-h-[220px]">
+            <div className="relative rounded-lg border border-gray-200 bg-white p-8 sm:p-10 min-h-[220px] shadow-sm">
               {testimonials.map((t, i) => (
                 <div
                   key={t.name}
@@ -468,14 +473,14 @@ function CourseDetailView({ program }) {
                   }`}
                   aria-hidden={i !== testimonialIndex}
                 >
-                  <p className="text-lg text-neutral-700 leading-relaxed mb-6">&ldquo;{t.content}&rdquo;</p>
+                  <p className="text-lg text-text/70 leading-relaxed mb-6">&ldquo;{t.content}&rdquo;</p>
                   <div className="flex items-center gap-4">
-                    <div className="w-11 h-11 rounded-full border border-neutral-300 flex items-center justify-center text-neutral-900 font-bold text-sm">
+                    <div className="w-11 h-11 rounded-full border border-primary/20 bg-primary/5 flex items-center justify-center text-primary font-bold text-sm">
                       {t.image || t.name?.charAt(0)}
                     </div>
                     <div>
-                      <p className="font-bold text-neutral-900">{t.name}</p>
-                      <p className="text-sm text-neutral-600">
+                      <p className="font-bold text-text">{t.name}</p>
+                      <p className="text-sm text-text/60">
                         {t.role}
                         {t.company ? ` · ${t.company}` : ''}
                       </p>
@@ -491,7 +496,7 @@ function CourseDetailView({ program }) {
                       type="button"
                       onClick={() => setTestimonialIndex(i)}
                       className={`h-2 rounded-full transition-all ${
-                        i === testimonialIndex ? 'w-8 bg-neutral-900' : 'w-2 bg-neutral-300'
+                        i === testimonialIndex ? 'w-8 bg-gradient-to-r from-primary to-secondary' : 'w-2 bg-gray-300'
                       }`}
                       aria-label={`View testimonial ${i + 1}`}
                     />
@@ -504,7 +509,7 @@ function CourseDetailView({ program }) {
       )}
 
       {/* Sticky enroll bar mobile */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white border-t border-neutral-200 p-3 shadow-lg flex gap-2">
+      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white border-t border-gray-200 p-3 shadow-lg shadow-primary/10 flex gap-2">
         <Button type="button" onClick={() => openWhatsAppChat(waMessage)} variant="outline" className="flex-1 text-sm py-2.5">
           Counselor
         </Button>

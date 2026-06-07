@@ -1,44 +1,33 @@
-import { useState } from 'react'
-
 const announcements = [
-  "🚀 New courses launching this month! Enroll now and get 20% off",
-  "⭐ Join 10,000+ students already learning with us",
-  "🎯 Limited time offer: Free career consultation for new members",
-  "💡 Transform your skills with industry-expert mentors",
-  "🔥 Summer batch registrations now open - Reserve your spot!",
+  'Admissions Open – Reserve Your Spot!',
+  'New Courses Launching This Month!',
+  'Enroll Now & Get 20% Off',
+  'Join 10,000+ Students Already Learning With Us',
+  'Placement Assistance & Career Guidance Included',
+  'Limited Seats Available – Enrol Before Deadline',
+  'Industry-Recognized Certifications',
+  'Learn from Experienced Industry Professionals',
+  'Become Job-Ready with Hands-On Training',
+  'Get Up to 20% Early Enrollment Discount',
 ]
 
 function TopAnnouncementBar() {
-  const [isVisible, setIsVisible] = useState(true)
-
-  if (!isVisible) return null
-
-  const duplicatedAnnouncements = [...announcements, ...announcements]
+  const items = [...announcements, ...announcements]
 
   return (
-    <div className="bg-gradient-to-r from-primary via-secondary to-accent text-white py-2 overflow-hidden relative">
-      <button 
-        onClick={() => setIsVisible(false)}
-        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-1 hover:bg-white/20 rounded transition-colors"
-        aria-label="Close announcement"
-      >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-      
-      <div className="relative flex">
-        <div className="flex animate-scroll whitespace-nowrap">
-          {duplicatedAnnouncements.map((announcement, index) => (
-            <span 
-              key={index} 
-              className="mx-8 text-sm font-medium inline-flex items-center"
-            >
-              {announcement}
-              <span className="mx-8 text-white/50">•</span>
-            </span>
-          ))}
-        </div>
+    <div className="relative w-full overflow-hidden bg-gradient-to-r from-primary via-secondary to-emerald shadow-lg shadow-primary/20">
+      <div className="flex animate-scroll whitespace-nowrap py-2.5">
+        {items.map((msg, i) => (
+          <span
+            key={i}
+            className="mx-10 inline-flex items-center gap-2 text-white/90 text-sm font-medium tracking-wide"
+          >
+            <svg className="w-3.5 h-3.5 flex-shrink-0 text-white/70" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+            {msg}
+          </span>
+        ))}
       </div>
     </div>
   )

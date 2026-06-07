@@ -2,11 +2,11 @@
 
 function AboutLegacyStory({ videoUrl }) {
   return (
-    <section className="section-block bg-gradient-to-br from-primary/5 to-secondary/5" aria-labelledby="about-legacy-heading">
+    <section className="section-block bg-gradient-to-br from-primary/5 via-emerald/[0.02] to-secondary/5" aria-labelledby="about-legacy-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="section-eyebrow bg-primary/10 text-primary mb-4 inline-flex">
+            <span className="section-eyebrow bg-gradient-to-r from-primary/10 to-secondary/10 text-primary mb-4 inline-flex">
               Our Story
             </span>
             <h2 id="about-legacy-heading" className="text-3xl lg:text-4xl font-extrabold text-text mb-6">
@@ -33,19 +33,16 @@ function AboutLegacyStory({ videoUrl }) {
           </div>
           <div className="relative">
             <div
-              className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-3xl transform rotate-3 opacity-20"
+              className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent rounded-3xl transform rotate-3 opacity-20"
               aria-hidden
             />
             <div className="relative bg-white rounded-3xl p-8 shadow-xl">
               <div className="aspect-video rounded-2xl overflow-hidden bg-black">
-                <video className="w-full h-full object-cover" controls playsInline preload="metadata">
+                <video className="w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata">
                   <source src={videoUrl} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
-              <p className="mt-4 text-sm text-text/60">
-                Demo video for reference (we&apos;ll replace this with your official video).
-              </p>
             </div>
           </div>
         </div>

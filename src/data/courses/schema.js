@@ -29,6 +29,9 @@ export const DEFAULT_INSTRUCTOR = {
  * @property {number} [students]
  * @property {string} [image] - asset key under /program-images/
  * @property {string} [imageFile]
+ * @property {string} [bannerImage]
+ * @property {string} [heroImage]
+ * @property {string} [thumbnail]
  * @property {'primary'|'secondary'|'accent'} [color]
  * @property {boolean} [isFeatured]
  * @property {boolean} [isPublished]
@@ -62,6 +65,9 @@ export function normalizeCourseListing(listing) {
     students: listing.students ?? 0,
     image: listing.image || '',
     imageFile: listing.imageFile || '',
+    bannerImage: listing.bannerImage || listing.imageFile || '',
+    heroImage: listing.heroImage || listing.imageFile || '',
+    thumbnail: listing.thumbnail || listing.imageFile || '',
     color: COURSE_COLORS.includes(listing.color) ? listing.color : 'primary',
     isFeatured: Boolean(listing.isFeatured),
     isPublished: listing.isPublished !== false,

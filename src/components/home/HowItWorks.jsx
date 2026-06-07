@@ -91,15 +91,15 @@ function HowItWorks() {
   }
 
   return (
-    <section className="section-block bg-white" aria-labelledby="how-it-works-heading">
+    <section className="section-block bg-gradient-to-b from-white via-secondary/[0.02] to-accent/[0.02] overflow-hidden" aria-labelledby="how-it-works-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="section-header-center">
-          <span className="section-eyebrow bg-primary/10 text-primary">
+          <span className="section-eyebrow bg-gradient-to-r from-primary/10 via-secondary/10 to-emerald/10 text-primary border border-primary/10 shadow-sm">
             How It Works
           </span>
           <h2 id="how-it-works-heading" className="section-title">
             <span className="section-title-line">Learn &amp;</span>
-            <span className="section-title-accent bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <span className="section-title-accent bg-gradient-to-r from-primary via-secondary to-emerald bg-clip-text text-transparent">
               Practice
             </span>
           </h2>
@@ -108,7 +108,7 @@ function HowItWorks() {
           </p>
         </div>
 
-        <div className="rounded-3xl bg-gradient-to-b from-white to-primary/10 pt-8 pb-10 px-4 sm:px-6 lg:px-10">
+        <div className="rounded-3xl bg-gradient-to-b from-primary/[0.03] via-white to-emerald/[0.03] pt-8 pb-10 px-4 sm:px-6 lg:px-10 border border-primary/5 shadow-sm">
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
             {learnPracticeTopics.map((topic) => (
               <li key={topic.title} className="flex">
@@ -116,9 +116,9 @@ function HowItWorks() {
                   type="button"
                   onClick={() => handleNavigate(topic.to)}
                   aria-label={`${topic.title} — ${topic.description}`}
-                  className="group flex w-full min-h-[210px] flex-col items-center text-center bg-white rounded-2xl shadow-md px-4 py-6 sm:px-5 sm:py-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/40"
+                  className="group flex w-full min-h-[210px] flex-col items-center text-center bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100/80 px-4 py-6 sm:px-5 sm:py-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10 hover:shadow-secondary/5 hover:border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary/40"
                 >
-                  <div className="mb-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/15">
+                  <div className="mb-4 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 via-secondary/10 to-emerald/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:from-primary group-hover:via-secondary group-hover:to-accent group-hover:text-white group-hover:shadow-lg group-hover:shadow-primary/25">
                     {topic.icon}
                   </div>
                   <h3 className="font-semibold text-base sm:text-lg text-text mb-2 leading-snug px-1">
