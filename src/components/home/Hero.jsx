@@ -12,23 +12,7 @@ function Hero({ onRegisterInterest }) {
   }
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 w-full h-full object-cover"
-          poster="/hero/hero-student-ai.jpg"
-        >
-          <source src="/hero/edugram-motion.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-white/85 to-emerald/10" />
-      </div>
-
+    <section className="relative overflow-hidden bg-gradient-to-br from-background via-white to-emerald/[0.03]">
       {/* Decorative Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-48 -right-48 w-[35rem] h-[35rem] bg-gradient-to-br from-emerald/20 via-secondary/15 to-transparent rounded-full blur-[120px]" />

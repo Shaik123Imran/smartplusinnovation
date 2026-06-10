@@ -5,15 +5,14 @@ import {
   mapCourseToProgram,
   mapListingToProgram,
 } from '../services/courseService'
-import { publishedCourseEntries } from '../data/courses/catalog'
 import { fetchTestimonials, submitTestimonial as apiSubmitTestimonial } from '../services/testimonialService'
 import { submitContact, submitInterest, subscribeNewsletter } from '../services/formService'
 import { faqs, faqCategories, getFaqsByCategory } from '../data/faq'
 import { team, values } from '../data/team'
 import { pricingPlans, annualDiscount } from '../data/pricing'
 import { isFastTrackProgram, FAST_TRACK_MAX_WEEKS } from '../utils/fastTrack'
-import { mergeProgramWithDetail } from '../utils/mergeProgramWithDetail'
 import { DEFAULT_CATEGORIES } from '../data/programs'
+import { getCatalogListings } from '../data/courses/catalog'
 
 const DataContext = createContext()
 
@@ -23,12 +22,6 @@ export function useData() {
     throw new Error('useData must be used within a DataProvider')
   }
   return context
-}
-
-function programsFromCatalog() {
-  return publishedCourseEntries.map(({ listing }) =>
-    mergeProgramWithDetail(mapListingToProgram(listing))
-  )
 }
 
 export function DataProvider({ children }) {
@@ -46,8 +39,8 @@ export function DataProvider({ children }) {
           fetchCategories(),
           fetchTestimonials(),
         ])
-        const apiPrograms = courses.map((c) => mergeProgramWithDetail(mapCourseToProgram(c)))
-        setPrograms(apiPrograms.length > 0 ? apiPrograms : programsFromCatalog())
+        const apiPrograms = courses.map(mapCourseToProgram)
+        setPrograms(apiPrograms)
         setCategories(cats?.length > 1 ? cats : DEFAULT_CATEGORIES)
         setTestimonials(
           reviews.map((t) => ({
@@ -63,10 +56,19 @@ export function DataProvider({ children }) {
         )
         setError(null)
       } catch (err) {
-        console.error('Failed to load data:', err)
-        setError(err.message)
-        setPrograms(programsFromCatalog())
-        setCategories(DEFAULT_CATEGORIES)
+        console.warn('Backend API unavailable, loading courses from local catalog:', err.message)
+        // Fallback: load from static catalog so Programs page is never empty
+        try {
+          const staticListings = getCatalogListings()
+          const staticPrograms = staticListings.map(mapListingToProgram)
+          setPrograms(staticPrograms)
+          setCategories(DEFAULT_CATEGORIES)
+        } catch (catalogErr) {
+          console.error('Failed to load catalog fallback:', catalogErr)
+          setPrograms([])
+          setCategories(DEFAULT_CATEGORIES)
+        }
+        setError(null) // Don't show error UI; static data is sufficient
       } finally {
         setLoading(false)
       }
@@ -75,7 +77,7 @@ export function DataProvider({ children }) {
   }, [])
 
   const getProgramById = useCallback(
-    (id) => mergeProgramWithDetail(programs.find((p) => p.id === id || p.slug === id)),
+    (id) => programs.find((p) => p.id === id || p.slug === id) || null,
     [programs]
   )
 

@@ -66,11 +66,11 @@ function ProgramCard({ program, compact = false }) {
 
       <div className="relative flex flex-1 flex-col min-h-0">
         {imageSrc ? (
-          <Link to={detailPath} className="mb-5 block overflow-hidden rounded-xl bg-gradient-to-br from-slate-100 to-slate-50 relative group/image">
+          <Link to={detailPath} className="mb-5 block overflow-hidden rounded-xl bg-gradient-to-br from-slate-100 to-slate-50 relative group/image aspect-[16/9]">
             <img
               src={imageSrc}
               alt={`${program.title} program`}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              className="w-full h-full object-contain bg-gradient-to-br from-slate-100 to-slate-50 group-hover:scale-105 transition-transform duration-700 ease-out"
               loading="lazy"
               onError={() => setShowImage(false)}
             />
