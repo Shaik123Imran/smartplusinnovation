@@ -52,7 +52,7 @@ app.use(
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   })
 )
-app.options('*', cors())
+app.options('/{*path}', cors())
 
 console.log(`[BACKEND] Allowed CORS origins:`, ALLOWED_ORIGINS)
 console.log(`[BACKEND] GOOGLE_CLIENT_ID set: ${!!process.env.GOOGLE_CLIENT_ID}`)
