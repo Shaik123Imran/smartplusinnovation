@@ -17,6 +17,15 @@ async function init() {
 
 export default async function handler(req, res) {
   console.log(`[API] ${req.method} ${req.url}`)
-  await init()
-  app(req, res)
+  try {
+    await init()
+    app(req, res)
+  } catch (err) {
+    console.error('[API] Serverless invocation error:', err)
+    res.status(500).json({
+      success: false,
+      error: 'Serverless initialization failed',
+      message: err.message,
+    })
+  }
 }

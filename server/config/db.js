@@ -6,13 +6,10 @@ async function connectDB() {
   const uri = process.env.MONGODB_URI
 
   if (!uri) {
-    console.warn('[DB] MONGODB_URI not set — skipping database connection. Some features will be unavailable.')
-    return
+    throw new Error('MONGODB_URI is not set in environment variables')
   }
 
-  if (isConnected) return
-
-  if (mongoose.connection.readyState === 1) {
+  if (isConnected || mongoose.connection.readyState === 1) {
     isConnected = true
     return
   }
