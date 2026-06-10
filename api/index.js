@@ -1,8 +1,9 @@
 import express from 'express'
-import connectDB from '../server/config/db.js'
+import authRoutes from '../server/routes/authRoutes.js'
 
 const app = express()
-app.get('/api/ping', (req, res) => res.json({ ping: 'ok', db: !!connectDB }))
+app.use('/api/auth', authRoutes)
+app.get('/api/ping', (req, res) => res.json({ ping: 'ok' }))
 
 export default function handler(req, res) {
   console.log(`[API] ${req.method} ${req.url}`)
