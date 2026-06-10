@@ -1,28 +1,11 @@
-import connectDB from '../server/config/db.js'
-import { configureCloudinary } from '../server/config/cloudinary.js'
-import app from '../server/app.js'
+import express from 'express'
 
-let initialized = false
-
-async function init() {
-  if (initialized) return
-  console.log('[API] Cold start — initializing services...')
-  try {
-    await connectDB()
-    configureCloudinary()
-    console.log('[API] Services initialized')
-  } catch (err) {
-    console.error('[API] Init error:', err.message)
-  }
-  initialized = true
-}
+const app = express()
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', message: 'API is alive', url: req.url })
+})
 
 export default function handler(req, res) {
-  console.log(`[API] ${req.method} ${req.url} | origin=${req.headers.origin || 'unknown'}`)
-  init().then(() => {
-    app(req, res)
-  }).catch((err) => {
-    console.error('[API] Handler error:', err.message)
-    res.status(500).json({ success: false, message: 'Initialization failed' })
-  })
+  console.log(`[API] ${req.method} ${req.url}`)
+  app(req, res)
 }
