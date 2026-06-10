@@ -1,23 +1,16 @@
-import connectDB from '../server/config/db.js'
-import { configureCloudinary } from '../server/config/cloudinary.js'
-import app from '../server/app.js'
-
-let initialized = false
-
-async function init() {
-  if (initialized) return
-  console.log('[API] Cold start — initializing...')
-  try {
-    await connectDB()
-    configureCloudinary()
-  } catch (err) {
-    console.error('[API] Init error:', err.message)
-  }
-  initialized = true
-}
-
 export default async function handler(req, res) {
-  console.log(`[API] ${req.method} ${req.url}`)
-  await init()
-  app(req, res)
+  try {
+    const [express, cors] = await Promise.all([
+      import('express').then(m => m.default),
+      import('cors').then(m => m.default),
+    ])
+    const app = express()
+    app.use(cors())
+    app.get('/api/health', (rq, rs) => rs.json({ ok: true, id: process.env.GOOGLE_CLIENT_ID?.slice(0,10) }))
+    app(req, res)
+  } catch (err) {
+    res.statusCode = 500
+    res.setHeader('Content-Type', 'application/json')
+    res.end(JSON.stringify({ error: err.message, stack: err.stack?.split('\n') }))
+  }
 }
