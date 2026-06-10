@@ -17,8 +17,12 @@ async function init() {
   initialized = true
 }
 
-export default async function handler(req, res) {
+export default function handler(req, res) {
   console.log(`[API] ${req.method} ${req.url} | origin=${req.headers.origin || 'unknown'}`)
-  await init()
-  app(req, res)
+  init().then(() => {
+    app(req, res)
+  }).catch((err) => {
+    console.error('[API] Handler error:', err.message)
+    res.status(500).json({ success: false, message: 'Initialization failed' })
+  })
 }
