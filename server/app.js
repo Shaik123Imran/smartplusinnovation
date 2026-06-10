@@ -1,5 +1,7 @@
 import express from 'express'
 import cors from 'cors'
+import helmet from 'helmet'
+import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import { configureCloudinary } from './config/cloudinary.js'
 import { errorHandler, notFound } from './middleware/errorHandler.js'
@@ -23,6 +25,7 @@ const ALLOWED_ORIGINS = [
   process.env.CLIENT_URL,
 ].filter(Boolean)
 
+app.use(helmet())
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -39,6 +42,7 @@ app.use(
   })
 )
 app.options('/{*path}', cors())
+app.use(morgan('dev'))
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
