@@ -176,20 +176,24 @@ app.post('/api/auth/login', async (req, res) => {
 
 // POST /api/auth/google — Google Sign-In / Sign-Up
 app.post('/api/auth/google', async (req, res) => {
+  console.log(`[API] POST /api/auth/google | body keys:`, Object.keys(req.body || {}), `| credential length:`, req.body?.credential?.length || 0)
   try {
     const { credential } = req.body
 
     if (!googleClient) {
+      console.warn(`[AUTH] Google Sign-In not configured: googleClient is null/undefined.`)
       return res.status(503).json({
         success: false,
         message: 'Google Sign-In is not configured on the server. Please add GOOGLE_CLIENT_ID to .env',
       })
     }
     if (!credential) {
+      console.warn(`[AUTH] Google Sign-In failed: credential field missing in request body.`)
       return res.status(400).json({ success: false, message: 'Google credential is required' })
     }
 
     // Verify Google token
+    console.log(`[AUTH] Verifying token against audience:`, GOOGLE_CLIENT_ID)
     const ticket = await googleClient.verifyIdToken({
       idToken: credential,
       audience: GOOGLE_CLIENT_ID,
@@ -201,7 +205,10 @@ app.post('/api/auth/google', async (req, res) => {
     const fullName = payload.name || 'Google User'
     const avatar = payload.picture || ''
 
+    console.log(`[AUTH] Token verified. email:`, email, `| sub:`, googleId)
+
     if (!email) {
+      console.warn(`[AUTH] Google Sign-In failed: email missing in Google payload.`)
       return res.status(400).json({ success: false, message: 'Google account has no email' })
     }
 
