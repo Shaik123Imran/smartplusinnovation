@@ -1,8 +1,8 @@
 import express from 'express'
-import authRoutes from '../server/routes/authRoutes.js'
+import courseRoutes from '../server/routes/courseRoutes.js'
 
 const app = express()
-app.use('/api/auth', authRoutes)
+app.use('/api/courses', courseRoutes)
 app.get('/api/ping', (req, res) => res.json({ ping: 'ok' }))
 
 export default function handler(req, res) {
