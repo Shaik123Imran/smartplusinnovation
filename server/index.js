@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import connectDB from './config/db.js'
 import { configureCloudinary } from './config/cloudinary.js'
 import app from './app.js'
