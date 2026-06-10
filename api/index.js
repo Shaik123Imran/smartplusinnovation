@@ -1,24 +1,17 @@
-import connectDB from '../server/config/db.js'
-import { configureCloudinary } from '../server/config/cloudinary.js'
-import app from '../server/app.js'
-
-let initialized = false
-
-async function init() {
-  if (initialized) return
-  console.log('[API] Cold start — initializing services...')
-  try {
-    await connectDB()
-    configureCloudinary()
-    console.log('[API] Services initialized')
-  } catch (err) {
-    console.error('[API] Init error:', err.message)
-  }
-  initialized = true
+async function getApp() {
+  const mod = await import('../server/app.js')
+  return mod.default
 }
 
 export default async function handler(req, res) {
-  console.log(`[API] ${req.method} ${req.url} | origin=${req.headers.origin || 'unknown'}`)
-  await init()
-  app(req, res)
+  console.log(`[API] ${req.method} ${req.url}`)
+  try {
+    const app = await getApp()
+    app(req, res)
+  } catch (err) {
+    console.error('[API] Error:', err.message, err.stack)
+    res.statusCode = 500
+    res.setHeader('Content-Type', 'text/plain')
+    res.end('ERROR: ' + err.message + '\n' + (err.stack || ''))
+  }
 }
