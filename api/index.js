@@ -1,7 +1,6 @@
 import connectDB from '../server/config/db.js'
 import { configureCloudinary } from '../server/config/cloudinary.js'
 import app from '../server/app.js'
-import serverless from 'serverless-http'
 
 let initialized = false
 
@@ -18,10 +17,8 @@ async function init() {
   initialized = true
 }
 
-const baseHandler = serverless(app)
-
 export default async function handler(req, res) {
-  console.log(`[API] Request: ${req.method} ${req.url} | origin=${req.headers.origin || 'unknown'}`)
+  console.log(`[API] ${req.method} ${req.url} | origin=${req.headers.origin || 'unknown'}`)
   await init()
-  return baseHandler(req, res)
+  app(req, res)
 }

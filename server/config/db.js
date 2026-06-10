@@ -6,17 +6,24 @@ async function connectDB() {
   const uri = process.env.MONGODB_URI
 
   if (!uri) {
-    console.error('MONGODB_URI is required. Set it in your .env file.')
-    process.exit(1)
+    console.warn('[DB] MONGODB_URI not set — skipping database connection. Some features will be unavailable.')
+    return
   }
 
   if (isConnected) return
 
+  if (mongoose.connection.readyState === 1) {
+    isConnected = true
+    return
+  }
+
   const conn = await mongoose.connect(uri, {
     dbName: process.env.MONGODB_DB_NAME || undefined,
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 10000,
   })
   isConnected = true
-  console.log(`MongoDB connected: ${conn.connection.host}`)
+  console.log(`[DB] MongoDB connected: ${conn.connection.host}`)
 }
 
 export default connectDB
