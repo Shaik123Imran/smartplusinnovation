@@ -64,12 +64,16 @@ export const login = asyncHandler(async (req, res) => {
 
 export const googleLogin = asyncHandler(async (req, res) => {
   const { credential } = req.body
+  const origin = req.get('origin') || req.get('referer') || 'unknown'
+  console.log(`[AUTH] googleLogin hit | method=${req.method} | origin=${origin} | hasCredential=${!!credential} | credentialLength=${credential?.length || 0}`)
 
   if (!googleClient || !credential) {
+    console.warn(`[AUTH] Google Sign-In not configured or no credential. googleClient=${!!googleClient}, credential=${!!credential}`)
     res.status(400)
     throw new Error('Google Sign-In is not configured')
   }
 
+  console.log(`[AUTH] Verifying Google ID token with audience: ${process.env.GOOGLE_CLIENT_ID?.slice(0, 20)}...`)
   const ticket = await googleClient.verifyIdToken({
     idToken: credential,
     audience: process.env.GOOGLE_CLIENT_ID,
@@ -81,15 +85,22 @@ export const googleLogin = asyncHandler(async (req, res) => {
   const fullName = payload.name || 'Google User'
   const avatar = payload.picture || ''
 
+  console.log(`[AUTH] Token verified | email=${email} | googleId=${googleId?.slice(0, 10)}... | name=${fullName}`)
+
   let user = await User.findOne({ $or: [{ googleId }, { email }] })
+  console.log(`[AUTH] User lookup | found=${!!user} | googleId=${!!googleId} | email=${email}`)
 
   if (user) {
     if (!user.googleId) {
+      console.log(`[AUTH] Linking Google ID to existing email account: ${email}`)
       user.googleId = googleId
       if (!user.avatar) user.avatar = avatar
       await user.save()
+    } else {
+      console.log(`[AUTH] Existing Google user: ${email}`)
     }
   } else {
+    console.log(`[AUTH] Creating new user from Google: ${email}`)
     user = await User.create({
       fullName,
       email,
@@ -101,10 +112,11 @@ export const googleLogin = asyncHandler(async (req, res) => {
     try {
       await sendWelcomeEmail(user)
     } catch (e) {
-      console.warn('Welcome email failed:', e.message)
+      console.warn('[AUTH] Welcome email failed:', e.message)
     }
   }
 
+  console.log(`[AUTH] Sending token response for: ${email}`)
   sendTokenResponse(user, 200, res)
 })
 

@@ -29,12 +29,34 @@ mongoose
 // ── Express app ─────────────────────────────────────────────────
 const app = express()
 
+const ALLOWED_ORIGINS = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://edugram-technologies-lnjr6z6m5.vercel.app',
+  'https://www.edugramtechnologies.in',
+  process.env.CLIENT_URL,
+].filter(Boolean)
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: (origin, callback) => {
+      if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+        callback(null, true)
+      } else {
+        console.warn(`[CORS] Origin not in allowlist: ${origin}`)
+        callback(null, true)
+      }
+    },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   })
 )
+app.options('*', cors())
+
+console.log(`[BACKEND] Allowed CORS origins:`, ALLOWED_ORIGINS)
+console.log(`[BACKEND] GOOGLE_CLIENT_ID set: ${!!process.env.GOOGLE_CLIENT_ID}`)
+console.log(`[BACKEND] VITE_GOOGLE_CLIENT_ID set: ${!!process.env.VITE_GOOGLE_CLIENT_ID}`)
 app.use(express.json())
 
 // ── Models ───────────────────────────────────────────────────────

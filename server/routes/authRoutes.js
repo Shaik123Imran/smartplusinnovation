@@ -58,7 +58,10 @@ router.post(
   login
 )
 
-router.post('/google', authLimiter, googleLogin)
+router.post('/google', (req, res, next) => {
+  console.log(`[ROUTE] POST /api/auth/google | origin=${req.get('origin') || 'unknown'} | content-type=${req.get('content-type')}`)
+  next()
+}, authLimiter, googleLogin)
 router.post('/forgot-password', authLimiter, forgotPassword)
 router.put('/reset-password/:token', authLimiter, resetPassword)
 router.get('/me', protect, getMe)

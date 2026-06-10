@@ -35,9 +35,17 @@ export const login = async (email, password) => {
 }
 
 export const googleLogin = async (credential) => {
-  const { data: res } = await api.post('/auth/google', { credential })
-  setSession(res.token, res.user)
-  return res
+  const apiUrl = import.meta.env.VITE_API_URL || '/api (fallback)'
+  console.log(`[AUTH] googleLogin called | credential length: ${credential?.length || 0} | API_URL: ${apiUrl} | mode: ${import.meta.env.MODE}`)
+  try {
+    const { data: res } = await api.post('/auth/google', { credential })
+    console.log(`[AUTH] googleLogin success | user: ${res.user?.email}`)
+    setSession(res.token, res.user)
+    return res
+  } catch (err) {
+    console.error(`[AUTH] googleLogin failed | message: ${err.message} | status: ${err.response?.status} | data: ${JSON.stringify(err.response?.data)}`)
+    throw err
+  }
 }
 
 export const logout = async () => {
