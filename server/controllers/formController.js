@@ -6,25 +6,27 @@ import { sendContactNotification, sendInterestNotification } from '../services/e
 
 const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdIhnHhAjWuzzLYQXXK6xQrYSQEFzDpEbYFe57lOITDAMXeSw/formResponse'
 
-async function submitToGoogleForm(data) {
-  const params = new URLSearchParams({
-    'entry.510307354': data.name || '',
-    'entry.1280008216': data.email || '',
-    'entry.79514962': data.phone || '',
-    'entry.1241231701': data.city || '',
-    'entry.1839725247': data.courseType || '',
-  })
+/**
+ * Silently forwards registration data to the Google Form in the background.
+ * Fire-and-forget: never awaited, errors are caught and logged only.
+ * NOTE: mode:'no-cors' is browser-only and must NOT be used in Node.js.
+ */
+function submitToGoogleForm(data) {
+  const params = new URLSearchParams()
+  params.append('entry.59240132', data.name || '')
+  params.append('entry.1654006449', data.email || '')
+  params.append('entry.843462197', data.phone || '')
+  params.append('entry.1435585359', data.city || '')
+  params.append('entry.342965658', data.courseType || '')
 
-  try {
-    await fetch(GOOGLE_FORM_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString(),
-    })
-  } catch (e) {
-    console.warn('Google Form submission failed:', e.message)
-  }
+  // Fire-and-forget — do NOT await, never throws into the caller
+  fetch(GOOGLE_FORM_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString(),
+  })
+    .then((res) => console.log(`[Google Form] Submitted for ${data.email} → status ${res.status}`))
+    .catch((e) => console.warn('[Google Form] Submission failed:', e.message))
 }
 
 export const submitContact = asyncHandler(async (req, res) => {

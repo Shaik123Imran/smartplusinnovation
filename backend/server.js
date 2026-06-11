@@ -3,6 +3,13 @@
  * EduGram backend entry point — Express + MongoDB + Google Auth + JWT
  */
 
+// Fix: Force Node.js to use Google's public DNS servers for all lookups.
+// The default ISP/router DNS often silently drops MongoDB Atlas SRV queries,
+// causing 'querySrv ETIMEOUT'. Google DNS (8.8.8.8) fully supports SRV records.
+import dns from 'dns'
+dns.setDefaultResultOrder('ipv4first')
+dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1'])
+
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
@@ -19,11 +26,15 @@ if (!MONGO_URI) {
 }
 
 mongoose
-  .connect(MONGO_URI)
+  .connect(MONGO_URI, {
+    serverSelectionTimeoutMS: 10000,
+    connectTimeoutMS: 15000,
+  })
   .then(() => console.log('✅  MongoDB connected:', mongoose.connection.host))
   .catch((err) => {
-    console.error('❌  MongoDB connection failed:', err.message)
-    process.exit(1)
+    // Log the error but keep the server alive — Mongoose will retry the connection.
+    // Exiting here would kill Express and cause "Network Error" on all API calls.
+    console.error('⚠️  MongoDB initial connection failed (will retry):', err.message)
   })
 
 // ── Express app ─────────────────────────────────────────────────
@@ -307,6 +318,46 @@ app.get('/api/courses/:slug', async (req, res) => {
 
 // ─── REGISTRATION ────────────────────────────────────────────────
 
+/**
+ * Silently submits registration data to the connected Google Form in the background.
+ * Uses native fetch (Node 18+) so no extra dependency is needed.
+ * Errors are caught and logged — they never affect the main API response.
+ *
+ * Google Form: https://forms.gle/tXEhfmSqXFLYv81x6
+ * Field map:
+ *   entry.59240132   → Full Name
+ *   entry.1654006449 → Email ID
+ *   entry.843462197  → Phone Number
+ *   entry.1435585359 → City
+ *   entry.342965658  → Course Type
+ */
+const GOOGLE_FORM_ACTION_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSdIhnHhAjWuzzLYQXXK6xQrYSQEFzDpEbYFe57lOITDAMXeSw/formResponse'
+
+const submitToGoogleForm = (data) => {
+  const { name, email, phone, city, courseType } = data
+
+  const body = new URLSearchParams()
+  body.append('entry.59240132', name || '')
+  body.append('entry.1654006449', email || '')
+  body.append('entry.843462197', phone || '')
+  body.append('entry.1435585359', city || '')
+  body.append('entry.342965658', courseType || '')
+
+  // Fire-and-forget: do NOT await — response is not needed
+  fetch(GOOGLE_FORM_ACTION_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString(),
+  })
+    .then((res) => {
+      console.log(`[Google Form] Submission status for ${email}: ${res.status}`)
+    })
+    .catch((err) => {
+      console.error(`[Google Form] Submission failed for ${email}:`, err.message)
+    })
+}
+
 // POST /api/register  &  POST /api/forms/interest
 const handleRegistration = async (req, res) => {
   try {
@@ -326,8 +377,11 @@ const handleRegistration = async (req, res) => {
         message: 'You already submitted interest recently. We will contact you soon.',
       })
     }
+
+    // 1️⃣  Save to MongoDB
+    const resolvedName = name || fullName
     const doc = await InterestRegistration.create({
-      name: name || fullName,
+      name: resolvedName,
       email,
       phone,
       city: city || '',
@@ -335,9 +389,20 @@ const handleRegistration = async (req, res) => {
       message: message || '',
       source: source || 'register-interest',
     })
-    console.log(`[API] Registration saved for ${email} (${resolvedCourse})`)
+    console.log(`[API] Registration saved to MongoDB for ${email} (${resolvedCourse})`)
+
+    // 2️⃣  Silently forward to Google Form (non-blocking)
+    submitToGoogleForm({
+      name: resolvedName,
+      email,
+      phone,
+      city: city || '',
+      courseType: resolvedCourse,
+    })
+
     res.status(201).json({ success: true, message: 'Registration submitted successfully', id: doc._id })
   } catch (err) {
+    console.error('[API] Registration error:', err.message)
     res.status(500).json({ success: false, message: err.message })
   }
 }
